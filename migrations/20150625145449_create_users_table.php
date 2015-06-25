@@ -11,26 +11,16 @@ class CreateUsersTable extends AbstractMigration
      *
      * More information on writing migrations is available here:
      * http://docs.phinx.org/en/latest/migrations.html#the-abstractmigration-class
-     *
+     */
     public function change()
-    {
-    }
-    */
-
-    public function up()
     {
         $users = $this->table('users');
         $users->addColumn('email',    'string', ['limit' => 64])
               ->addColumn('password', 'string', ['limit' => 64])
               ->addColumn('created',  'datetime')
-              ->addColumn('updated', 'datetime', ['null' => true])
-              ->addIndex(['email'], ['unique' => true])
+              ->addColumn('updated',  'datetime', ['null' => true])
+              ->addIndex(['email'],  ['unique' => true])
               ->addIndex(['password'])
-              ->save();
-    }
-
-    public function down()
-    {
-        $this->dropTable('users');
+              ->create();
     }
 }
