@@ -11,13 +11,8 @@ class CreateFeedsTable extends AbstractMigration
      *
      * More information on writing migrations is available here:
      * http://docs.phinx.org/en/latest/migrations.html#the-abstractmigration-class
-     *
+     */
     public function change()
-    {
-    }
-    */
-
-    public function up()
     {
         $feeds = $this->table('feeds');
         $feeds->addColumn('name',       'string', ['limit' => 64])
@@ -27,11 +22,6 @@ class CreateFeedsTable extends AbstractMigration
               ->addColumn('updated', 'datetime', ['null' => true])
               ->addColumn('updateInterval', 'integer')
               ->addIndex(['name', 'updated', 'updateInterval'])
-              ->save();
-    }
-
-    public function down()
-    {
-        $this->dropTable('feeds');
+              ->create();
     }
 }
