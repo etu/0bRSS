@@ -37,6 +37,21 @@ $logger = new \Flynsarmy\SlimMonolog\Log\MonologWriter([
 
 
 /**
+ * Prepare Database Connection
+ */
+$dbConfig = $config['environments']['database'];
+
+$dbalConfig = new \Doctrine\DBAL\Configuration();
+$dbalConn = \Doctrine\DBAL\DriverManager::getConnection([
+    'url' => $dbConfig['adapter'].'://'.$dbConfig['user'].':'.$dbConfig['pass'].'@'.$dbConfig['host'].':'
+            .$dbConfig['port'].'/'.$dbConfig['name'].'?charset='.$dbConfig['charset']
+], $dbalConfig);
+
+$injector->share($dbalConn);
+
+
+
+/**
  * Prepare Slim
  */
 $slim = new \Slim\Slim([
