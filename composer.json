@@ -3,6 +3,8 @@
         "robmorgan/phinx": "^0.4.4",
 
         "slim/slim": "^2.6",
+        "twig/twig": "^1.18",
+        "slim/views": "^0.1.3",
         "flynsarmy/slim-monolog": "^1.0"
     }
 }
