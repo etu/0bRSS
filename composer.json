@@ -8,5 +8,11 @@
         "twig/twig": "^1.18",
         "slim/views": "^0.1.3",
         "flynsarmy/slim-monolog": "^1.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "0bRSS\\": "src/0bRSS"
+        }
     }
 }
