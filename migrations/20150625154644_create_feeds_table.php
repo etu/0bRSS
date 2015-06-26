@@ -20,8 +20,8 @@ class CreateFeedsTable extends AbstractMigration
               ->addColumn('feedUri',    'string', ['limit' => 256])
               ->addColumn('added', 'datetime')
               ->addColumn('updated', 'datetime', ['null' => true])
-              ->addColumn('updateInterval', 'integer')
-              ->addIndex(['name', 'updated', 'updateInterval'])
+              ->addColumn('update_interval', 'integer')
+              ->addIndex(['name', 'updated', 'update_interval'])
               ->create();
     }
 }

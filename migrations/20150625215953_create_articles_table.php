@@ -16,12 +16,12 @@ class CreateArticlesTable extends AbstractMigration
     {
         $articles = $this->table('articles');
         $articles->addColumn('title', 'string', ['limit' => 64])
-                 ->addColumn('feedId', 'integer')
+                 ->addColumn('feed_id', 'integer')
                  ->addColumn('body', 'text')
                  ->addColumn('uri', 'string', ['limit' => 256])
                  ->addColumn('published', 'datetime')
                  ->addIndex(['title', 'uri', 'published'])
-                 ->addForeignKey('feedId', 'feeds', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
+                 ->addForeignKey('feed_id', 'feeds', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
                  ->create();
     }
 }
