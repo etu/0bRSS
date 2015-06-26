@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e97f1bace44cee09ba2ffc5a7868e6d2",
+    "hash": "436dbdd26c9bebbe9443d91c3723a76a",
     "packages": [
         {
             "name": "flynsarmy/slim-monolog",

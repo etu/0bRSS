@@ -12,7 +12,7 @@
 
     "autoload": {
         "psr-4": {
-            "0bRSS\\": "src/0bRSS"
+            "ZerobRSS\\": "src/ZerobRSS"
         }
     }
 }
