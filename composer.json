@@ -4,6 +4,8 @@
 
         "rdlowrey/auryn": "^0.15.2",
 
+        "doctrine/dbal": "^2.5",
+
         "slim/slim": "^2.6",
         "twig/twig": "^1.18",
         "slim/views": "^0.1.3",
