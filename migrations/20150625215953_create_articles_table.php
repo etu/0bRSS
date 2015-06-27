@@ -24,6 +24,7 @@ class CreateArticlesTable extends AbstractMigration
                  ->addIndex(['title', 'uri', 'published'])
 
                  ->addForeignKey('feed_id', 'feeds', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
+
                  ->create();
     }
 }

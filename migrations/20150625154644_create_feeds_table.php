@@ -23,6 +23,7 @@ class CreateFeedsTable extends AbstractMigration
               ->addColumn('update_interval', 'integer')
 
               ->addIndex(['name', 'updated', 'update_interval'])
+
               ->create();
     }
 }
