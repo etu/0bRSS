@@ -3,12 +3,12 @@
 0bRSS is a Simple RSS-Reader application.
 
 ** Requirements
- - PHP 5.4 or greater
- - PostgreSQL or MySQL (InnoDB required)
- - Webserver that rewrites the URI's
+ - PHP 5.4 or greater.
+ - PostgreSQL or MySQL (InnoDB required).
+ - Webserver that rewrites the URI's [[https://github.com/slimphp/Slim#setup-your-web-server][like this]].
 
 ** Installation
- - Clone the git-repo
- - Install the composer dependencies (=php composer.phar install=)
- - Write the config-file
- - Run the migrations (=php vendor/bin/phinx migrate -c config.php=)
+ - Clone the git-repo.
+ - Install the composer dependencies (=php composer.phar install=).
+ - Write the config-file.
+ - Run the migrations (=php vendor/bin/phinx migrate -c config.php=).
