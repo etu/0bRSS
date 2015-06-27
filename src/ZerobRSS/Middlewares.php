@@ -34,7 +34,7 @@ class Middlewares
     /**
      * Middleware to initiate the database connection
      */
-    public function initDb()
+    public function db()
     {
         $injector = $this->injector;
 
