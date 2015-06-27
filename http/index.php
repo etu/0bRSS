@@ -59,9 +59,11 @@ $slim->view->parserExtensions[] = new \Slim\Views\TwigExtension();
 
 
 /**
- * Controller loading closure
+ * Load the Middleware class with clasures for loading controllers and middlewares
  */
 $mws = $injector->make('ZerobRSS\Middlewares');
+
+
 
 /**
  * Prepare Routes
