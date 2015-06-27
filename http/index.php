@@ -55,6 +55,7 @@ $injector->share($slim);
 $slim->view->parserOptions['debug'] = true;
 #$slim->view->parserOptions['cache'] = $slim->config('templates.path').'/cache';
 $slim->view->parserExtensions[] = new \Slim\Views\TwigExtension();
+$slim->view->parserExtensions[] = new Twig_Extension_Debug();
 
 
 
