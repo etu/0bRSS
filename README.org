@@ -1,4 +1,4 @@
-* 0bRSS - Tiny RSS Reader
+* 0bRSS - Simple RSS Reader
 
 0bRSS is a Simple RSS-Reader application.
 
