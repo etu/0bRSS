@@ -15,10 +15,10 @@ class CreateArticlesTable extends AbstractMigration
     public function change()
     {
         $articles = $this->table('articles');
-        $articles->addColumn('title',     'string', ['limit' => 64])
-                 ->addColumn('feed_id',   'integer')
+        $articles->addColumn('title',     'string',  ['limit'  => 64])
+                 ->addColumn('feed_id',   'integer', ['signed' => false])
                  ->addColumn('body',      'text')
-                 ->addColumn('uri',       'string', ['limit' => 256])
+                 ->addColumn('uri',       'string',  ['limit'  => 256])
                  ->addColumn('published', 'datetime')
 
                  ->addIndex(['title', 'uri', 'published'])
