@@ -58,7 +58,7 @@ $injector->share($dbalConn->createQueryBuilder()); // Share \Doctrine\DBAL\Query
 $slim = new \Slim\Slim([
     'log.writer' => $logger,
     'view' => new \Slim\Views\Twig(),
-    'templates.path' => realpath(PROJECT_ROOT.'/src/views')
+    'templates.path' => PROJECT_ROOT.'/src/views'
 ]);
 $injector->share($slim);
 
