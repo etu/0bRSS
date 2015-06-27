@@ -82,6 +82,12 @@ $slim->get('/', function () use ($injector) {
     return call_user_func_array([$controller, 'index'], func_get_args());
 });
 
+$slim->get('/assets/css/:file', function () use ($injector) {
+    $controller = $injector->make('ZerobRSS\Controllers\Scss');
+
+    return call_user_func_array([$controller, 'get'], func_get_args());
+});
+
 
 
 /**
