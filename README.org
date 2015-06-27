@@ -11,4 +11,4 @@
  - Clone the git-repo
  - Install the composer dependencies (=php composer.phar install=)
  - Write the config-file
- - Run the migrations (=php vendor/bin/phinx migrate=)
+ - Run the migrations (=php vendor/bin/phinx migrate -c config.php=)
