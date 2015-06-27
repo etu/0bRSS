@@ -74,19 +74,23 @@ $slim->view->parserExtensions[] = new \Slim\Views\TwigExtension();
 
 
 /**
+ * Controller loading closure
+ */
+$controllerLoader = (function ($controller, $method) use ($injector) {
+    return (function () use ($controller, $method, $injector) {
+        $controller = $injector->make('ZerobRSS\Controllers\\'.$controller);
+
+        return call_user_func_array([$controller, $method], func_get_args());
+    });
+});
+
+
+
+/**
  * Prepare Routes
  */
-$slim->get('/', function () use ($injector) {
-    $controller = $injector->make('ZerobRSS\Controllers\Root');
-
-    return call_user_func_array([$controller, 'index'], func_get_args());
-});
-
-$slim->get('/assets/css/:file', function () use ($injector) {
-    $controller = $injector->make('ZerobRSS\Controllers\Scss');
-
-    return call_user_func_array([$controller, 'get'], func_get_args());
-});
+$slim->get('/',                 $controllerLoader('Root', 'index'));
+$slim->get('/assets/css/:file', $controllerLoader('Scss', 'get'));
 
 
 
