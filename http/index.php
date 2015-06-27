@@ -47,7 +47,8 @@ $dbalConn = \Doctrine\DBAL\DriverManager::getConnection([
             .$dbConfig['port'].'/'.$dbConfig['name'].'?charset='.$dbConfig['charset']
 ], $dbalConfig);
 
-$injector->share($dbalConn);
+$injector->share($dbalConn);                       // Share \Doctrine\DBAL\Connection
+$injector->share($dbalConn->createQueryBuilder()); // Share \Doctrine\DBAL\Query\QueryBuilder
 
 
 
