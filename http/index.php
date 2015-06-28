@@ -64,6 +64,7 @@ $mws = $injector->make('ZerobRSS\Middlewares');
  */
 $slim->get('/',                 $mws->db(), $mws->controllerLoader('Root', 'index'));
 $slim->get('/assets/css/:file',             $mws->controllerLoader('Scss', 'get'));
+$slim->get('/login',                        $mws->controllerLoader('Login', 'get'));
 
 
 
