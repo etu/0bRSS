@@ -1,0 +1,7 @@
+/**
+ * Fontsize mixin
+ */
+@mixin font-size($rem, $lineFactor: 1.5) {
+    font-size: $rem + rem;
+    line-height: ($rem * $lineFactor) + rem;
+};

@@ -1,6 +1,14 @@
 @import "reset";
 @import "box-sizing";
+@import "mixins";
 
 html {
-    margin: 0;
+    font-size: 100%;
+}
+
+header {
+    background: #56b33c;
+    padding: 1px;
+
+    @include font-size(1.75);
 }
