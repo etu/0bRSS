@@ -8,14 +8,19 @@ $headerForeground: #FFFFFF;
 html {
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
-
-    height: 100%;
 }
 
 body {
+    background: #F2F2F2;
+}
+
+html, body {
     height: 100%;
 }
 
+/**
+ * Header styling
+ */
 header {
     padding: 1px;
     background: $headerBackground;
@@ -26,14 +31,29 @@ header {
     @include font-size(1.5);
 }
 
-aside {
-    background: red;
-
-    float: left;
-
-    width: 15rem;
-
+/**
+ * Aside/Content shared styles
+ */
+aside, div#content {
     // Calculate height of sidebar
     // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
     height: calc(100% - #{1.5 * 1.5 + 1}rem);
+    padding: 0.5rem;
+    float: left;
+}
+
+/**
+ * Aside Styling
+ */
+aside {
+    background: #FFFFFF;
+
+    width: 15rem;
+}
+
+/**
+ * Content styling
+ */
+div#content {
+    width: calc(100% - 15rem);
 }
