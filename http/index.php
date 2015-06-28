@@ -12,13 +12,6 @@ ini_set('display_errors', 1);
 
 
 /**
- * Load Configruation
- */
-$config = require(PROJECT_ROOT.'/config.php');
-
-
-
-/**
  * Prepare dependency injector
  */
 $injector = new \Auryn\Injector();
