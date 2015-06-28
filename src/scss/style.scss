@@ -3,15 +3,37 @@
 @import "mixins";
 
 $headerBackground: #F4426B;
+$headerForeground: #FFFFFF;
 
 html {
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
+
+    height: 100%;
+}
+
+body {
+    height: 100%;
 }
 
 header {
-    background: $headerBackground;
     padding: 1px;
+    background: $headerBackground;
 
-    @include font-size(1.75);
+    color: $headerForeground;
+    padding: 0.5rem;
+
+    @include font-size(1.5);
+}
+
+aside {
+    background: red;
+
+    float: left;
+
+    width: 15rem;
+
+    // Calculate height of sidebar
+    // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
+    height: calc(100% - #{1.5 * 1.5 + 1}rem);
 }
