@@ -2,12 +2,15 @@
 @import "box-sizing";
 @import "mixins";
 
+$headerBackground: #F4426B;
+
 html {
     font-size: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
 header {
-    background: #56b33c;
+    background: $headerBackground;
     padding: 1px;
 
     @include font-size(1.75);
