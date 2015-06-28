@@ -5,6 +5,11 @@
 $headerBackground: #F4426B;
 $headerForeground: #FFFFFF;
 
+
+
+/**
+ * Document wide styles
+ */
 html {
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -17,6 +22,8 @@ body {
 html, body {
     height: 100%;
 }
+
+
 
 /**
  * Header styling
@@ -31,6 +38,8 @@ header {
     @include font-size(1.5);
 }
 
+
+
 /**
  * Aside/Content shared styles
  */
@@ -42,6 +51,8 @@ aside, div#content {
     float: left;
 }
 
+
+
 /**
  * Aside Styling
  */
@@ -50,6 +61,8 @@ aside {
 
     width: 15rem;
 }
+
+
 
 /**
  * Content styling
