@@ -2,6 +2,12 @@
 @import "box-sizing";
 @import "mixins";
 
+$asideBackground: #FFFFFF;
+$asideForeground: #000000;
+
+$bodyBackground: #F2F2F2;
+$bodyForeground: #000000;
+
 $headerBackground: #42B0F4;
 $headerForeground: #FFFFFF;
 
@@ -16,7 +22,8 @@ html {
 }
 
 body {
-    background: #F2F2F2;
+    background: $bodyBackground;
+    color: $bodyForeground;
 }
 
 html, body {
@@ -60,7 +67,8 @@ aside, div#content {
  * Aside Styling
  */
 aside {
-    background: #FFFFFF;
+    background: $asideBackground;
+    color: $asideForeground;
 
     width: 15rem;
 }
