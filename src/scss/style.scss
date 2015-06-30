@@ -116,6 +116,10 @@ div#content {
 
         border: 1px solid $inputBorderColor;
 
+        &[type='submit'] {
+            cursor: pointer;
+        }
+
         &:first-child {
             margin: 0;
         }
