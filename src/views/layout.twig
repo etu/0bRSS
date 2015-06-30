@@ -10,10 +10,14 @@
         <header>
             0bRSS
         </header>
-        <aside>
-            aside
-        </aside>
-        <div id="content">
+
+        {% if not hide_aside %}
+            <aside>
+                aside
+            </aside>
+        {% endif %}
+
+        <div id="content"{{ hide_aside ? ' class="fullwidth"' }}>
             {{ block('content') }}
         </div>
     </body>

@@ -72,4 +72,8 @@ aside {
  */
 div#content {
     width: calc(100% - 15rem);
+
+    &.fullwidth {
+        width: 100%;
+    }
 }
