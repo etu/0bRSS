@@ -12,6 +12,7 @@ $headerBackground: #42B0F4;
 $headerForeground: #FFFFFF;
 
 $boxShadowColor: #CCCCCC;
+$inputBorderColor: #CCCCCC;
 
 
 
@@ -109,9 +110,11 @@ div#content {
 
     input {
         width: 100%;
-        padding: 0.5rem;
 
+        padding: 0.5rem;
         margin-top: 0.5rem;
+
+        border: 1px solid $inputBorderColor;
 
         &:first-child {
             margin: 0;
