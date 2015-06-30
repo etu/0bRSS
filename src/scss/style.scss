@@ -85,3 +85,32 @@ div#content {
         width: 100%;
     }
 }
+
+
+
+/**
+ * Loginform styling
+ */
+#loginform {
+    background: #fff;
+
+    width: 20rem;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    fieldset {
+        padding: 0.5em;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.5em;
+
+        margin-top: 0.5em;
+
+        &:first-child {
+            margin: 0;
+        }
+    }
+}
