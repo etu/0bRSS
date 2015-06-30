@@ -3,7 +3,7 @@ namespace ZerobRSS\Controllers;
 
 use \Slim\Slim;
 
-class Root
+class Index
 {
     /** @var Slim */
     private $slim;
@@ -13,7 +13,7 @@ class Root
         $this->slim = $slim;
     }
 
-    public function index()
+    public function get()
     {
         $this->slim->log->info('Slim "/" route');
 
