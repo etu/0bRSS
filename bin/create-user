@@ -1,0 +1,86 @@
+#!/usr/bin/env php
+<?php
+define('PROJECT_ROOT', realpath(__DIR__.'/..'));
+
+require(PROJECT_ROOT.'/vendor/autoload.php');
+
+
+
+// Prepare dependency injector
+$injector = new \Auryn\Injector();
+$injector->share($injector);
+
+
+
+// Set up Middlewares
+$mws = $injector->make('\ZerobRSS\Middlewares');
+
+// Init the database connection
+$dbClosure = $mws->db();
+$dbClosure();
+
+
+
+// Load the password validator
+$validator = $injector->make('\JeremyKendall\Password\PasswordValidator');
+$config = require(PROJECT_ROOT.'/config.php');
+$validator->setOptions(['cost' => $config['bcrypt-password-cost']]);
+
+
+
+// Get ZerobRSS\Dao\Users
+$usersDao = $injector->make('\ZerobRSS\Dao\Users');
+
+
+
+// Ask for users name
+echo 'Name of user: ';
+$name = trim(fgets(STDIN));
+
+
+// Ask for users email
+echo 'Enter emailaddress of user: ';
+$email = trim(fgets(STDIN));
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    errlog('Invalid email');
+}
+
+if ($usersDao->getUser($email, 'email')->fetch() !== false) {
+    errlog('User with this email already exist'.PHP_EOL);
+}
+
+
+// Ask for users password with hidden input and hash the password
+echo 'Enter password: ';
+system('stty -echo');
+$hash = $validator->rehash(trim(fgets(STDIN)));
+system('stty echo');
+echo PHP_EOL;
+
+
+
+// Save user
+try {
+    $usersDao->create([
+        'email' => $email,
+        'name' => $name,
+        'password' => $hash
+    ]);
+
+    echo 'User created'.PHP_EOL;
+} catch (\Exception $e) {
+    print_r($e->getMessage());
+}
+
+
+
+
+// Print $message to stderr and exit with $code
+function errlog($message, $code = 1) {
+    $stderr = fopen('php://stderr', 'w');
+    fwrite($stderr, $message.PHP_EOL);
+    fclose($stderr);
+
+    exit($code);
+}

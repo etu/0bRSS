@@ -38,4 +38,16 @@ class Users
 
         return $query->execute();
     }
+
+    public function create($values)
+    {
+        $query = $this->db->createQueryBuilder()
+               ->insert('users');
+
+        foreach ($values as $key => $value) {
+            $query = $query->setValue($key, ':'.$key)->setParameter(':'.$key, $value);
+        }
+
+        return $query->execute();
+    }
 }
