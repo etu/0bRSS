@@ -41,9 +41,11 @@ class Users
 
     public function create($values)
     {
+        // Prepare insert query
         $query = $this->db->createQueryBuilder()
                ->insert('users');
 
+        // Append parameters to insert to the query
         foreach ($values as $key => $value) {
             $query = $query->setValue($key, ':'.$key)->setParameter(':'.$key, $value);
         }
