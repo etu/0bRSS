@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'bcrypt-password-cost' => 10,       // bcrypt password cost
     'paths' => [
         'migrations' => __DIR__.'/migrations'
     ],
