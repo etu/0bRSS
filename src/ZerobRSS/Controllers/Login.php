@@ -59,7 +59,11 @@ class Login
 
 
             if ($result->getCode() === Result::SUCCESS_PASSWORD_REHASHED) {
-                // Needs rehash, should update database with contents of: $result->getPassword();
+                // Update password in database to reflect the new updated hash
+                $this->usersDao->update($user->id, [
+                    'password' => $result->getPassword(),
+                    'updated' => date('Y-m-d H:i:s')
+                ]);
             }
 
 
@@ -67,6 +71,7 @@ class Login
             if ($result->isValid()) {
                 // Password is valid
                 // $this->slim->response->headers->set('Location', $this->slim->request->getRootUri().'/');
+
                 echo 'password is valid, go home';
                 return;
             }
