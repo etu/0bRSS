@@ -46,9 +46,9 @@ class Login
 
 
 
-        // Use this to hash a password, cost by default is 10 though, this should be in config
-        // $this->passwordValidator->setOptions(['cost' => 9]);
-        // $hash = $this->passwordValidator->rehash($password);
+        // Set password hashing cost for bcrypt, default is 10, but more is better
+        $config = require(PROJECT_ROOT.'/config.php');
+        $this->passwordValidator->setOptions(['cost' => $config['bcrypt-password-cost']]);
 
 
 
