@@ -50,6 +50,7 @@ class Middlewares
                         .$dbConfig['port'].'/'.$dbConfig['name'].'?charset='.$dbConfig['charset']
             ], $dbalConfig);
 
+            $dbalConn->setFetchMode(\PDO::FETCH_OBJ);
 
             $injector->share($dbalConn);                       // Share \Doctrine\DBAL\Connection
             $injector->share($dbalConn->createQueryBuilder()); // Share \Doctrine\DBAL\Query\QueryBuilder
