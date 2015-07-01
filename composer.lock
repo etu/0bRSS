@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7adedafcf3bdb9adfa2f4b415474ed6",
+    "hash": "792f73fcc9edb61ab67692f97e6893e3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -562,6 +562,62 @@
                 "password"
             ],
             "time": "2014-11-20 16:49:30"
+        },
+        {
+            "name": "jeremykendall/password-validator",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykendall/password-validator.git",
+                "reference": "fed8f83379bbaaf82e056fcfef40fc82d36fe2d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykendall/password-validator/zipball/fed8f83379bbaaf82e056fcfef40fc82d36fe2d4",
+                "reference": "fed8f83379bbaaf82e056fcfef40fc82d36fe2d4",
+                "shasum": ""
+            },
+            "require": {
+                "ircmaxell/password-compat": "1.*",
+                "php": ">=5.3.7",
+                "wp-cli/php-cli-tools": "0.10.*"
+            },
+            "require-dev": {
+                "league/phpunit-coverage-listener": "~1.1",
+                "phpunit/phpunit": "4.*"
+            },
+            "bin": [
+                "bin/cost-check",
+                "bin/version-check"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JeremyKendall\\Password\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Kendall",
+                    "homepage": "http://about.me/jeremykendall",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Password Validator validates password_hash generated passwords, rehashes passwords as necessary, and will upgrade legacy passwords.",
+            "homepage": "https://github.com/jeremykendall/password-validator",
+            "keywords": [
+                "password",
+                "password validation",
+                "password validator",
+                "password_hash",
+                "passwords",
+                "security"
+            ],
+            "time": "2015-03-25 08:38:48"
         },
         {
             "name": "leafo/scssphp",
@@ -1214,6 +1270,56 @@
                 "templating"
             ],
             "time": "2015-06-06 23:31:24"
+        },
+        {
+            "name": "wp-cli/php-cli-tools",
+            "version": "v0.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/php-cli-tools.git",
+                "reference": "228e8c1300675313e519b4195783aaa1a1a020bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/228e8c1300675313e519b4195783aaa1a1a020bf",
+                "reference": "228e8c1300675313e519b4195783aaa1a1a020bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "cli": "lib/"
+                },
+                "files": [
+                    "lib/cli/cli.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Logsdon",
+                    "email": "jlogsdon@php.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@handbuilt.co",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Console utilities for PHP",
+            "homepage": "http://github.com/wp-cli/php-cli-tools",
+            "keywords": [
+                "cli",
+                "console"
+            ],
+            "time": "2015-02-27 22:11:29"
         }
     ],
     "packages-dev": [],
