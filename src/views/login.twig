@@ -3,6 +3,12 @@
 {% set hide_aside = true %}
 
 {% block content %}
+    {% if message %}
+        <div id="errormessage">
+            {{ message }}
+        </div>
+    {% endif %}
+
     <div id="loginform">
         <form action="{{ baseUrl() }}/login" method="POST">
             <fieldset>
