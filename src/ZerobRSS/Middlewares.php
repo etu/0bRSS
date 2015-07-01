@@ -43,17 +43,20 @@ class Middlewares
             $dbConfig = $config['environments']['database'];
 
 
+            // Connect to database
             $dbalConfig = new \Doctrine\DBAL\Configuration();
-
             $dbalConn = \Doctrine\DBAL\DriverManager::getConnection([
                 'url' => $dbConfig['adapter'].'://'.$dbConfig['user'].':'.$dbConfig['pass'].'@'.$dbConfig['host'].':'
                         .$dbConfig['port'].'/'.$dbConfig['name'].'?charset='.$dbConfig['charset']
             ], $dbalConfig);
 
+
+            // Set default fetch-mode to fetch objects
             $dbalConn->setFetchMode(\PDO::FETCH_OBJ);
 
-            $injector->share($dbalConn);                       // Share \Doctrine\DBAL\Connection
-            $injector->share($dbalConn->createQueryBuilder()); // Share \Doctrine\DBAL\Query\QueryBuilder
+
+            // Share \Doctrine\DBAL\Connection
+            $injector->share($dbalConn);
         };
     }
 }
