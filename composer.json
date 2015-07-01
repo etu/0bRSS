@@ -5,6 +5,8 @@
         "doctrine/dbal": "^2.5",
         "slim/slim": "^2.6",
 
+        "ircmaxell/password-compat": "^1.0",
+
         "flynsarmy/slim-monolog": "^1.0",
 
         "leafo/scssphp": "^0.1.6",
