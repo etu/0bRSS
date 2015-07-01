@@ -70,6 +70,10 @@ class Login
 
             if ($result->isValid()) {
                 // Password is valid
+                $this->usersDao->update($user->id, [
+                    'last_login' => date('Y-m-d H:i:s')
+                ]);
+
                 // $this->slim->response->headers->set('Location', $this->slim->request->getRootUri().'/');
 
                 echo 'password is valid, go home';
