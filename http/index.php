@@ -1,7 +1,5 @@
 <?php
-
 define('PROJECT_ROOT', realpath(__DIR__.'/..'));
-
 require(PROJECT_ROOT.'/vendor/autoload.php');
 
 
