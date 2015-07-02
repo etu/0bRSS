@@ -85,7 +85,8 @@ class Middlewares
                 $slim->log->info('User not member of group: '.$group);
 
                 // Redirect to loginpage
-                $slim->response->headers->set('Location', $this->slim->request->getRootUri().'/login');
+                header('Location: '.$slim->request->getRootUri().'/login');
+                #$slim->response->headers->set('Location', $slim->request->getRootUri().'/login');
 
                 exit;
             }
