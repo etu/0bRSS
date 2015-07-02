@@ -59,4 +59,22 @@ class Middlewares
             $injector->share($dbalConn);
         };
     }
+
+    /**
+     * Middleware to init session and authenticate the user
+     */
+    public function auth($group)
+    {
+        return function () use ($group) {
+            session_start();
+
+            if (true === $group) {
+                return true;
+            }
+
+            echo '<pre>';
+            var_dump($_SESSION);
+            echo '</pre>';
+        };
+    }
 }

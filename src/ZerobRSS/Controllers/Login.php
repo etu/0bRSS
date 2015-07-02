@@ -74,10 +74,14 @@ class Login
                     'last_login' => date('Y-m-d H:i:s')
                 ]);
 
-                // $this->slim->response->headers->set('Location', $this->slim->request->getRootUri().'/');
+                // Set User-data to session
+                $_SESSION['user']['id']    = $user->id;
+                $_SESSION['user']['email'] = $user->email;
+                $_SESSION['user']['name']  = $user->name;
 
-                echo 'password is valid, go home';
-                return;
+
+                // Redirect to homepage
+                $this->slim->response->headers->set('Location', $this->slim->request->getRootUri().'/');
             }
         }
 
