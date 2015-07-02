@@ -1,6 +1,6 @@
 * 0bRSS - Simple RSS Reader
 
-0bRSS is a Simple RSS-Reader application.
+0bRSS is a Simple RSS-Reader.
 
 ** Requirements
  - PHP 5.4 or greater.
