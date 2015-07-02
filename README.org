@@ -12,3 +12,15 @@
  - Install the composer dependencies (=php composer.phar install=).
  - Write the config-file.
  - Run the migrations (=php vendor/bin/phinx migrate -c config.php=).
+ - Create user (=php bin/create-user=).
+
+** Writing the config
+Start by copying the =config.sample.php= to =config.php= and then change your
+values to match your database configruation.
+
+You may also set =bcrypt-password-cost= which will be used by the password
+hashing. Higher number -> Slower but better hashing.
+
+There is a script provided (=php vendor/bin/cost-check=) which will benchmark
+a cost for you which takes 0.2s to hash a password with. On my 5 year old
+laptop, it suggests 11. So most people should be able to go higher than that.
