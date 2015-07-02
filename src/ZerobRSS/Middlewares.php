@@ -60,6 +60,8 @@ class Middlewares
         };
     }
 
+
+
     /**
      * Middleware to init session and authenticate the user
      */
