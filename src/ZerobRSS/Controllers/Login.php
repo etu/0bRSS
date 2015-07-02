@@ -75,9 +75,10 @@ class Login
                 ]);
 
                 // Set User-data to session
-                $_SESSION['user']['id']    = $user->id;
-                $_SESSION['user']['email'] = $user->email;
-                $_SESSION['user']['name']  = $user->name;
+                $_SESSION['user']['id']     = $user->id;
+                $_SESSION['user']['email']  = $user->email;
+                $_SESSION['user']['name']   = $user->name;
+                $_SESSION['user']['groups'] = [];
 
 
                 // Redirect to homepage
