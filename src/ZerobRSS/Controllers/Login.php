@@ -80,6 +80,10 @@ class Login
                 $_SESSION['user']['name']   = $user->name;
                 $_SESSION['user']['groups'] = [];
 
+                // Loop user groups and add them to the session
+                foreach ($this->usersDao->getGroups($user->id)->fetchAll() as $group) {
+                    $_SESSION['user']['groups'][] = $group->name;
+                }
 
                 // Redirect to homepage
                 $this->slim->response->headers->set('Location', $this->slim->request->getRootUri().'/');

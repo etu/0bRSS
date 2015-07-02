@@ -2,15 +2,20 @@
 namespace ZerobRSS;
 
 use \Auryn\Injector;
+use \Slim\Slim;
 
 class Middlewares
 {
     /** @var Injector */
     private $injector;
 
-    public function __construct(Injector $injector)
+    /** @var Slim */
+    private $slim;
+
+    public function __construct(Injector $injector, Slim $slim)
     {
         $this->injector = $injector;
+        $this->slim = $slim;
     }
 
 
@@ -67,16 +72,26 @@ class Middlewares
      */
     public function auth($group)
     {
-        return function () use ($group) {
+        $slim = $this->slim;
+
+        return function () use ($group, $slim) {
             session_start();
 
             if (true === $group) {
                 return true;
             }
 
-            echo '<pre>';
-            var_dump($_SESSION);
-            echo '</pre>';
+            if (!in_array($group, $_SESSION['user']['groups'])) {
+                $slim->log->info('User not member of group: '.$group);
+
+                // Redirect to loginpage
+                $slim->response->headers->set('Location', $this->slim->request->getRootUri().'/login');
+
+                exit;
+            }
+
+            // Otherwise, everything is fine
+            return true;
         };
     }
 }
