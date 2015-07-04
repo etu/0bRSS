@@ -50,6 +50,9 @@ class Users
             $query = $query->setValue($key, ':'.$key)->setParameter(':'.$key, $value);
         }
 
-        return $query->execute();
+        $query->execute();
+
+        // @TODO: Check if this works in MariaDB
+        return $this->db->lastInsertId('users_id_seq');
     }
 }
