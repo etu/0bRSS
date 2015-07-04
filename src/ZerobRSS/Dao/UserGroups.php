@@ -23,4 +23,15 @@ class UserGroups
             ->setParameter(':value', $value)
             ->execute();
     }
+
+    public function addUserToGroup($userId, $groupId)
+    {
+        return $this->db->createQueryBuilder()
+            ->insert('user_groups')
+            ->setValue('user_id', ':user_id')
+            ->setValue('group_id', ':group_id')
+            ->setParameter(':user_id', $userId)
+            ->setParameter(':group:id', $groupId)
+            ->execute();
+    }
 }
