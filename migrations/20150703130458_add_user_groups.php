@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class AddUsersGroup extends AbstractMigration
+class AddUserGroups extends AbstractMigration
 {
     /**
      * Change Method.
@@ -22,7 +22,8 @@ class AddUsersGroup extends AbstractMigration
      */
     public function up()
     {
-        $this->execute("INSERT INTO groups (id, name, system) VALUES (1, 'users', true)");
+        $this->execute("INSERT INTO groups (id, name, system) VALUES (1, 'admin', true)");
+        $this->execute("INSERT INTO groups (id, name, system) VALUES (2, 'users', true)");
     }
 
     /**
