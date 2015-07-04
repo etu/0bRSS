@@ -22,7 +22,7 @@ class AddUsersGroup extends AbstractMigration
      */
     public function up()
     {
-        $this->execute("INSERT INTO groups (name, system) VALUES ('users', true)");
+        $this->execute("INSERT INTO groups (id, name, system) VALUES (1, 'users', true)");
     }
 
     /**
