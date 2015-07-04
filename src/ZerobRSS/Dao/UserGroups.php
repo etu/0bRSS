@@ -31,7 +31,7 @@ class UserGroups
             ->setValue('user_id', ':user_id')
             ->setValue('group_id', ':group_id')
             ->setParameter(':user_id', $userId)
-            ->setParameter(':group:id', $groupId)
+            ->setParameter(':group_id', $groupId)
             ->execute();
     }
 }

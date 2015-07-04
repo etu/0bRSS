@@ -29,7 +29,8 @@ $validator->setOptions(['cost' => $config['bcrypt-password-cost']]);
 
 // Get ZerobRSS\Dao\Users
 $usersDao = $injector->make('\ZerobRSS\Dao\Users');
-
+$groupsDao = $injector->make('\ZerobRSS\Dao\Groups');
+$userGroupsDao = $injector->make('\ZerobRSS\Dao\UserGroups');
 
 
 // Ask for users name
@@ -59,13 +60,19 @@ echo PHP_EOL;
 
 
 
-// Save user
 try {
-    $usersDao->create([
+    // Create user
+    $userId = $usersDao->create([
         'email' => $email,
         'name' => $name,
         'password' => $hash
     ]);
+
+    // Get group named users
+    $userGroup = $groupsDao->getGroup('users', 'name')->fetch();
+
+    // Add user to users group
+    $userGroupsDao->addUserToGroup($userId, $userGroup->id);
 
     echo 'User created'.PHP_EOL;
 } catch (\Exception $e) {
