@@ -81,7 +81,7 @@ class Middlewares
                 return true;
             }
 
-            if (!in_array($group, $_SESSION['user']['groups'])) {
+            if (!isset($_SESSION['user']) || !in_array($group, $_SESSION['user']['groups'])) {
                 $slim->log->info('User not member of group: '.$group);
 
                 // Redirect to loginpage
