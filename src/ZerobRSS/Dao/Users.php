@@ -52,15 +52,4 @@ class Users
 
         return $query->execute();
     }
-
-    public function getGroups($value, $column = 'user_id')
-    {
-        return $this->db->createQueryBuilder()
-            ->select('*')
-            ->from('user_groups', 'ug')
-            ->innerJoin('ug', 'groups', 'g', 'g.id = ug.group_id')
-            ->where($column.' = :value')
-            ->setParameter(':value', $value)
-            ->execute();
-    }
 }

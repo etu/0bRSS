@@ -2,6 +2,7 @@
 namespace ZerobRSS\Controllers;
 
 use \ZerobRSS\Dao\Users as UsersDao;
+use \ZerobRSS\Dao\UserGroups as UserGroupsDao;
 
 use \Slim\Slim;
 use \JeremyKendall\Password\PasswordValidator;
@@ -15,13 +16,18 @@ class Login
     /** @var UsersDao */
     private $usersDao;
 
+    /** @var UserGroupsDao */
+    private $userGroupsDao;
+
     /** @var PasswordValidator */
     private $passwordValidator;
 
-    public function __construct(Slim $slim, UsersDao $usersDao, PasswordValidator $passwordValidator)
-    {
+    public function __construct(
+        Slim $slim, UsersDao $usersDao, UserGroupsDao $userGroupsDao, PasswordValidator $passwordValidator
+    ) {
         $this->slim = $slim;
         $this->usersDao = $usersDao;
+        $this->userGroupsDao = $userGroupsDao;
         $this->passwordValidator = $passwordValidator;
     }
 
@@ -81,7 +87,7 @@ class Login
                 $_SESSION['user']['groups'] = [];
 
                 // Loop user groups and add them to the session
-                foreach ($this->usersDao->getGroups($user->id)->fetchAll() as $group) {
+                foreach ($this->userGroupsDao->getUserGroups($user->id)->fetchAll() as $group) {
                     $_SESSION['user']['groups'][] = $group->name;
                 }
 
