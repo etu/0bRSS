@@ -19,6 +19,8 @@ class CreateArticlesTable extends AbstractMigration
                  ->addColumn('feed_id',   'integer', ['signed' => false])
                  ->addColumn('body',      'text')
                  ->addColumn('uri',       'string',  ['limit'  => 255])
+                 ->addColumn('read',      'boolean', ['default' => false])
+                 ->addColumn('starred',   'boolean', ['default' => false])
                  ->addColumn('published', 'datetime')
 
                  ->addIndex(['title', 'uri', 'published'])
