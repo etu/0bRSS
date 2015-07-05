@@ -1,5 +1,13 @@
 {% extends 'layout.twig' %}
 
+{% block aside %}
+    <ul>
+        {% for feed in feeds %}
+            <li><a href="#">{{ feed.name }} <span class="unread">0</span></a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
 {% block content %}
     Hello {{ name }}.
 {% endblock %}

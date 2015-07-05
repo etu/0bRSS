@@ -3,14 +3,20 @@ namespace ZerobRSS\Controllers;
 
 use \Slim\Slim;
 
+use \ZerobRSS\Dao\Feeds as FeedsDao;
+
 class Index
 {
     /** @var Slim */
     private $slim;
 
-    public function __construct(Slim $slim)
+    /** @var FeedsDao */
+    private $feedsDao;
+
+    public function __construct(Slim $slim, FeedsDao $feedsDao)
     {
         $this->slim = $slim;
+        $this->feedsDao = $feedsDao;
     }
 
     public function get()
@@ -19,7 +25,10 @@ class Index
 
         $this->slim->render(
             'index.twig',
-            ['name' => '0bRSS']
+            [
+                'name' => '0bRSS',
+                'feeds' => $this->feedsDao->getFeeds($_SESSION['user']['id'])->fetchAll()
+            ]
         );
     }
 }
