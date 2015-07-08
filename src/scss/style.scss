@@ -63,7 +63,7 @@ header {
 aside, div#content {
     // Calculate height of sidebar
     // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
-    height: calc(100% - #{1.5 * 1.5 + 2}rem);
+    height: calc(100% - #{1.2 * 1.5 + 2}rem);
     padding: 0.5rem;
     float: left;
 }
