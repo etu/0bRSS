@@ -8,13 +8,14 @@ $asideForeground: #000000;
 $bodyBackground: #F2F2F2;
 $bodyForeground: #000000;
 
-$headerBackground: #42B0F4;
+$headerBackground: #2196f3;
 $headerForeground: #FFFFFF;
 
 $boxShadowColor: #CCCCCC;
+$boxShadowColor: rgba(0, 0, 0, 0.25);
 $inputBorderColor: #CCCCCC;
 
-$errorBackground: #F44242;
+$errorBackground: #FA6A6A;
 $errorForeground: #000000;
 
 
@@ -45,12 +46,13 @@ header {
     background: $headerBackground;
 
     color: $headerForeground;
-    padding: 0.5rem;
+    padding: 1rem;
+    padding-left: 3rem;
 
     position: relative;
-    box-shadow: 0 0.5rem 1rem $boxShadowColor;
+    box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
 
-    @include font-size(1.5);
+    @include font-size(1.2);
 }
 
 
@@ -61,7 +63,7 @@ header {
 aside, div#content {
     // Calculate height of sidebar
     // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
-    height: calc(100% - #{1.5 * 1.5 + 1}rem);
+    height: calc(100% - #{1.5 * 1.5 + 2}rem);
     padding: 0.5rem;
     float: left;
 }
@@ -106,22 +108,31 @@ div#content {
     margin-left: auto;
     margin-right: auto;
 
-    box-shadow: 0 0 1rem $boxShadowColor;
+    box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
 
     fieldset {
-        padding: 0.5rem;
+        padding: 2rem 1rem;
     }
 
     input {
         width: 100%;
 
         padding: 0.5rem;
-        margin-top: 0.5rem;
+        margin-top: 1rem;
 
         border: 0.1rem solid $inputBorderColor;
 
         &[type='submit'] {
             cursor: pointer;
+
+            box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
+
+            background: $headerBackground;
+            color: $headerForeground;
+
+            width: 4rem;
+
+            float: right;
         }
 
         &:first-child {
@@ -137,10 +148,12 @@ div#content {
     margin-left: auto;
     margin-right: auto;
 
-    box-shadow: 0 0 1rem $boxShadowColor;
+    box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
 
-    padding: 0.5rem;
+    padding: 2rem 1rem;
 
     background: $errorBackground;
     color: $errorForeground;
+
+    @include font-size(1);
 }
