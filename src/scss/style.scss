@@ -121,11 +121,12 @@ div#content {
         margin-top: 1rem;
 
         border: 0.1rem solid $inputBorderColor;
+        box-shadow: 0 0rem 0.1rem $boxShadowColor;
 
         &[type='submit'] {
             cursor: pointer;
 
-            box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
+            box-shadow: 0 0rem 0.4rem $boxShadowColor;
 
             background: $headerBackground;
             color: $headerForeground;
@@ -133,6 +134,9 @@ div#content {
             width: 4rem;
 
             float: right;
+
+            border: 0;
+            border-radius: 0.2rem;
         }
 
         &:first-child {
