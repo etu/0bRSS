@@ -77,6 +77,8 @@ aside {
     background: $asideBackground;
     color: $asideForeground;
 
+    box-shadow: 0.1rem 0 0.2rem $boxShadowColor;
+
     width: 15rem;
 }
 
