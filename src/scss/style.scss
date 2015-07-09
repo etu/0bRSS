@@ -53,6 +53,7 @@ header {
     box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
 
     @include font-size(1.2);
+    font-weight: bold;
 }
 
 
