@@ -79,7 +79,7 @@ aside {
 
     box-shadow: 0.1rem 0 0.2rem $boxShadowColor;
 
-    width: 15rem;
+    width: 20rem;
 }
 
 
@@ -88,7 +88,7 @@ aside {
  * Content styling
  */
 div#content {
-    width: calc(100% - 15rem);
+    width: calc(100% - 20rem);
 
     &.fullwidth {
         width: 100%;
