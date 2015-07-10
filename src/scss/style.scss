@@ -49,8 +49,8 @@ html, body {
  */
 header {
     background: $headerBackground;
-
     color: $headerForeground;
+
     padding: 1.2rem;
     padding-left: 3rem;
 
@@ -59,8 +59,56 @@ header {
 
     @include font-size(1.2);
     font-weight: bold;
-}
 
+    button#header-menu-button {
+        background: $headerBackground;
+        color: $headerForeground;
+
+        float: right;
+        font-weight: normal;
+
+        padding: 0 1rem;
+
+        border: 0;
+
+        @include font-size(1.5, 1);
+    }
+
+    nav#header-menu {
+        position: fixed;
+
+        right: 1rem;
+        top: 2.75rem;
+
+        padding: 0.5rem 0;
+
+        background: $asideBackground;
+        color: $asideForeground;
+
+        box-shadow: 0.1rem 0 0.2rem $boxShadowColor;
+
+        min-width: 10rem;
+
+        display: none;
+
+        @include font-size(1, 1);
+
+        font-weight: normal;
+
+        a {
+            display: block;
+
+            text-decoration: none;
+            color: $asideForeground;
+
+            padding: 1rem 1.5rem;
+
+            &:hover {
+                background: $asideHoverBackground;
+            }
+        }
+    }
+}
 
 
 /**

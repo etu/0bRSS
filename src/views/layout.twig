@@ -12,7 +12,18 @@
     </head>
     <body>
         <header>
+            {# <i class="fa fa-bars"><!-- Hamburgemenu for later usage --></i> #}
             0bRSS
+
+            {% if not hide_header_menu %}
+                {# Button to open and close the right hand side menu #}
+                <button id="header-menu-button" class="fa fa-ellipsis-v"></button>
+
+                {# Right hand side menu itself #}
+                <nav id="header-menu">
+                    <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+                </nav>
+            {% endif %}
         </header>
 
         {% if not hide_aside %}
@@ -25,4 +36,7 @@
             {{ block('content') }}
         </div>
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
+    <script src="{{ baseUrl() }}/assets/js/header-menu.js"></script>
 </html>
