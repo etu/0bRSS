@@ -89,12 +89,12 @@ aside {
 
     nav a {
         display: block;
-        padding: 1rem;
+        padding: 0.75rem;
 
         text-decoration: none;
         color: $asideForeground;
 
-        @include font-size(1);
+        @include font-size(1, 1.85);
 
         span.unread {
             display: block;
@@ -103,11 +103,15 @@ aside {
             border-radius: 0.3rem;
             text-align: center;
             font-weight: bold;
-            min-width: 2.5rem;
+            min-width: 2rem;
+
             padding: 0 0.5rem;
+            margin-top: 0.25rem;
 
             background: $unreadBackground;
             color: $unreadForeground;
+
+            @include font-size(0.75);
         }
 
         .fa-rss-square {
@@ -115,7 +119,7 @@ aside {
 
             color: $rssIconColor;
 
-            @include font-size(1.5, 1);
+            font-size: 1.25rem;
         }
 
         &:hover {
