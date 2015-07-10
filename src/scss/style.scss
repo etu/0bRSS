@@ -51,7 +51,7 @@ header {
     background: $headerBackground;
 
     color: $headerForeground;
-    padding: 1rem;
+    padding: 1.2rem;
     padding-left: 3rem;
 
     position: relative;
@@ -69,7 +69,7 @@ header {
 aside, div#content {
     // Calculate height of sidebar
     // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
-    height: calc(100% - #{1.2 * 1.5 + 2}rem);
+    height: calc(100% - #{1.2 * 1.5 + 2.4}rem);
     padding: 1rem;
     float: left;
 }
