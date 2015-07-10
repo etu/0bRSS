@@ -1,11 +1,11 @@
 {% extends 'layout.twig' %}
 
 {% block aside %}
-    <ul>
+    <nav>
         {% for feed in feeds %}
-            <li><a href="#">{{ feed.name }} <span class="unread">0</span></a></li>
+            <a href="#"><i class="fa fa-rss-square"></i> {{ feed.name }} <span class="unread">0</span></a>
         {% endfor %}
-    </ul>
+    </nav>
 {% endblock %}
 
 {% block content %}
