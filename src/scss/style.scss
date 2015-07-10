@@ -85,7 +85,7 @@ aside {
 
     box-shadow: 0.1rem 0 0.2rem $boxShadowColor;
 
-    width: 20rem;
+    width: 17rem;
 
     nav a {
         display: block;
@@ -134,7 +134,7 @@ aside {
  * Content styling
  */
 div#content {
-    width: calc(100% - 20rem);
+    width: calc(100% - 17rem);
 
     &.fullwidth {
         width: 100%;
