@@ -278,7 +278,7 @@ div#content {
     @include font-size(1);
 }
 
-@media (max-width: 34rem) {
+@media (max-width: 40rem) {
     header button#show-aside-button {
         display: inline;
     }
