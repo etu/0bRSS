@@ -12,7 +12,9 @@
     </head>
     <body>
         <header>
-            <button id="show-aside-button" class="fa fa-bars"></button>
+            {% if not hide_aside %}
+                <button id="show-aside-button" class="fa fa-bars"></button>
+            {% endif %}
 
             0bRSS
 
