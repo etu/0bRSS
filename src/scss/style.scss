@@ -60,6 +60,9 @@ header {
     @include font-size(1.2);
     font-weight: bold;
 
+    /**
+     * Header menu button styles
+     */
     button#header-menu-button {
         background: $headerBackground;
         color: $headerForeground;
@@ -74,6 +77,9 @@ header {
         @include font-size(1.5, 1);
     }
 
+    /**
+     * And menu styles itself
+     */
     nav#header-menu {
         position: absolute;
 
