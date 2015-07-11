@@ -47,7 +47,7 @@ $('show-aside-button').addEvent('click', function (event) {
  * aside or not.
  */
 $('content').addEvent('click', function (event) {
-    var asideButtonVisible = $('show-aside-button').getStyle('display') === 'inline-block';
+    var asideButtonVisible = $('show-aside-button').getStyle('display') !== 'none';
     var asideVisible = parseInt($('aside-menu').getStyle('margin-left')) === 0;
 
     if (false === asideButtonVisible && false === asideVisible) {
