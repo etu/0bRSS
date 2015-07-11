@@ -17,12 +17,53 @@ class FeedReader
         $this->simplePie->enable_cache(false);
     }
 
+
+
+    /**
+     * Open feed URI for reading
+     */
     public function open($feedUri)
     {
         $this->simplePie->set_feed_url($feedUri);
         $this->simplePie->init();
     }
 
+
+
+    /**
+     * Get feed description
+     */
+    public function getFeedTitle()
+    {
+        return $this->simplePie->get_title();
+    }
+
+
+
+    /**
+     * Get feed description
+     */
+    public function getFeedDescription()
+    {
+        return $this->simplePie->get_description();
+    }
+
+
+
+    /**
+     * Get first link from feed, most of the time a link to the website,
+     * otherwise you might get the link to the feed itself.
+     */
+    public function getFeedLink()
+    {
+        return $this->simplePie->get_link();
+    }
+
+
+
+    /**
+     * Get all posts from feed
+     */
     public function getPosts()
     {
         $spItems = $this->simplePie->get_items();
