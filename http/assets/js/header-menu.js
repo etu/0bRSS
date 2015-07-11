@@ -22,7 +22,7 @@ if ($('header-menu-button')) {
         if (event.target                           === $('header-menu-button') ||
             event.target.getParent('#header-menu') === $('header-menu') ||
             event.target                           === $('header-menu')) {
-            return false;
+            return true;
         }
 
         if ('block' === $('header-menu').getStyle('display')) {

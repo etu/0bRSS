@@ -60,10 +60,11 @@ $mws = $injector->make('ZerobRSS\Middlewares');
 /**
  * Prepare Routes
  */
-$slim->get('/',                 $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index', 'get'));
-$slim->get('/assets/css/:file',                                  $mws->controllerLoader('Scss',  'get'));
-$slim->get('/login',                                 $mws->db(), $mws->controllerLoader('Login', 'get'));
-$slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login', 'post'));
+$slim->get('/',                 $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
+$slim->get('/assets/css/:file',                                  $mws->controllerLoader('Scss',   'get'));
+$slim->get('/login',                                 $mws->db(), $mws->controllerLoader('Login',  'get'));
+$slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login',  'post'));
+$slim->get('/logout',                                            $mws->controllerLoader('Logout', 'get'));
 
 
 
