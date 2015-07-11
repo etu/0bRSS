@@ -52,7 +52,7 @@ header {
     color: $headerForeground;
 
     padding: 1.2rem;
-    padding-left: 3rem;
+    // padding-left: 3rem;
 
     position: relative;
     box-shadow: 0 0.16rem 0.2rem $boxShadowColor;
@@ -60,21 +60,33 @@ header {
     @include font-size(1.2);
     font-weight: bold;
 
+    button#show-aside-button {
+        display: none;
+
+        background: $headerBackground;
+        color: $headerForeground;
+
+        font-weight: normal;
+        @include font-size(1.5, 1);
+
+        padding: 0 1rem;
+        border: 0;
+    }
+
     /**
      * Header menu button styles
      */
     button#header-menu-button {
+        float: right;
+
         background: $headerBackground;
         color: $headerForeground;
 
-        float: right;
         font-weight: normal;
+        @include font-size(1.5, 1);
 
         padding: 0 1rem;
-
         border: 0;
-
-        @include font-size(1.5, 1);
     }
 
     /**
@@ -120,12 +132,14 @@ header {
 /**
  * Aside/Content shared styles
  */
-aside, div#content {
+aside#aside-menu, div#content {
     // Calculate height of sidebar
     // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
     min-height: calc(100% - #{1.2 * 1.5 + 2.4}rem);
     padding: 1rem;
     float: left;
+
+    transition: all 0.5s ease;
 }
 
 
@@ -133,7 +147,7 @@ aside, div#content {
 /**
  * Aside Styling
  */
-aside {
+aside#aside-menu {
     background: $asideBackground;
     color: $asideForeground;
 
@@ -262,4 +276,18 @@ div#content {
     color: $errorForeground;
 
     @include font-size(1);
+}
+
+@media (max-width: 34rem) {
+    header button#show-aside-button {
+        display: inline;
+    }
+
+    aside#aside-menu {
+        margin-left: -18rem;
+    }
+
+    div#content {
+        width: 100%;
+    }
 }

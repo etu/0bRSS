@@ -12,7 +12,8 @@
     </head>
     <body>
         <header>
-            {# <i class="fa fa-bars"><!-- Hamburgemenu for later usage --></i> #}
+            <button id="show-aside-button" class="fa fa-bars"></button>
+
             0bRSS
 
             {% if not hide_header_menu %}
@@ -27,7 +28,7 @@
         </header>
 
         {% if not hide_aside %}
-            <aside>
+            <aside id="aside-menu">
                 {{ block('aside') }}
             </aside>
         {% endif %}
@@ -39,4 +40,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
     <script src="{{ baseUrl() }}/assets/js/header-menu.js"></script>
+    <script src="{{ baseUrl() }}/assets/js/aside-menu.js"></script>
 </html>
