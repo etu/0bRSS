@@ -10,7 +10,9 @@
         "leafo/scssphp": "^0.1.6",
         "twig/twig": "^1.18",
         "slim/views": "^0.1.3",
-        "jeremykendall/password-validator": "^3.0"
+        "jeremykendall/password-validator": "^3.0",
+
+        "simplepie/simplepie": "^1.3"
     },
 
     "autoload": {
