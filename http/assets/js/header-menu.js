@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 /**
  * Open and close button for menu
  */
@@ -10,10 +12,12 @@ $('header-menu-button').addEvent('click', function (event) {
     );
 });
 
+
+
 /**
- * Catch all clicks on the html element (everything basicly),
- * then filter out which is not interesting (menu button and menu itself)
- * and then close the menu if it's not catched in the not interesting filter
+ * Catch all clicks on the html element (everything basicly), then filter out
+ * which is not interesting (menu button and menu itself) and then close the
+ * menu if it's not catched in the not interesting filter
  */
 $$('html')[0].addEvent('click', function (event) {
     if (event.target                           === $('header-menu-button') ||
