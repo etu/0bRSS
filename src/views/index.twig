@@ -3,7 +3,7 @@
 {% block aside %}
     <nav>
         {% for feed in feeds %}
-            <a href="#"><i class="fa fa-rss-square"></i> {{ feed.name }} <span class="unread">0</span></a>
+            <a href="#"><i class="fa fa-rss-square"></i> {{ feed.name }} <span class="unread">{{ feed.unread }}</span></a>
         {% endfor %}
     </nav>
 {% endblock %}

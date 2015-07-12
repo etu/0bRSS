@@ -17,6 +17,7 @@ class Feeds
     {
         return $this->db->createQueryBuilder()
             ->select('*')
+            ->addSelect('(SELECT COUNT(*) AS unread FROM articles WHERE read = false and feed_id = feeds.id)')
             ->from('feeds')
             ->where('user_id = :user_id')
             ->setParameter(':user_id', $userId)
