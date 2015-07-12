@@ -26,7 +26,6 @@ class Index
         $this->slim->render(
             'index.twig',
             [
-                'name' => '0bRSS',
                 'feeds' => $this->feedsDao->getFeeds($_SESSION['user']['id'])->fetchAll()
             ]
         );

@@ -3,11 +3,13 @@
 {% block aside %}
     <nav>
         {% for feed in feeds %}
-            <a href="#"><i class="fa fa-rss-square"></i> {{ feed.name }} <span class="unread">{{ feed.unread }}</span></a>
+            <a href="{{ baseUrl() }}/read/{{ feed.id }}">
+                <i class="fa fa-rss-square"></i> {{ feed.name }} <span class="unread">{{ feed.unread }}</span>
+            </a>
         {% endfor %}
     </nav>
 {% endblock %}
 
 {% block content %}
-    Hello {{ name }}.
+    Hello 0bRSS.
 {% endblock %}
