@@ -229,7 +229,7 @@ div#content {
         > header {
             background: $cardHeaderBackground;
 
-            @include font-size(1.25, 1);
+            @include font-size(1.05, 1);
 
             .extras {
                 float: right;
