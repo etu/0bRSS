@@ -58,6 +58,7 @@ class Articles
             ->from('articles', 'a')
             ->innerJoin('a', 'feeds', 'f', 'f.id = a.feed_id')
             ->where('a.feed_id = :feed_id AND f.user_id = :user_id')
+            ->orderBy('date', 'DESC')
             ->setParameter(':feed_id', $feedId)
             ->setParameter(':user_id', $userId)
             ->execute();
