@@ -26,7 +26,7 @@ class CreateFeedsTable extends AbstractMigration
               ->addColumn('update_interval', 'integer',  ['signed'  => false])
               ->addColumn('user_id',         'integer',  ['signed'  => false])
 
-              ->addIndex(['name', 'updated', 'update_interval', 'user_id'])
+              ->addIndex(['name', 'updated', 'next_update', 'user_id'])
 
               ->create();
     }
