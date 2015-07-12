@@ -14,7 +14,7 @@
     {% for article in articles %}
         <article>
             <header>
-                {{ article.title }}
+                {{ article.title|raw }}
                 <span class="extras">
                     <a href="{{ article.uri }}" target="_blank" class="fa fa-external-link"></a>
                 </span>
