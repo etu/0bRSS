@@ -15,12 +15,15 @@
         <article>
             <header>
                 {{ article.title }}
+                <span class="extras">
+                    <a href="{{ article.uri }}" target="_blank" class="fa fa-external-link"></a>
+                </span>
             </header>
             <p>
                 {{ article.body|raw }}
             </p>
             <footer>
-                {{ article.date }} {{ article.uri }} {{ article.read }} {{ article.starred }}
+                {{ article.date }} {{ article.read }} {{ article.starred }}
             </footer>
         </article>
     {% endfor %}

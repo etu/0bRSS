@@ -228,6 +228,15 @@ div#content {
             background: $cardHeaderBackground;
 
             @include font-size(1.25, 1);
+
+            .extras {
+                float: right;
+
+                a {
+                    text-decoration: none;
+                    color: $asideForeground;
+                }
+            }
         }
 
         > p {
