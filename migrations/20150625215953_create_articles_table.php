@@ -15,15 +15,17 @@ class CreateArticlesTable extends AbstractMigration
     public function change()
     {
         $articles = $this->table('articles');
-        $articles->addColumn('title',     'string',  ['limit'  => 255])
-                 ->addColumn('feed_id',   'integer', ['signed' => false])
-                 ->addColumn('body',      'text')
-                 ->addColumn('uri',       'string',  ['limit'  => 255])
-                 ->addColumn('read',      'boolean', ['default' => false])
-                 ->addColumn('starred',   'boolean', ['default' => false])
-                 ->addColumn('published', 'datetime')
+        $articles->addColumn('feed_id',    'integer', ['signed' => false])
+                 ->addColumn('identifier', 'string',  ['limit'  => 32])
+                 ->addColumn('title',      'string',  ['limit'  => 255])
+                 ->addColumn('uri',        'string',  ['limit'  => 255])
+                 ->addColumn('date',       'datetime')
+                 ->addColumn('body',       'text')
+                 ->addColumn('read',       'boolean', ['default' => false])
+                 ->addColumn('starred',    'boolean', ['default' => false])
 
-                 ->addIndex(['title', 'uri', 'published'])
+                 ->addIndex(['title', 'uri', 'date'])
+                 ->addIndex(['identifier'], ['unique' => true])
 
                  ->addForeignKey('feed_id', 'feeds', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
 

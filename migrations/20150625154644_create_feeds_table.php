@@ -18,10 +18,11 @@ class CreateFeedsTable extends AbstractMigration
         $feeds->addColumn('name',            'string',   ['limit'   => 64])
               ->addColumn('website_uri',     'string',   ['limit'   => 255])
               ->addColumn('feed_uri',        'string',   ['limit'   => 255])
+              ->addColumn('description',     'string',   ['limit'   => 255, 'null' => true])
               ->addColumn('added',           'datetime', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('updated',         'datetime', ['update'  => 'CURRENT_TIMESTAMP', 'null' => true])
               ->addColumn('update_interval', 'integer',  ['signed'  => false])
-              ->addColumn('user_id',         'integer',  ['signed' => false])
+              ->addColumn('user_id',         'integer',  ['signed'  => false])
 
               ->addIndex(['name', 'updated', 'update_interval', 'user_id'])
 
