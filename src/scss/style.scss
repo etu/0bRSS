@@ -218,6 +218,8 @@ div#content {
         background: $asideBackground;
         color: $asideForeground;
 
+        box-shadow: 0.1rem 0 0.2rem $boxShadowColor;
+
         margin-bottom: 1rem;
 
         > header, > p, > footer {
