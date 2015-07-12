@@ -1,0 +1,59 @@
+#!/usr/bin/env php
+<?php
+define('PROJECT_ROOT', realpath(__DIR__.'/..'));
+require(PROJECT_ROOT.'/vendor/autoload.php');
+
+
+
+// Prepare dependency injector
+$injector = new \Auryn\Injector();
+$injector->share($injector);
+
+
+
+// Set up Middlewares
+$mws = $injector->make('\ZerobRSS\Middlewares');
+
+// Init the database connection
+$dbClosure = $mws->db();
+$dbClosure();
+
+
+// Set up Feed Reader class and Dao for feeds
+$feedReader  = $injector->make('\ZerobRSS\FeedReader');
+$feedsDao    = $injector->make('\ZerobRSS\Dao\Feeds');
+$articlesDao = $injector->make('\ZerobRSS\Dao\Articles');
+
+//
+$feedsToUpdate = $feedsDao->getFeedsToUpdate()->fetchAll();
+if (!empty($feedsToUpdate)) {
+    foreach ($feedsToUpdate as $feed) {
+        $feedReader->open($feed->feed_uri);
+
+        $feedUpdates = [
+            'updated' => date('Y-m-d H:i:s'),
+            'next_update' => date('Y-m-d H:i:s', strtotime('+'.$feed->update_interval.' minutes'))
+        ];
+
+        // Fetch feed-posts and add create/update them in the database
+        foreach ($feedReader->getPosts() as $post) {
+            $article = [
+                'feed_id'    => $feed->id,
+                'identifier' => $post->id,
+                'title'      => $post->title,
+                'uri'        => $post->link,
+                'date'       => $post->date,
+                'body'       => $post->content
+            ];
+
+            try {
+                $articlesDao->create($article);
+            } catch (Exception $e) {
+                $articlesDao->update($article['identifier'], $article);
+            }
+        }
+
+        // Mark feed as updated and update updated time and time to next update
+        $feedsDao->update($feed->id, $feedUpdates);
+    }
+}
