@@ -13,6 +13,8 @@ class Articles
         $this->db = $db;
     }
 
+
+
     public function create($values)
     {
         $query = $this->db->createQueryBuilder()
@@ -29,6 +31,8 @@ class Articles
         return $this->db->lastInsertId('articles_id_seq');
     }
 
+
+
     // Update article by unique identifier
     public function update($identifier, $values)
     {
@@ -44,5 +48,18 @@ class Articles
         }
 
         return $query->execute();
+    }
+
+
+    public function getArticles($feedId, $userId)
+    {
+        return $this->db->createQueryBuilder()
+            ->select('a.*')
+            ->from('articles', 'a')
+            ->innerJoin('a', 'feeds', 'f', 'f.id = a.feed_id')
+            ->where('a.feed_id = :feed_id AND f.user_id = :user_id')
+            ->setParameter(':feed_id', $feedId)
+            ->setParameter(':user_id', $userId)
+            ->execute();
     }
 }
