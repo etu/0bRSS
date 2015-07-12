@@ -65,6 +65,7 @@ $slim->get('/assets/css/:file',                                  $mws->controlle
 $slim->get('/login',                                 $mws->db(), $mws->controllerLoader('Login',  'get'));
 $slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login',  'post'));
 $slim->get('/logout',                                            $mws->controllerLoader('Logout', 'get'));
+$slim->get('/read/(:id)',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Read',   'get'));
 
 
 

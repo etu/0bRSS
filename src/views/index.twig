@@ -11,5 +11,17 @@
 {% endblock %}
 
 {% block content %}
-    Hello 0bRSS.
+    {% for article in articles %}
+        <article>
+            <header>
+                {{ article.title }}
+            </header>
+            <p>
+                {{ article.body|raw }}
+            </p>
+            <footer>
+                {{ article.date }} {{ article.uri }} {{ article.read }} {{ article.starred }}
+            </footer>
+        </article>
+    {% endfor %}
 {% endblock %}

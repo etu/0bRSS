@@ -22,6 +22,9 @@ $errorForeground: #000000;
 $unreadBackground: #B0B0B0;
 $unreadForeground: #FFFFFF;
 
+$cardBorderColor: #E6E6E6;
+$cardHeaderBackground: #8cc7f5;
+
 $rssIconColor: #FD9F13;
 
 
@@ -135,9 +138,12 @@ html, body {
 aside#aside-menu, div#content {
     // Calculate height of sidebar
     // #{HeaderFontSize * HeaderLineHeight + HeaderPadding}rem
-    min-height: calc(100% - #{1.2 * 1.5 + 2.4}rem);
+    height: calc(100% - #{1.2 * 1.5 + 2.4}rem);
     padding: 1rem;
     float: left;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
 
     transition: all 0.5s ease;
 }
@@ -206,6 +212,28 @@ div#content {
 
     &.fullwidth {
         width: 100%;
+    }
+
+    article {
+        background: $asideBackground;
+        color: $asideForeground;
+
+        margin-bottom: 1rem;
+
+        > header, > p, > footer {
+            padding: 1rem;
+        }
+
+        > header {
+            background: $cardHeaderBackground;
+
+            @include font-size(1.25, 1);
+        }
+
+        > p {
+            border-top: 0.1rem solid $cardBorderColor;
+            border-bottom: 0.1rem solid $cardBorderColor;
+        }
     }
 }
 
