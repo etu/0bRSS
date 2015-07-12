@@ -22,4 +22,29 @@ class Feeds
             ->setParameter(':user_id', $userId)
             ->execute();
     }
+
+    public function getFeedsToUpdate()
+    {
+        return $this->db->createQueryBuilder()
+            ->select('*')
+            ->from('feeds')
+            ->where('next_update < NOW()')
+            ->execute();
+    }
+
+    public function update($id, $values)
+    {
+        // Prepare update query
+        $query = $this->db->createQueryBuilder()
+               ->update('feeds')
+               ->where('id = :id')
+               ->setParameter(':id', $id);
+
+        // Append parameters to update to the query
+        foreach ($values as $key => $value) {
+            $query = $query->set($key, ':'.$key)->setParameter(':'.$key, $value);
+        }
+
+        return $query->execute();
+    }
 }

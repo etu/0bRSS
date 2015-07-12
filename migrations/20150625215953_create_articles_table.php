@@ -25,7 +25,7 @@ class CreateArticlesTable extends AbstractMigration
                  ->addColumn('starred',    'boolean', ['default' => false])
 
                  ->addIndex(['title', 'uri', 'date'])
-                 ->addIndex(['identifier'], ['unique' => true])
+                 ->addIndex(['feed_id', 'identifier'], ['unique' => true])
 
                  ->addForeignKey('feed_id', 'feeds', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
 
