@@ -243,6 +243,7 @@ div#content {
             border-top: 0.1rem solid $cardBorderColor;
             border-bottom: 0.1rem solid $cardBorderColor;
 
+            @include font-size(1);
         }
 
         // Set max width of images in articles
