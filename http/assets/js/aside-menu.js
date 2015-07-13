@@ -7,7 +7,7 @@ if ($('show-aside-button')) {
      */
     var showAside = (function() {
         $('aside-menu').setStyle('margin-left', '0rem');
-        $('content').setStyle('width', 'calc(100% - 17rem)');
+        $('content').setStyle('margin-right', '-17rem');
     });
 
 
@@ -18,7 +18,7 @@ if ($('show-aside-button')) {
      */
     var hideAside = (function() {
         $('aside-menu').setStyle('margin-left', '-18rem');
-        $('content').setStyle('width', '100%');
+        $('content').setStyle('margin-right', '0rem');
     });
 
 
