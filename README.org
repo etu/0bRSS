@@ -14,6 +14,10 @@
  - Run the migrations (=php vendor/bin/phinx migrate -c config.php=).
  - Create user (=php bin/create-user=).
 
+** Updating feeds
+Run the updater (=php bin/update-feeds=) every 5 minutes or something. Should
+be easy with =systemd-timer= or =cron=. More info will come.
+
 ** Writing the config
 Start by copying the =config.sample.php= to =config.php= and then change your
 values to match your database configruation.
