@@ -53,7 +53,7 @@ $slim->view->parserExtensions[] = new Twig_Extension_Debug();
 /**
  * Load the Middleware class with clasures for loading controllers and middlewares
  */
-$mws = $injector->make('ZerobRSS\Middlewares');
+$mws = $injector->make('\ZerobRSS\Middlewares');
 
 
 

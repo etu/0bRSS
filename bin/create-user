@@ -27,7 +27,7 @@ $validator->setOptions(['cost' => $config['bcrypt-password-cost']]);
 
 
 
-// Get ZerobRSS\Dao\Users
+// Get \ZerobRSS\Dao\Users
 $usersDao = $injector->make('\ZerobRSS\Dao\Users');
 $groupsDao = $injector->make('\ZerobRSS\Dao\Groups');
 $userGroupsDao = $injector->make('\ZerobRSS\Dao\UserGroups');

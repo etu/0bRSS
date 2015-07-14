@@ -28,7 +28,7 @@ class Middlewares
         $injector = $this->injector;
 
         return function () use ($controller, $method, $injector) {
-            $controller = $injector->make('ZerobRSS\Controllers\\'.$controller);
+            $controller = $injector->make('\ZerobRSS\Controllers\\'.$controller);
 
             return call_user_func_array([$controller, $method], func_get_args());
         };
