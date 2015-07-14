@@ -67,6 +67,10 @@ $slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controlle
 $slim->get('/logout',                                            $mws->controllerLoader('Logout', 'get'));
 $slim->get('/read/(:id)',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Read',   'get'));
 
+$slim->group('/api', function () use ($slim, $mws) {
+    $slim->get('/feeds',        $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
+});
+
 
 
 /**
