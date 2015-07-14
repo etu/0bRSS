@@ -23,7 +23,10 @@ class Login
     private $passwordValidator;
 
     public function __construct(
-        Slim $slim, UsersDao $usersDao, UserGroupsDao $userGroupsDao, PasswordValidator $passwordValidator
+        Slim $slim,
+        UsersDao $usersDao,
+        UserGroupsDao $userGroupsDao,
+        PasswordValidator $passwordValidator
     ) {
         $this->slim = $slim;
         $this->usersDao = $usersDao;

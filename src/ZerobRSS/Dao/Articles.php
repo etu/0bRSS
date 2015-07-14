@@ -39,7 +39,7 @@ class Articles
         $query = $this->db->createQueryBuilder()
                ->update('articles')
                ->where('identifier = :id AND feed_id = :feedid')
-               ->setParameter(':id',     $values['identifier'])
+               ->setParameter(':id', $values['identifier'])
                ->setParameter(':feedid', $values['feed_id']);
 
         // Append parameters to insert to the query
