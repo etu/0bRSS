@@ -59,4 +59,35 @@ class Articles
 
         $this->slim->response->setStatus(403);
     }
+
+    /**
+     * Update read/starred of specific article
+     */
+    public function put($articleIdentifier)
+    {
+        // Read JSON from Body-input
+        $requestData = json_decode($this->slim->request->getBody());
+
+        $article = $this->articlesDao->getArticleByIdentifier($_SESSION['user']['id'], $articleIdentifier)->fetch();
+
+        if (false !== $article) {
+            $values = [
+                'identifier' => $article->identifier,
+                'feed_id' => $article->feed_id
+            ];
+
+            if (isset($requestData->read)) {
+                $values['read'] = ($requestData->read) ? 'true' : 'false';
+            }
+
+            if (isset($requestData->starred)) {
+                $values['starred'] = ($requestData->starred) ? 'true' : 'false';
+            }
+
+            $this->articlesDao->update($article->identifier, $values);
+            exit;
+        }
+
+        $this->slim->response->setStatus(403);
+    }
 }

@@ -86,6 +86,7 @@ $slim->group('/api', function () use ($slim, $mws) {
     /** Route: /api/articles */
     $slim->group('/articles', function () use ($slim, $mws) {
         $slim->get('/:aid',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'getArticle'));
+        $slim->put('/:aid',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'put'));
     });
 });
 
