@@ -83,7 +83,8 @@ try {
 
 
 // Print $message to stderr and exit with $code
-function errlog($message, $code = 1) {
+function errlog($message, $code = 1)
+{
     $stderr = fopen('php://stderr', 'w');
     fwrite($stderr, $message.PHP_EOL);
     fclose($stderr);
