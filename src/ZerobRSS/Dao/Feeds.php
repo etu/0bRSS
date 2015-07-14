@@ -63,4 +63,23 @@ class Feeds
 
         return $query->execute();
     }
+
+    public function create($userId, $values)
+    {
+        // Prepare insert query
+        $query = $this->db->createQueryBuilder()
+            ->insert('feeds')
+            ->setValue('user_id', ':user_id')
+            ->setParameter(':user_id', $userId);
+
+        // Append parameters to insert to the query
+        foreach ($values as $key => $value) {
+            $query = $query->setValue($key, ':'.$key)->setParameter(':'.$key, $value);
+        }
+
+        $query->execute();
+
+        // @TODO: Check if this works in MariaDB
+        return $this->db->lastInsertId('feeds_id_seq');
+    }
 }

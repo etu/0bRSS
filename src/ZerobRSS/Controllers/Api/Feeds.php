@@ -30,4 +30,13 @@ class Feeds
 
         echo json_encode($result);
     }
+
+    public function post()
+    {
+        $requestData = json_decode($this->slim->request->getBody());
+
+        $feedId = $this->feedsDao->create($_SESSION['user']['id'], $requestData);
+
+        $this->slim->redirect($this->slim->request->getRootUri().'/api/feeds/'.$feedId);
+    }
 }
