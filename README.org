@@ -22,9 +22,15 @@ be easy with =systemd-timer= or =cron=. More info will come.
 Start by copying the =config.sample.php= to =config.php= and then change your
 values to match your database configruation.
 
+*** bcrypt settings
 You may also set =bcrypt-password-cost= which will be used by the password
-hashing. Higher number -> Slower but better hashing.
+hashing. Bigger number -> Slower but better hashing.
 
 There is a script provided (=php vendor/bin/cost-check=) which will benchmark
 a cost for you which takes 0.2s to hash a password with. On my 5 year old
 laptop, it suggests 11. So most people should be able to go higher than that.
+As of writing, PHP defaults to 10.
+
+The login also supports rehashing, so if you change your =bcrypt-password-cost=,
+it will update the hash in the database on next login for the user logging in to
+match the new cost set in the config.
