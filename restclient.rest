@@ -43,7 +43,7 @@ Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
-# Get articles
+# Get articles from feed
 ##
 GET http://dev.rss.0b.se/api/feeds/10/articles?page=2
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
