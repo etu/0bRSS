@@ -62,4 +62,19 @@ class Feeds
 
         $this->slim->response->setStatus(403);
     }
+
+    public function delete($feedId)
+    {
+        $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
+
+        if (false !== $feed) {
+            try {
+                $this->feedsDao->delete($feed->id);
+            } catch (\Exception $e) {}
+
+            return;
+        }
+
+        $this->slim->response->setStatus(403);
+    }
 }

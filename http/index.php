@@ -72,6 +72,7 @@ $slim->group('/api', function () use ($slim, $mws) {
     $slim->get('/feeds/:id',    $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
     $slim->post('/feeds',       $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'post'));
     $slim->put('/feeds/:id',    $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
+    $slim->delete('/feeds/:id', $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
 });
 
 

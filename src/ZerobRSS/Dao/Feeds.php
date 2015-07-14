@@ -94,4 +94,15 @@ class Feeds
         // @TODO: Check if this works in MariaDB
         return $this->db->lastInsertId('feeds_id_seq');
     }
+
+
+    // Delete feed
+    public function delete($feedId)
+    {
+        return $this->db->createQueryBuilder()
+            ->delete('feeds')
+            ->where('id = :feed_id')
+            ->setParameter(':feed_id', $feedId)
+            ->execute();
+    }
 }
