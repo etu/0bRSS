@@ -1,0 +1,42 @@
+# -*- restclient -*-
+
+#
+# Example Usage of the API using Emacs restclient-mode
+#
+
+
+###
+# Get feeds
+##
+GET http://dev.rss.0b.se/api/feeds
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
+
+
+###
+# Get specific feed
+##
+GET http://dev.rss.0b.se/api/feeds/10
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
+
+
+###
+# Create feed
+##
+POST http://dev.rss.0b.se/api/feeds
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
+{"name":"XKCD","website_uri":"https:\/\/xkcd.org\/","feed_uri":"https:\/\/xkcd.com\/atom.xml","update_interval":60}
+
+
+###
+# Update feed
+##
+PUT http://dev.rss.0b.se/api/feeds/10
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
+{"name":"XKCD","website_uri":"https:\/\/xkcd.org\/","feed_uri":"https:\/\/xkcd.com\/atom.xml","update_interval":60}
+
+
+###
+# Delete feed
+##
+DELETE http://dev.rss.0b.se/api/feeds/9
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
