@@ -63,4 +63,34 @@ class Articles
             ->setParameter(':user_id', $userId)
             ->execute();
     }
+
+    public function getPagedArticles($feedId, $page = 0, $read = null)
+    {
+        $pageSize = 20;
+
+        $queryBuilder = $this->db->createQueryBuilder();
+
+        // Prepare default where-clause
+        $whereClause = 'feed_id = :feed_id';
+
+        if (null !== $read) {
+            $whereClause = $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq('feed_id', ':feed_id'),
+                $queryBuilder->expr()->eq('read', ':read')
+            );
+
+            $queryBuilder->setParameter(':read', $read);
+        }
+
+        $query = $queryBuilder
+            ->select('*')
+            ->from('articles')
+            ->where($whereClause)
+            ->setParameter(':feed_id', $feedId)
+            ->orderBy('date', 'DESC')
+            ->setFirstResult($page * $pageSize)
+            ->setMaxResults($pageSize);
+
+        return $query->execute();
+    }
 }
