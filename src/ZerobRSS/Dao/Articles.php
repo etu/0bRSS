@@ -99,4 +99,20 @@ class Articles
 
         return $query->execute();
     }
+
+    /**
+     * Get single article by UserId and Article Identifier (not article.id)
+     */
+    public function getArticleByIdentifier($userId, $identifier)
+    {
+        return $this->db->createQueryBuilder()
+            ->select('a.*')
+            ->from('articles', 'a')
+            ->innerJoin('a', 'feeds', 'f', 'f.id = a.feed_id')
+            ->where('f.user_id = :user_id AND a.identifier = :identifier')
+            ->orderBy('date', 'DESC')
+            ->setParameter(':user_id', $userId)
+            ->setParameter(':identifier', $identifier)
+            ->execute();
+    }
 }

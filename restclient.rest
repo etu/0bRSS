@@ -47,3 +47,10 @@ Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 ##
 GET http://dev.rss.0b.se/api/feeds/10/articles?page=2
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
+
+
+###
+# Get specific article
+##
+GET http://dev.rss.0b.se/api/articles/a3b39ed6ac59c610574a2837d0cab7e2
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
