@@ -42,4 +42,24 @@ class Feeds
         // Redirect to the new API-Resource to tell the client where it is
         $this->slim->redirect($this->slim->request->getRootUri().'/api/feeds/'.$feedId);
     }
+
+    public function put($feedId)
+    {
+        // Read JSON from Body-input
+        $requestData = json_decode($this->slim->request->getBody());
+
+        $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
+
+        if (false !== $feed) {
+            try {
+                $this->feedsDao->update($feed->id, $requestData);
+            } catch (\Exception $e) {
+                $this->slim->response->setStatus(400);
+            }
+
+            return;
+        }
+
+        $this->slim->response->setStatus(403);
+    }
 }
