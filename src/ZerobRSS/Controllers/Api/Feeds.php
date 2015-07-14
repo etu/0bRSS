@@ -20,8 +20,14 @@ class Feeds
         $this->slim->response->headers->set('Content-Type', 'application/json');
     }
 
-    public function get()
+    public function get($feedId = null)
     {
-        echo json_encode($this->feedsDao->getFeeds($_SESSION['user']['id'])->fetchAll());
+        $result = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetchAll();
+
+        if (null !== $feedId) {
+            $result = $result[0];
+        }
+
+        echo json_encode($result);
     }
 }

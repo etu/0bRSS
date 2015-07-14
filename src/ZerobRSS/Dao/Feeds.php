@@ -13,15 +13,30 @@ class Feeds
         $this->db = $db;
     }
 
-    public function getFeeds($userId)
+    public function getFeeds($userId, $feedId = null)
     {
-        return $this->db->createQueryBuilder()
-            ->select('*')
-            ->addSelect('(SELECT COUNT(*) AS unread FROM articles WHERE read = false and feed_id = feeds.id)')
+        $queryBuilder = $this->db->createQueryBuilder();
+
+        $whereClause = 'user_id = :user_id';
+
+        if (null !== $feedId) {
+            $whereClause = $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq('user_id', ':user_id'),
+                $queryBuilder->expr()->eq('id', ':feed_id')
+            );
+
+            $queryBuilder->setParameter(':feed_id', $feedId);
+        }
+
+        $query = $queryBuilder
+            ->select('id, name, website_uri, feed_uri, description, added, updated, next_update, update_interval')
+            ->addSelect('(SELECT COUNT(*) FROM articles WHERE read = false and feed_id = feeds.id) as unread')
             ->from('feeds')
-            ->where('user_id = :user_id')
-            ->setParameter(':user_id', $userId)
-            ->execute();
+            ->where($whereClause)
+            ->setParameter(':user_id', $userId);
+
+
+        return $query->execute();
     }
 
     public function getFeedsToUpdate()
