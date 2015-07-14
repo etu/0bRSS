@@ -33,10 +33,13 @@ class Feeds
 
     public function post()
     {
+        // Read JSON from Body-input
         $requestData = json_decode($this->slim->request->getBody());
 
+        // Create feed
         $feedId = $this->feedsDao->create($_SESSION['user']['id'], $requestData);
 
+        // Redirect to the new API-Resource to tell the client where it is
         $this->slim->redirect($this->slim->request->getRootUri().'/api/feeds/'.$feedId);
     }
 }

@@ -13,12 +13,18 @@ class Feeds
         $this->db = $db;
     }
 
+
+    /**
+     * Get one or all feeds for a user
+     */
     public function getFeeds($userId, $feedId = null)
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
+        // Prepare default where-clause
         $whereClause = 'user_id = :user_id';
 
+        // But if we got a feedId, make a where expression and add the feed_id parameter
         if (null !== $feedId) {
             $whereClause = $queryBuilder->expr()->andX(
                 $queryBuilder->expr()->eq('user_id', ':user_id'),
@@ -39,6 +45,8 @@ class Feeds
         return $query->execute();
     }
 
+
+    // Used by cronjob to get feeds that needs to be updated
     public function getFeedsToUpdate()
     {
         return $this->db->createQueryBuilder()
@@ -48,6 +56,8 @@ class Feeds
             ->execute();
     }
 
+
+    // Update settings for feed
     public function update($id, $values)
     {
         // Prepare update query
@@ -64,6 +74,8 @@ class Feeds
         return $query->execute();
     }
 
+
+    // Add feed
     public function create($userId, $values)
     {
         // Prepare insert query
