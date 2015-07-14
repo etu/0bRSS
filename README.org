@@ -9,7 +9,7 @@
 
 ** Installation
  - Clone the git-repo.
- - Install the composer dependencies (=php composer.phar install=).
+ - Install the composer dependencies (=php composer.phar install --no-dev=).
  - Write the config-file.
  - Run the migrations (=php vendor/bin/phinx migrate -c config.php=).
  - Create user (=php bin/create-user=).
