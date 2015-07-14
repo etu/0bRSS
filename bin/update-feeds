@@ -24,7 +24,8 @@ $feedReader  = $injector->make('\ZerobRSS\FeedReader');
 $feedsDao    = $injector->make('\ZerobRSS\Dao\Feeds');
 $articlesDao = $injector->make('\ZerobRSS\Dao\Articles');
 
-//
+
+// Fetch all feeds to update
 $feedsToUpdate = $feedsDao->getFeedsToUpdate()->fetchAll();
 if (!empty($feedsToUpdate)) {
     foreach ($feedsToUpdate as $feed) {
