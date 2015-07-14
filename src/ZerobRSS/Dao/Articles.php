@@ -64,6 +64,12 @@ class Articles
             ->execute();
     }
 
+    /**
+     * Get Paged Articles
+     * @param $feedId integer Feed ID
+     * @param $page integer (optional) default: 0
+     * @param $read boolean Choose if you want read articles or not, default null -> returns both
+     */
     public function getPagedArticles($feedId, $page = 0, $read = null)
     {
         $pageSize = 20;
