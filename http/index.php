@@ -68,11 +68,13 @@ $slim->get('/logout',                                            $mws->controlle
 $slim->get('/read/(:id)',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Read',   'get'));
 
 $slim->group('/api', function () use ($slim, $mws) {
-    $slim->get('/feeds',        $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
-    $slim->get('/feeds/:id',    $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
-    $slim->post('/feeds',       $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'post'));
-    $slim->put('/feeds/:id',    $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
-    $slim->delete('/feeds/:id', $mws->auth('users'),  $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
+    $slim->group('/feeds', function () use ($slim, $mws) {
+        $slim->get('/',         $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
+        $slim->get('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
+        $slim->post('/',        $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'post'));
+        $slim->put('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
+        $slim->delete('/:id',   $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
+    });
 });
 
 
