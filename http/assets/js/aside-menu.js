@@ -5,7 +5,7 @@ if ($('show-aside-button')) {
      * Change aside margin to show it
      * Change content width do adjust to fit on the side of aside
      */
-    var showAside = (function() {
+    var showAside = (function () {
         $('aside-menu').setStyle('margin-left', '0rem');
         $('content').setStyle('margin-right', '-17rem');
     });
@@ -16,7 +16,7 @@ if ($('show-aside-button')) {
      * Change aside margin to hide it
      * Change content width do adjust to fit on the side of aside
      */
-    var hideAside = (function() {
+    var hideAside = (function () {
         $('aside-menu').setStyle('margin-left', '-18rem');
         $('content').setStyle('margin-right', '0rem');
     });
