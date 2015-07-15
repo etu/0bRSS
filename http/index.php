@@ -67,9 +67,9 @@ $slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controlle
 $slim->get('/logout',                                            $mws->controllerLoader('Logout', 'get'));
 $slim->get('/read/(:id)',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Read',   'get'));
 
-/** Route: /api */
-$slim->group('/api', function () use ($slim, $mws) {
-    /** Route: /api/feeds */
+/** Route: /api/v1 */
+$slim->group('/api/v1', function () use ($slim, $mws) {
+    /** Route: /api/v1/feeds */
     $slim->group('/feeds', function () use ($slim, $mws) {
         $slim->get('/',         $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
         $slim->get('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
@@ -77,13 +77,13 @@ $slim->group('/api', function () use ($slim, $mws) {
         $slim->put('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
         $slim->delete('/:id',   $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
 
-        /** Route: /api/feeds/:id/articles */
+        /** Route: /api/v1/feeds/:id/articles */
         $slim->group('/:id/articles', function () use ($slim, $mws) {
             $slim->get('/',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'get'));
         });
     });
 
-    /** Route: /api/articles */
+    /** Route: /api/v1/articles */
     $slim->group('/articles', function () use ($slim, $mws) {
         $slim->get('/:aid',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'getArticle'));
         $slim->put('/:aid',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'put'));

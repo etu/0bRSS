@@ -8,21 +8,21 @@
 ###
 # Get feeds
 ##
-GET http://dev.rss.0b.se/api/feeds
+GET http://dev.rss.0b.se/api/v1/feeds
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
 # Get specific feed
 ##
-GET http://dev.rss.0b.se/api/feeds/10
+GET http://dev.rss.0b.se/api/v1/feeds/10
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
 # Create feed
 ##
-POST http://dev.rss.0b.se/api/feeds
+POST http://dev.rss.0b.se/api/v1/feeds
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 {"name":"XKCD","website_uri":"https:\/\/xkcd.org\/","feed_uri":"https:\/\/xkcd.com\/atom.xml","update_interval":60}
 
@@ -30,7 +30,7 @@ Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 ###
 # Update feed
 ##
-PUT http://dev.rss.0b.se/api/feeds/10
+PUT http://dev.rss.0b.se/api/v1/feeds/10
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 {"name":"XKCD","website_uri":"https:\/\/xkcd.org\/","feed_uri":"https:\/\/xkcd.com\/atom.xml","update_interval":60}
 
@@ -38,27 +38,27 @@ Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 ###
 # Delete feed
 ##
-DELETE http://dev.rss.0b.se/api/feeds/9
+DELETE http://dev.rss.0b.se/api/v1/feeds/9
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
 # Get articles from feed
 ##
-GET http://dev.rss.0b.se/api/feeds/10/articles?page=2
+GET http://dev.rss.0b.se/api/v1/feeds/12/articles?page=0
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
 # Get specific article
 ##
-GET http://dev.rss.0b.se/api/articles/a3b39ed6ac59c610574a2837d0cab7e2
+GET http://dev.rss.0b.se/api/v1/articles/db80fd02dd7c1f56700e8532490c81c3
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
 # Update article with read/starred status
 ##
-PUT http://dev.rss.0b.se/api/articles/a3b39ed6ac59c610574a2837d0cab7e2
+PUT http://dev.rss.0b.se/api/v1/articles/db80fd02dd7c1f56700e8532490c81c3
 Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 {"read":true,"starred":false}
