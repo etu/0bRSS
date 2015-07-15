@@ -27,7 +27,6 @@ var Feeds = new Class({
         var template = Handlebars.compile($('feed-menu-template').get('html'));
 
         this.feeds.each(function(feed) {
-            console.log(feed);
             var a = new Element('a');
 
             a.set('href', '#!/feeds/' + feed.id);
