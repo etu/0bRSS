@@ -31,7 +31,8 @@
 
         {% if not hide_aside %}
             <aside id="aside-menu">
-                {{ block('aside') }}
+                <nav>
+                </nav>
             </aside>
         {% endif %}
 
@@ -40,7 +41,23 @@
         </div>
     </body>
 
+
+    {# Start feed-menu-handlebars-template #}
+    <script id="feed-menu-template" type="text/x-handlebars-template">
+        {% verbatim %}
+            <i class="fa fa-rss-square"></i> {{name}} <span class="unread">{{unread}}</span>
+        {% endverbatim %}
+    </script>
+    {# End feed-menu-handlebars-template #}
+
+
+    {# Set API-URI so JS can use it #}
+    <script>window.ZerobRSS = { apiUri: '{{ baseUrl() }}/api' };</script>
+
+    {# Include Scripts #}
     <script src="//ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
+    <script src="//cdn.jsdelivr.net/handlebarsjs/3.0.3/handlebars.min.js"></script>
     <script src="{{ baseUrl() }}/assets/js/header-menu.js"></script>
     <script src="{{ baseUrl() }}/assets/js/aside-menu.js"></script>
+    <script src="{{ baseUrl() }}/assets/js/client.js"></script>
 </html>
