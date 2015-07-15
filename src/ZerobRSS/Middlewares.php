@@ -3,6 +3,7 @@ namespace ZerobRSS;
 
 use \Auryn\Injector;
 use \Slim\Slim;
+use \Doctrine\DBAL\Configuration as DbalConfig;
 
 class Middlewares
 {
@@ -12,10 +13,14 @@ class Middlewares
     /** @var Slim */
     private $slim;
 
-    public function __construct(Injector $injector, Slim $slim)
+    /** @var DbalConfig */
+    private $dbalConfig;
+
+    public function __construct(Injector $injector, Slim $slim, DbalConfig $dbalConfig)
     {
         $this->injector = $injector;
         $this->slim = $slim;
+        $this->dbalConfig = $dbalConfig;
     }
 
 
@@ -49,11 +54,10 @@ class Middlewares
 
 
             // Connect to database
-            $dbalConfig = new \Doctrine\DBAL\Configuration();
             $dbalConn = \Doctrine\DBAL\DriverManager::getConnection([
                 'url' => $dbConfig['adapter'].'://'.$dbConfig['user'].':'.$dbConfig['pass'].'@'.$dbConfig['host'].':'
                         .$dbConfig['port'].'/'.$dbConfig['name'].'?charset='.$dbConfig['charset']
-            ], $dbalConfig);
+            ], $this->dbalConfig);
 
 
             // Set default fetch-mode to fetch objects
