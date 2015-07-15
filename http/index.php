@@ -18,21 +18,9 @@ $injector->share($injector);
 
 
 /**
- * Prepare Logger
- */
-$logger = new \Flynsarmy\SlimMonolog\Log\MonologWriter([
-    'handlers' => [
-        new \Monolog\Handler\StreamHandler(PROJECT_ROOT.'/logs/'.date('Y-m-d').'.log')
-    ]
-]);
-
-
-
-/**
  * Prepare Slim
  */
 $slim = new \Slim\Slim([
-    'log.writer' => $logger,
     'view' => new \Slim\Views\Twig(),
     'templates.path' => PROJECT_ROOT.'/src/views'
 ]);

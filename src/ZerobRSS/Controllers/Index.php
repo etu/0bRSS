@@ -21,8 +21,6 @@ class Index
 
     public function get()
     {
-        $this->slim->log->info('Slim "/" route');
-
         $this->slim->render(
             'index.twig',
             [
