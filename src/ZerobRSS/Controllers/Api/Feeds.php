@@ -70,7 +70,8 @@ class Feeds
         if (false !== $feed) {
             try {
                 $this->feedsDao->delete($feed->id);
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             return;
         }
