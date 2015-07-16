@@ -29,8 +29,11 @@ var Feeds = new Class({
         this.feeds.each(function(feed) {
             var a = new Element('a');
 
-            a.set('href', '#!/feeds/' + feed.id);
             a.set('html', template(feed));
+
+            a.addEvent('click', (function () {
+                window.ZerobRSS.Router.nav('/feed/' + feed.id)
+            }));
 
             a.inject($$('#aside-menu nav')[0]);
         });
