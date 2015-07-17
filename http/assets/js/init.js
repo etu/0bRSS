@@ -14,11 +14,18 @@ $('content').addEvent('scroll', (function () { window.ZerobRSS.Scroll.event(); }
 
 
 /**
+ * Set up Keyboard navigation object
+ */
+window.ZerobRSS.Keyboard = new Keyboard();
+
+
+/**
  * Set up routing
  */
 window.ZerobRSS.Router = new Router().add(/feed\/(\d+)/, (function () {
     $('content').set('html', '');
     window.ZerobRSS.ArticleLoader = new ArticleLoader(arguments[0]);
+    window.ZerobRSS.Keyboard.currentArticle = null;
 })).route();
 
 /**
