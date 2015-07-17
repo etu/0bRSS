@@ -1,6 +1,12 @@
 'use strict';
 
 /**
+ * Setup Feeds object and draw aside
+ */
+window.ZerobRSS.Feeds = new Feeds();
+
+
+/**
  * Set up routing
  */
 window.ZerobRSS.Router = new Router();
