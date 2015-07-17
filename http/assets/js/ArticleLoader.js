@@ -20,6 +20,7 @@ var ArticleLoader = new Class({
                 response.each(function (article) {
                     var a = new Element('article');
 
+                    a.set('data-id', article.identifier);
                     a.set('html', template(article));
 
                     a.inject($('content'));
