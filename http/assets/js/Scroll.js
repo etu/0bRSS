@@ -6,7 +6,7 @@ var Scroll = new Class({
 
         var distanceToBottom = elem.getScrollSize().y - (elem.scrollTop + elem.getSize().y);
 
-        if (distanceToBottom < 200) {
+        if (distanceToBottom < 500) {
             window.ZerobRSS.ArticleLoader.page++;
             window.ZerobRSS.ArticleLoader.getArticles();
         }
