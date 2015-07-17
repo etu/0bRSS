@@ -49,12 +49,12 @@ $mws = $injector->make('\ZerobRSS\Middlewares');
  * Prepare Routes
  */
 $slim->get('/',                 $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
+$slim->get('/feed/:id',         $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
 $slim->get('/assets/css/:file',                                  $mws->controllerLoader('Scss',   'get'));
 $slim->get('/assets/js/:file',                                   $mws->controllerLoader('Js',     'get'));
 $slim->get('/login',                                 $mws->db(), $mws->controllerLoader('Login',  'get'));
 $slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login',  'post'));
 $slim->get('/logout',                                            $mws->controllerLoader('Logout', 'get'));
-$slim->get('/read/(:id)',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Read',   'get'));
 
 /** Route: /api/v1 */
 $slim->group('/api/v1', function () use ($slim, $mws) {

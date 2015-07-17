@@ -50,6 +50,27 @@
     </script>
     {# End feed-menu-handlebars-template #}
 
+    {# Start news-card-handlebars-template #}
+    <script id="news-card-template" type="text/x-handlebars-template">
+        {% verbatim %}
+            <header>
+                {{{title}}}
+                <span class="extras">
+                    <!-- <i class="fa fa-star"></i> Icons for future usage <i class="fa fa-star-o"></i> -->
+                    <a href="{{{uri}}}" target="_blank" class="fa fa-external-link"></a>
+                </span>
+            </header>
+            <p>
+                {{{body}}}
+            </p>
+            <footer>
+                {{date}} {{read}} {{starred}}
+            </footer>
+        {% endverbatim %}
+    </script>
+    {# End news-card-handlebars-template #}
+
+
 
     {# Set API-URI so JS can use it #}
     <script>window.ZerobRSS = { apiUri: '{{ baseUrl() }}/api' };</script>
@@ -57,7 +78,8 @@
     {# Include Scripts #}
     <script src="//ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
     <script src="//cdn.jsdelivr.net/handlebarsjs/3.0.3/handlebars.min.js"></script>
+    <script src="{{ baseUrl() }}/assets/js/client.js"></script>
+    <script src="{{ baseUrl() }}/assets/js/Router.js"></script>
     <script src="{{ baseUrl() }}/assets/js/header-menu.js"></script>
     <script src="{{ baseUrl() }}/assets/js/aside-menu.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/client.js"></script>
 </html>

@@ -22,7 +22,7 @@ class Index
     public function get()
     {
         $this->slim->render(
-            'index.twig',
+            'layout.twig',
             [
                 'feeds' => $this->feedsDao->getFeeds($_SESSION['user']['id'])->fetchAll()
             ]

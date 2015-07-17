@@ -1,0 +1,132 @@
+'use strict';
+
+var Router = new Class({
+    Implements: [ Options, Events ],
+    options: {
+        routes: [],
+        mode: !!(history.pushState) ? 'history' : 'hash',
+        root: '/',
+        previousMatch: null
+    },
+
+
+    initialize: function (options) {
+        this.setOptions(options);
+    },
+
+
+    /**
+     * Get the current URI fragment
+     */
+    getFragment: function () {
+        var fragment = '';
+
+        // Hash fragment matching
+        fragment = window.location.hash.substr(2);
+
+        // Fallback for history
+        if ('history' === this.options.mode) {
+            fragment = this.clearSlashes(decodeURI(location.pathname + location.search));
+            fragment = fragment.replace(/\?(.*)$/, '');
+            fragment = this.root != '/' ? fragment.replace(this.root, '') : fragment;
+        }
+
+        return this.clearSlashes(fragment);
+    },
+
+
+    /**
+     * Add Route
+     */
+    add: function (route, callback) {
+        this.options.routes.push({
+            route: route,
+            callback: callback
+        });
+
+        return this;
+    },
+
+
+    /**
+     * Match current URI to a route and run the handler
+     */
+    match: function () {
+        var fragment = this.getFragment();
+
+        /**
+         * Avoid duplicate runs
+         */
+        if (this.options.previousMatch === fragment) {
+            return this;
+        }
+        this.options.previousMatch = fragment;
+
+        /**
+         * Loop routes
+         */
+        this.options.routes.each(function (route) {
+            /**
+             * Match with regex
+             */
+            var match = fragment.match(route.route);
+
+            if (match) {
+                match.shift();
+
+                /**
+                 * Run callback
+                 */
+                route.callback.apply({}, match);
+
+                return this;
+            }
+        }, this);
+
+        return this;
+    },
+
+
+    /**
+     * Navigate to URI
+     */
+    nav: function(path) {
+        if ('history' === this.options.mode) {
+            history.pushState(null, null, this.options.root + this.clearSlashes(path))
+
+            return this.match();
+        }
+
+        window.location.hash = '#!' + this.clearSlashes(path);
+
+        return this;
+    },
+
+
+    /**
+     * Removes slashes at start and end
+     */
+    clearSlashes: function(path) {
+        return path.toString().replace(/\/$/, '').replace(/^\//, '');
+    }
+});
+
+// Init router
+window.ZerobRSS.Router = new Router();
+
+// Register for events
+window.addEvent('hashchange', (function () { window.ZerobRSS.Router.match(); }));
+window.addEvent('popstate', (function () { window.ZerobRSS.Router.match(); }));
+
+/**
+ * Register routes
+ */
+window.ZerobRSS.Router.add(/feed\/(\d+)/, (function () {
+    $('content').set('html', '');
+    window.ZerobRSS.ArticleLoader = new ArticleLoader(arguments[0]);
+}));
+
+/**
+ * Trigger routing
+ */
+window.fireEvent('hashchange');
