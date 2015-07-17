@@ -170,6 +170,8 @@ aside#aside-menu {
         text-decoration: none;
         color: $asideForeground;
 
+        cursor: pointer;
+
         @include font-size(1, 1.85);
 
         span.unread {
