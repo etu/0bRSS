@@ -1,7 +1,7 @@
 'use strict';
 
 var Router = new Class({
-    Implements: [ Options, Events ],
+    Implements: Options,
     options: {
         routes: [],
         mode: !!(history.pushState) ? 'history' : 'hash',
