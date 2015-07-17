@@ -49,9 +49,9 @@ var Router = new Class({
 
 
     /**
-     * Match current URI to a route and run the handler
+     * Route current URI to a route and run the handler
      */
-    match: function () {
+    route: function () {
         var fragment = this.getFragment();
 
         /**
@@ -94,7 +94,7 @@ var Router = new Class({
         if ('history' === this.options.mode) {
             history.pushState(null, null, this.options.root + this.clearSlashes(path))
 
-            return this.match();
+            return this.route();
         }
 
         window.location.hash = '#!' + this.clearSlashes(path);
