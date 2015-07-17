@@ -7,6 +7,13 @@ window.ZerobRSS.Feeds = new Feeds();
 
 
 /**
+ * Set up Scroll object
+ */
+window.ZerobRSS.Scroll = new Scroll();
+$('content').addEvent('scroll', (function () { window.ZerobRSS.Scroll.event(); }));
+
+
+/**
  * Set up routing
  */
 window.ZerobRSS.Router = new Router().add(/feed\/(\d+)/, (function () {
