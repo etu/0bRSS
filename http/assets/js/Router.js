@@ -110,23 +110,3 @@ var Router = new Class({
         return path.toString().replace(/\/$/, '').replace(/^\//, '');
     }
 });
-
-// Init router
-window.ZerobRSS.Router = new Router();
-
-// Register for events
-window.addEvent('hashchange', (function () { window.ZerobRSS.Router.match(); }));
-window.addEvent('popstate', (function () { window.ZerobRSS.Router.match(); }));
-
-/**
- * Register routes
- */
-window.ZerobRSS.Router.add(/feed\/(\d+)/, (function () {
-    $('content').set('html', '');
-    window.ZerobRSS.ArticleLoader = new ArticleLoader(arguments[0]);
-}));
-
-/**
- * Trigger routing
- */
-window.fireEvent('hashchange');
