@@ -66,10 +66,7 @@ $slim->group('/api/v1', function () use ($slim, $mws) {
         $slim->put('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
         $slim->delete('/:id',   $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
 
-        /** Route: /api/v1/feeds/:id/articles */
-        $slim->group('/:id/articles', function () use ($slim, $mws) {
-            $slim->get('/',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'get'));
-        });
+        $slim->get('/:id/articles', $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'get'));
     });
 
     /** Route: /api/v1/articles */
