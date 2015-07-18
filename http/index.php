@@ -48,31 +48,30 @@ $mws = $injector->make('\ZerobRSS\Middlewares');
 /**
  * Prepare Routes
  */
-$slim->get('/',                 $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
-$slim->get('/feed/:id',         $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
-$slim->get('/assets/css/:file',                                  $mws->controllerLoader('Scss',   'get'));
-$slim->get('/assets/js/:file',                                   $mws->controllerLoader('Js',     'get'));
-$slim->get('/login',                                 $mws->db(), $mws->controllerLoader('Login',  'get'));
-$slim->post('/login',           $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login',  'post'));
-$slim->get('/logout',                                            $mws->controllerLoader('Logout', 'get'));
+$slim->get('/',                     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
+$slim->get('/feed/:id',             $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
+$slim->get('/assets/css/:file',                                      $mws->controllerLoader('Scss',   'get'));
+$slim->get('/assets/js/:file',                                       $mws->controllerLoader('Js',     'get'));
+$slim->get('/login',                                     $mws->db(), $mws->controllerLoader('Login',  'get'));
+$slim->post('/login',               $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login',  'post'));
+$slim->get('/logout',                                                $mws->controllerLoader('Logout', 'get'));
 
 /** Route: /api/v1 */
 $slim->group('/api/v1', function () use ($slim, $mws) {
     /** Route: /api/v1/feeds */
     $slim->group('/feeds', function () use ($slim, $mws) {
-        $slim->get('/',         $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
-        $slim->get('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
-        $slim->post('/',        $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'post'));
-        $slim->put('/:id',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
-        $slim->delete('/:id',   $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
-
+        $slim->get('/',             $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
+        $slim->get('/:id',          $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
+        $slim->post('/',            $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'post'));
+        $slim->put('/:id',          $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
+        $slim->delete('/:id',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
         $slim->get('/:id/articles', $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'get'));
     });
 
     /** Route: /api/v1/articles */
     $slim->group('/articles', function () use ($slim, $mws) {
-        $slim->get('/:aid',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'getArticle'));
-        $slim->put('/:aid',     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'put'));
+        $slim->get('/:aid',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'getArticle'));
+        $slim->put('/:aid',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'put'));
     });
 });
 
