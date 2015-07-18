@@ -43,13 +43,14 @@ var ArticleLoader = new Class({
         $$('#content > article').each(function (elem) {
             elem.removeClass('active');
         });
+        $$('article[data-id=' + id + ']')[0].addClass('active');
 
         new Request.JSON({
             url: window.ZerobRSS.apiUri + '/v1/articles/' + id,
             data: JSON.encode({'read': true}),
             emulation: false,
             onComplete: function (response) {
-                $$('article[data-id=' + id + ']')[0].addClass('active read');
+                $$('article[data-id=' + id + ']')[0].addClass('read');
             }
         }).put();
     }
