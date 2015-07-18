@@ -44,7 +44,7 @@ be easy with =systemd-timer= or =cron=. More info will come.
 timer file. The timer will be the the job responsible for running the service.
 
 **** systemd service file
-#+BEGIN_SRC conf
+#+BEGIN_SRC ini
 # Filename: /etc/systemd/system/0bRSS-updater.service
 [Unit]
 Description=0bRSS updater
@@ -64,7 +64,7 @@ WantedBy=multi-user.target
 #+END_SRC
 
 **** systemd timer file
-#+BEGIN_SRC conf
+#+BEGIN_SRC ini
 # Filename: /etc/systemd/system/0bRSS-updater.timer
 [Unit]
 Description=Run 0bRSS updater every 5 minutes
