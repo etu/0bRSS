@@ -7,13 +7,29 @@ var ArticleLoader = new Class({
     initialize: function (feed) {
         this.feed = feed;
 
-        this.getArticles();
+        new Request.JSON({
+            method: 'get',
+            url: window.ZerobRSS.apiUri + '/v1/feeds/' + this.feed + '/unread',
+            onComplete: function (response) {
+                window.ZerobRSS.ArticleLoader.unread = response;
+
+                window.ZerobRSS.ArticleLoader.getArticles();
+            }
+        }).send();
     },
 
     getArticles: function () {
+        var readGet = null;
+
+        if (this.unread > 0) {
+            readGet = '&read=false';
+        }
+
+
+
         new Request.JSON({
             method: 'get',
-            url: window.ZerobRSS.apiUri + '/v1/feeds/' + this.feed + '/articles?page=' + this.page,
+            url: window.ZerobRSS.apiUri + '/v1/feeds/' + this.feed + '/articles?page=' + this.page + readGet,
             onComplete: function (response) {
                 var template = Handlebars.compile($('news-card-template').get('html'));
 
