@@ -23,7 +23,9 @@ $unreadBackground: #B0B0B0;
 $unreadForeground: #FFFFFF;
 
 $cardBorderColor: #E6E6E6;
-$cardHeaderBackground: #8cc7f5;
+$cardReadHeaderBackground: #E0E0E0;
+$cardActiveHeaderBackground: #8CC7F5;
+$cartUnreadHeaderBackground: #8FF58C;
 
 $rssIconColor: #FD9F13;
 
@@ -231,7 +233,7 @@ div#content {
         }
 
         > header {
-            background: $cardHeaderBackground;
+            background: $cartUnreadHeaderBackground;
 
             @include font-size(1.05, 1);
 
@@ -255,6 +257,14 @@ div#content {
         // Set max width of images in articles
         img {
             max-width: 100%;
+        }
+
+        &.read > header {
+            background: $cardReadHeaderBackground;
+        }
+
+        &.active > header {
+            background: $cardActiveHeaderBackground;
         }
     }
 }

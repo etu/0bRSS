@@ -39,6 +39,9 @@ var Keyboard = new Class({
 
             // Scroll to article
             nextArticle.scrollIntoView();
+
+            // Mark as clicked
+            window.ZerobRSS.ArticleLoader.clickArticle(nextArticle.get('data-id'));
         }
 
         // Trigger scroll event to get more articles if needed
@@ -65,6 +68,9 @@ var Keyboard = new Class({
 
             // Scroll to article
             nextArticle.scrollIntoView();
+
+            // Mark as clicked
+            window.ZerobRSS.ArticleLoader.clickArticle(nextArticle.get('data-id'));
         }
 
         // Trigger scroll event to get more articles if needed
