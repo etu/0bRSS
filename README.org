@@ -2,10 +2,12 @@
 
 0bRSS is a Simple RSS-Reader.
 
+
 ** Requirements
  - PHP 5.4 or greater.
  - PostgreSQL or MySQL (InnoDB required).
  - Webserver that rewrites the URI's [[https://github.com/slimphp/Slim#setup-your-web-server][like this]].
+
 
 ** Installation
  - Clone the git-repo.
@@ -14,9 +16,6 @@
  - Run the migrations (=php vendor/bin/phinx migrate -c config.php=).
  - Create user (=php bin/create-user=).
 
-** Updating feeds
-Run the updater (=php bin/update-feeds=) every 5 minutes or something. Should
-be easy with =systemd-timer= or =cron=. More info will come.
 
 ** Writing the config
 Start by copying the =config.sample.php= to =config.php= and then change your
@@ -34,3 +33,52 @@ As of writing, PHP defaults to 10.
 The login also supports rehashing, so if you change your =bcrypt-password-cost=,
 it will update the hash in the database on next login for the user logging in to
 match the new cost set in the config.
+
+
+** Updating feeds
+Run the updater (=php bin/update-feeds=) every 5 minutes or something. Should
+be easy with =systemd-timer= or =cron=. More info will come.
+
+*** systemd way:
+=systemd= requires you to add to files to your system, one service file and one
+timer file. The timer will be the the job responsible for running the service.
+
+**** systemd service file
+#+BEGIN_SRC conf
+# Filename: /etc/systemd/system/0bRSS-updater.service
+[Unit]
+Description=0bRSS updater
+After=syslog.target network.target postgresql-9.4.service
+
+[Service]
+User=nginx
+Group=nginx
+Type=simple
+ExecStart=/usr/bin/php bin/update-feeds
+WorkingDirectory=/srv/http/0bRSS
+PrivateTmp=true
+InaccessibleDirectories=/home /root /boot /opt /mnt /media
+
+[Install]
+WantedBy=multi-user.target
+#+END_SRC
+
+**** systemd timer file
+#+BEGIN_SRC conf
+# Filename: /etc/systemd/system/0bRSS-updater.timer
+[Unit]
+Description=Run 0bRSS updater every 5 minutes
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
+#+END_SRC
+
+**** Activate and monitor the updater
+To activate the timer, you need to do =systemctl enable 0bRSS-updater.timer= and
+possibly =systemctl start 0bRSS-updater.timer=. Then you can check status on the
+job by =systemctl status 0bRSS-updater.timer= and also the service can tell some
+useful information like this =systemctl status 0bRSS-updater=.
