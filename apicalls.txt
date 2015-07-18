@@ -50,6 +50,13 @@ Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
 
 
 ###
+# Get unread count for feed
+##
+GET http://dev.rss.0b.se/api/v1/feeds/13/unread
+Cookie: PHPSESSID=io45659angiahe0dfkg26fj403
+
+
+###
 # Get specific article
 ##
 GET http://dev.rss.0b.se/api/v1/articles/db80fd02dd7c1f56700e8532490c81c3

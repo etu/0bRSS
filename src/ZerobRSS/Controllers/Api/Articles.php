@@ -91,4 +91,21 @@ class Articles
 
         $this->slim->response->setStatus(403);
     }
+
+
+
+    /**
+     * Get all articles from feed by feedId, use ?page to choose page to load
+     * page is 0 indexed
+     */
+    public function unread($feedId)
+    {
+        $result = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetchAll();
+
+        if (null !== $feedId) {
+            $result = $result[0];
+        }
+
+        echo json_encode($result->unread);
+    }
 }
