@@ -32,11 +32,12 @@ class Articles
     public function get($feedId)
     {
         $page = $this->slim->request->get('page', 0);
+        $read = $this->slim->request->get('read', null);
 
         $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
 
         if (false !== $feed) {
-            $articles = $this->articlesDao->getPagedArticles($feedId, $page)->fetchAll();
+            $articles = $this->articlesDao->getPagedArticles($feedId, $page, $read)->fetchAll();
 
             echo json_encode($articles);
             exit;
