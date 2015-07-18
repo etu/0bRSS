@@ -44,14 +44,25 @@ var ArticleLoader = new Class({
         $$('#content > article').each(function (elem) {
             elem.removeClass('active');
         });
-        $$('article[data-id=' + id + ']')[0].addClass('active');
+
+        var article = $$('article[data-id=' + id + ']')[0];
+
+        article.addClass('active');
 
         new Request.JSON({
             url: window.ZerobRSS.apiUri + '/v1/articles/' + id,
             data: JSON.encode({'read': true}),
             emulation: false,
             onComplete: function (response) {
-                $$('article[data-id=' + id + ']')[0].addClass('read');
+                var wasRead = article.hasClass('read');
+
+                article.addClass('read');
+
+                if (!wasRead) {
+                    var read = $$('#aside-menu > nav > a[data-feed-id=' + article.get('data-feed-id') + '] .unread')[0];
+
+                    read.set('html', read.get('html') - 1);
+                }
             }
         }).put();
     }
