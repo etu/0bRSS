@@ -21,6 +21,7 @@ var ArticleLoader = new Class({
                     var a = new Element('article');
 
                     a.set('data-id', article.identifier);
+                    a.set('data-feed-id', article.feed_id);
                     a.set('html', template(article));
 
                     if (article.read) {
