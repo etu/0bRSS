@@ -35,6 +35,7 @@ var Feeds = new Class({
         this.feeds.each(function(feed) {
             var a = new Element('a');
 
+            a.set('data-feed-id', feed.id);
             a.set('html', template(feed));
 
             a.addEvent('click', (function () {
