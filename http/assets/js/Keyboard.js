@@ -15,6 +15,9 @@ var Keyboard = new Class({
                 case 'v':
                     window.ZerobRSS.Keyboard.visitArticle();
                     break;
+                case 'm':
+                    window.ZerobRSS.Keyboard.toggleRead();
+                    break;
             }
         });
     },
@@ -86,5 +89,33 @@ var Keyboard = new Class({
         var link = $$('article[data-id=' + window.ZerobRSS.Keyboard.currentArticle + '] > header > span.extras > a')[0];
 
         window.open(link.href, '_blank');
+    },
+
+
+
+    /**
+     * Toggle read
+     */
+    toggleRead: function() {
+        var article = $$('article[data-id=' + this.currentArticle + ']')[0];
+
+        new Request.JSON({
+            url: window.ZerobRSS.apiUri + '/v1/articles/' + this.currentArticle,
+            data: JSON.encode({'read': !article.hasClass('read')}),
+            emulation: false,
+            onComplete: function (response) {
+                var wasRead = article.hasClass('read');
+
+                article.toggleClass('read');
+
+                var read = $$('#aside-menu > nav > a[data-feed-id=' + article.get('data-feed-id') + '] .unread')[0];
+
+                if (!wasRead) {
+                    read.set('html', parseInt(read.get('html')) - 1);
+                } else {
+                    read.set('html', parseInt(read.get('html')) + 1);
+                }
+            }
+        }).put();
     }
 });
