@@ -12,9 +12,8 @@ class FeedReader
     {
         $this->simplePie = $simplePie;
 
-        // @TODO: Enable caching of feeds
         $this->simplePie->set_cache_location(PROJECT_ROOT.'/cache');
-        $this->simplePie->enable_cache(false);
+        $this->simplePie->enable_cache(true);
     }
 
 
