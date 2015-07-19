@@ -18,6 +18,9 @@ var Keyboard = new Class({
                 case 'm':
                     window.ZerobRSS.Keyboard.toggleRead();
                     break;
+                case 'r':
+                    location.reload()
+                    break;
             }
         });
     },
