@@ -12,6 +12,7 @@ If you use cURL, you can use a Cookie Jar. Other HTTP does probably provide this
 as well.
 
 To login, you could do something like this:
+
 =$ curl -d 'email=my.email%40example.com&password=secretpassword' https://example.com/0bRSS/login=
 
 And if it worked correctly, you will get a 302 to
