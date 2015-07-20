@@ -1,4 +1,4 @@
-* API Docs
+* API
 The API is a simple REST-API with a fairly logical routing structure. But I will
 explain all methods in this document.
 
