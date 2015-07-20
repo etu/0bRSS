@@ -37,7 +37,12 @@ class Feeds
         $requestData = json_decode($this->slim->request->getBody());
 
         // Create feed
-        $feedId = $this->feedsDao->create($_SESSION['user']['id'], $requestData);
+        $feedId = $this->feedsDao->create($_SESSION['user']['id'], [
+            'name' => $requestData->name,
+            'website_uri' => $requestData->website_uri,
+            'feed_uri' => $requestData->feed_uri,
+            'update_interval' => $requestData->update_interval
+        ]);
 
         // Redirect to the new API-Resource to tell the client where it is
         $this->slim->redirect($this->slim->request->getRootUri().'/api/feeds/'.$feedId);
@@ -52,7 +57,13 @@ class Feeds
 
         if (false !== $feed) {
             try {
-                $this->feedsDao->update($feed->id, $requestData);
+                $this->feedsDao->update($feed->id, [
+                    'name' => $requestData->name,
+                    'website_uri' => $requestData->website_uri,
+                    'feed_uri' => $requestData->feed_uri,
+                    'update_interval' => $requestData->update_interval
+                ]);
+
             } catch (\Exception $e) {
                 $this->slim->response->setStatus(400);
             }
