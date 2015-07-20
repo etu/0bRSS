@@ -13,5 +13,15 @@ And there is no stable release yet. Use at own risk!
  - PostgreSQL or MySQL (InnoDB required).
  - Webserver that rewrites the URI's [[https://github.com/slimphp/Slim#setup-your-web-server][like this]].
 
+** Current features
+ - Multiuser support
+ - Cronjob to update feeds
+ - Keyboard navigation
+ - Mark as read/unread, unreadcount, filter to get only read/unread
+
+** Planned features
+ - Mark articles with star
+ - Interface to add Feeds with
+
 ** Screenshot
 [[https://i.imgur.com/Zilf2R4.png]]
