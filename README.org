@@ -77,8 +77,11 @@ OnUnitActiveSec=5min
 WantedBy=timers.target
 #+END_SRC
 
-**** Activate and monitor the updater
+**** Activate the updater
 To activate the timer, you need to do =systemctl enable 0bRSS-updater.timer= and
-possibly =systemctl start 0bRSS-updater.timer=. Then you can check status on the
-job by =systemctl status 0bRSS-updater.timer= and also the service can tell some
-useful information like this =systemctl status 0bRSS-updater=.
+possibly =systemctl start 0bRSS-updater.timer=.
+
+**** Monitor the updater
+You can check status on the timer with this command
+ =systemctl status 0bRSS-updater.timer=, you can also check on the service to
+get some useful information like this  =systemctl status 0bRSS-updater=.
