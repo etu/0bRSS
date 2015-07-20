@@ -2,6 +2,8 @@
 The API is a simple REST-API with a fairly logical routing structure. But I will
 explain all methods in this document.
 
+
+
 ** Authentication
 Authentication in the API is done by having a Session Cookie, to obtain the
 cookie, you have to request the regular login-page used by users pick up the
@@ -18,6 +20,7 @@ To login, you could do something like this:
 And if it worked correctly, you will get a 302 to
 =https://example.com/0bRSS/login=. Just make sure to catch the cookie which by
 default will be named =PHPSESSID=.
+
 
 
 ** Feed Related Methods
@@ -61,3 +64,43 @@ Requires a JSON-Body just like the creation call, requires the same parameters.
 
 Delete feed. Will also delete all articles for this feed. Articles and
 everything will be deleted from the database, there's no way back.
+
+
+
+** Article Related Methods
+*** Get articles for feed
+=GET https://example.com/0bRSS/api/v1/feeds/<feed-id>/articles=
+
+Fetch all articles for feed. This will paginate. To detect last page, you will
+get an empty JSON Array instead of a populated JSON Array.
+
+Also supports the following parameters:
+| Parameter | Default    | Description                      |
+|-----------+------------+----------------------------------|
+| page      | 0          | Pagination, Zero Indexed         |
+| read      | true/false | Only get read or unread articles |
+
+*** Get specific article
+=GET https://example.com/0bRSS/api/v1/articles/<article-identifier>=
+
+Fetch a specific article by article-identifier. All articles in the article list
+does have a unique identifier.
+
+*** Update article
+=PUT https://example.com/0bRSS/api/v1/articles/<article-identifier>=
+
+Requires a JSON-Body with the following (all optional) parameters:
+#+BEGIN_SRC json
+{
+    "read": true,
+    "starred": false
+}
+#+END_SRC
+
+| Variable | Type    | Description                        |
+|----------+---------+------------------------------------|
+| read     | boolean | Mark the article as read or not    |
+| starred  | boolean | Mark the article as starred or not |
+
+Both parameters are optional. But it seems silly to send an empty object. So
+I suggest to send at least one of them.
