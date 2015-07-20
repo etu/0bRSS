@@ -2,6 +2,9 @@
 
 0bRSS is a Simple RSS-Reader.
 
+Why the name 0bRSS? Because I own the domain 0b.se and wanted to use it for
+something.
+
 *Please note:* This project is exprimental, no guarantees is given that
 anything works. Especially the MariaDB/MySQL support, that haven't been
 tested what so ever. But it theory it probably works.
