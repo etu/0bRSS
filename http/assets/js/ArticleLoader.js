@@ -9,9 +9,9 @@ var ArticleLoader = new Class({
 
         new Request.JSON({
             method: 'get',
-            url: window.ZerobRSS.apiUri + '/v1/feeds/' + this.feed + '/unread',
+            url: window.ZerobRSS.apiUri + '/v1/feeds/' + this.feed,
             onComplete: function (response) {
-                window.ZerobRSS.ArticleLoader.unread = response;
+                window.ZerobRSS.ArticleLoader.unread = response.unread;
 
                 window.ZerobRSS.ArticleLoader.getArticles();
             }
