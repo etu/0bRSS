@@ -43,11 +43,12 @@ Requires a JSON-Body with the following (all required) parameters:
 }
 #+END_SRC
 
- - name - Name of feed
- - website_uri - Link to the website
- - feed_uri - Link to the feed itself
- - update_interval - How often to update the feed, this is limited by how often
-the cron-job is executed.
+| Variable        | Description                                                                               |
+|-----------------+-------------------------------------------------------------------------------------------|
+| name            | Name of feed                                                                              |
+| website_uri     | Link to the website                                                                       |
+| feed_uri        | Link to the feed itself                                                                   |
+| update_interval | How often to update the feed, this is limited by how often the install runs it's cronjob. |
 
 *** Update feed
 =PUT https://example.com/0bRSS/api/v1/feeds/<feed-id>=
