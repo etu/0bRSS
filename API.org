@@ -1,0 +1,61 @@
+* API Docs
+The API is a simple REST-API with a fairly logical routing structure. But I will
+explain all methods in this document.
+
+** Authentication
+Authentication in the API is done by having a Session Cookie, to obtain the
+cookie, you have to request the regular login-page used by users pick up the
+cookie from the response headers. Then you just have to make sure to send it
+with all requests.
+
+If you use cURL, you can use a Cookie Jar. Other HTTP does probably provide this
+as well.
+
+To login, you could do something like this:
+=$ curl -d 'email=my.email%40example.com&password=secretpassword' https://example.com/0bRSS/login=
+
+And if it worked correctly, you will get a 302 to
+=https://example.com/0bRSS/login=. Just make sure to catch the cookie which by
+default will be named =PHPSESSID=.
+
+
+** Feed Related Methods
+*** List feeds
+=GET https://example.com/0bRSS/api/v1/feeds=
+
+Returns a JSON-Array of feeds, including unread-count for each feed.
+
+*** Get single feed
+=GET https://example.com/0bRSS/api/v1/feeds/<feed-id>=
+
+Returns a JSON-Object with a single feed, including unread-count as well.
+
+*** Create feed
+=POST https://example.com/0bRSS/api/v1/feeds=
+
+Requires a JSON-Body with the following (all required) parameters:
+#+BEGIN_SRC json
+{
+    "name": "<feed-name>",
+    "website_uri": "https:\/\/example.org\/",
+    "feed_uri": "https:\/\/example.org\/atom.xml",
+    "update_interval": 60
+}
+#+END_SRC
+
+ - name - Name of feed
+ - website_uri - Link to the website
+ - feed_uri - Link to the feed itself
+ - update_interval - How often to update the feed, this is limited by how often
+the cron-job is executed.
+
+*** Update feed
+=PUT https://example.com/0bRSS/api/v1/feeds/<feed-id>=
+
+Requires a JSON-Body just like the creation call, requires the same parameters.
+
+*** Delete feed
+=DELETE https://example.com/0bRSS/api/v1/feeds/<feed-id>=
+
+Delete feed. Will also delete all articles for this feed. Articles and
+everything will be deleted from the database, there's no way back.
