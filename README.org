@@ -12,3 +12,6 @@ And there is no stable release yet. Use at own risk!
  - PHP 5.4 or greater.
  - PostgreSQL or MySQL (InnoDB required).
  - Webserver that rewrites the URI's [[https://github.com/slimphp/Slim#setup-your-web-server][like this]].
+
+** Screenshot
+[[https://i.imgur.com/Zilf2R4.png]]
