@@ -2,6 +2,10 @@
 
 0bRSS is a Simple RSS-Reader.
 
+*Please* *note:* This project is exprimental, no guarantees is given that anything works. Especially the MariaDB/MySQL support, that haven't been tested what so ever. But it theory it probably works.
+
+And there is no stable release yet. Use at own risk!
+
 ** Requirements
  - PHP 5.4 or greater.
  - PostgreSQL or MySQL (InnoDB required).
