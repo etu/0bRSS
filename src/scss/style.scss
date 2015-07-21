@@ -247,11 +247,17 @@ div#content {
             }
         }
 
-        > p {
+        > div.article-body {
             border-top: 0.1rem solid $cardBorderColor;
             border-bottom: 0.1rem solid $cardBorderColor;
 
+            padding: 1rem;
+
             @include font-size(1);
+
+            p {
+                padding: 1rem 0;
+            }
         }
 
         // Set max width of images in articles
