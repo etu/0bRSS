@@ -75,10 +75,10 @@ Fetch all articles for feed. This will paginate. To detect last page, you will
 get an empty JSON Array instead of a populated JSON Array.
 
 Also supports the following parameters:
-| Parameter | Default | Description                                                       |
-|-----------+---------+-------------------------------------------------------------------|
-| page      | 0       | Pagination, Zero Indexed                                          |
-| read      | null    | Return read or unread articles. Accepts "true", "false" or "null" |
+| Parameter  | Default | Description                                                       |
+|------------+---------+-------------------------------------------------------------------|
+| previousId | null    | Get articles older than the article with this id                  |
+| read       | null    | Return read or unread articles. Accepts "true", "false" or "null" |
 
 *** Get specific article
 =GET https://example.com/0bRSS/api/v1/articles/<article-identifier>=

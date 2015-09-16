@@ -26,18 +26,18 @@ class Articles
     }
 
     /**
-     * Get all articles from feed by feedId, use ?page to choose page to load
-     * page is 0 indexed
+     * Get all articles from feed by feedId, use ?previousId to get articles older
+     * than the choosen article ID.
      */
     public function get($feedId)
     {
-        $page = $this->slim->request->get('page', 0);
+        $previousId = $this->slim->request->get('previousId', null);
         $read = $this->slim->request->get('read', null);
 
         $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
 
         if (false !== $feed) {
-            $articles = $this->articlesDao->getPagedArticles($feedId, $page, $read)->fetchAll();
+            $articles = $this->articlesDao->getPagedArticles($feedId, $previousId, $read)->fetchAll();
 
             echo json_encode($articles);
             exit;

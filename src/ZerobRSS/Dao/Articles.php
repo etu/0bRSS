@@ -67,25 +67,36 @@ class Articles
     /**
      * Get Paged Articles
      * @param $feedId integer Feed ID
-     * @param $page integer (optional) default: 0
+     * @param $previousId integer (optional) default: 0
      * @param $read boolean Choose if you want read articles or not, default null -> returns both
      */
-    public function getPagedArticles($feedId, $page = 0, $read = null)
+    public function getPagedArticles($feedId, $previousId = null, $read = null)
     {
         $pageSize = 20;
 
         $queryBuilder = $this->db->createQueryBuilder();
 
         // Prepare default where-clause
-        $whereClause = 'feed_id = :feed_id';
+        $whereClause = $queryBuilder->expr()->eq('feed_id', ':feed_id');
 
+        // Append Read Where-Clause if defined
         if (null !== $read) {
             $whereClause = $queryBuilder->expr()->andX(
-                $queryBuilder->expr()->eq('feed_id', ':feed_id'),
+                $whereClause,
                 $queryBuilder->expr()->eq('read', ':read')
             );
 
             $queryBuilder->setParameter(':read', $read);
+        }
+
+        // Append previous article where clause if defined
+        if (null !== $previousId) {
+            $whereClause = $queryBuilder->expr()->andX(
+                $whereClause,
+                $queryBuilder->expr()->lt('articles.id', ':previous_id')
+            );
+
+            $queryBuilder->setParameter(':previous_id', $previousId);
         }
 
         $query = $queryBuilder
@@ -94,7 +105,6 @@ class Articles
             ->where($whereClause)
             ->setParameter(':feed_id', $feedId)
             ->orderBy('date', 'DESC')
-            ->setFirstResult($page * $pageSize)
             ->setMaxResults($pageSize);
 
         return $query->execute();
