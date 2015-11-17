@@ -12,7 +12,7 @@ tested what so ever. But it theory it probably works.
 And there is no stable release yet. Use at own risk!
 
 ** Requirements
- - PHP 5.4 or greater.
+ - PHP 5.5 or greater.
  - PostgreSQL or MySQL (InnoDB required).
  - Webserver that rewrites the URI's [[https://github.com/slimphp/Slim#setup-your-web-server][like this]].
 
