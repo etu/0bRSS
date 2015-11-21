@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c2f8d510a50b74eeae219e0b2940599",
+    "hash": "00bdd183c8290450f02575bd68e69ac9",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -628,16 +628,16 @@
         },
         {
             "name": "rdlowrey/auryn",
-            "version": "v0.15.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/auryn.git",
-                "reference": "d0d875868e1d7d241983c88252c07965a65224c1"
+                "reference": "f57eaf665a601dbe061c8b1426d84f58c003e6a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/d0d875868e1d7d241983c88252c07965a65224c1",
-                "reference": "d0d875868e1d7d241983c88252c07965a65224c1",
+                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/f57eaf665a601dbe061c8b1426d84f58c003e6a8",
+                "reference": "f57eaf665a601dbe061c8b1426d84f58c003e6a8",
                 "shasum": ""
             },
             "require": {
@@ -645,7 +645,8 @@
             },
             "require-dev": {
                 "athletic/athletic": "~0.1",
-                "phpunit/phpunit": "~4.5"
+                "fabpot/php-cs-fixer": "~1.9",
+                "phpunit/phpunit": "^4.7"
             },
             "type": "library",
             "autoload": {
@@ -665,25 +666,26 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Daniel Lowrey",
-                    "email": "rdlowrey@gmail.com",
-                    "role": "Creator / Main Developer"
-                },
-                {
                     "name": "Levi Morrison",
                     "email": "levim@php.net",
                     "homepage": "http://morrisonlevi.github.com/",
                     "role": "Developer"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com",
+                    "homepage": "https://github.com/rdlowrey",
+                    "role": "Creator / Main Developer"
                 }
             ],
             "description": "Auryn is a dependency injector for bootstrapping object-oriented PHP applications.",
-            "homepage": "https://github.com/rdlowrey/Auryn",
+            "homepage": "https://github.com/rdlowrey/auryn",
             "keywords": [
                 "dependency injection",
                 "dic",
                 "ioc"
             ],
-            "time": "2015-05-17 18:29:19"
+            "time": "2015-08-26 16:31:48"
         },
         {
             "name": "robmorgan/phinx",
