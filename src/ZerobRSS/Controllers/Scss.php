@@ -2,23 +2,23 @@
 namespace ZerobRSS\Controllers;
 
 use \Slim\Slim;
-use \scssc;
+use \Leafo\ScssPhp\Compiler;
 
 class Scss
 {
     /**
-     * @var scssc
+     * @var Compiler
      */
-    private $scssc;
+    private $compiler;
 
     /**
      * @var Slim
      */
     private $slim;
 
-    public function __construct(scssc $scssc, Slim $slim)
+    public function __construct(Compiler $compiler, Slim $slim)
     {
-        $this->scssc = $scssc;
+        $this->compiler = $compiler;
         $this->slim  = $slim;
     }
 
@@ -36,7 +36,7 @@ class Scss
 
         $this->slim->response->headers->set('Content-Type', 'text/css');
 
-        $this->scssc->addImportPath($scssPath);
-        echo $this->scssc->compile(file_get_contents($scssFile));
+        $this->compiler->addImportPath($scssPath);
+        echo $this->compiler->compile(file_get_contents($scssFile));
     }
 }
