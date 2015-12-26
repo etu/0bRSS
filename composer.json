@@ -11,7 +11,7 @@
 
         "jeremykendall/password-validator": "^3.0",
 
-        "leafo/scssphp": "^0.5",
+        "leafo/scssphp": "^0.6",
 
         "simplepie/simplepie": "^1.3"
     },

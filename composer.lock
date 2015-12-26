@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "00bdd183c8290450f02575bd68e69ac9",
-    "content-hash": "54a4f3301d357de2f214dca27617689d",
+    "hash": "bf87db501b987d070ef5098c89084249",
+    "content-hash": "6ad7164f6786cc0e34725f3a3a2354e7",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -576,16 +576,16 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "v0.5.1",
+            "version": "v0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "251cd10c1c86d9df20d54d3856ba30acdbdaab5b"
+                "reference": "feecdbe1defcd89089e51bf89bf77e0332658517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/251cd10c1c86d9df20d54d3856ba30acdbdaab5b",
-                "reference": "251cd10c1c86d9df20d54d3856ba30acdbdaab5b",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/feecdbe1defcd89089e51bf89bf77e0332658517",
+                "reference": "feecdbe1defcd89089e51bf89bf77e0332658517",
                 "shasum": ""
             },
             "require": {
@@ -594,7 +594,7 @@
             "require-dev": {
                 "kherge/box": "~2.5",
                 "phpunit/phpunit": "~3.7",
-                "squizlabs/php_codesniffer": "~2.3"
+                "squizlabs/php_codesniffer": "~2.5"
             },
             "bin": [
                 "bin/pscss"
@@ -625,7 +625,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2015-11-11 22:15:07"
+            "time": "2015-12-16 22:46:24"
         },
         {
             "name": "rdlowrey/auryn",
