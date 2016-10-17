@@ -13,7 +13,7 @@ class Groups
         $this->db = $db;
     }
 
-    public function getGroup($value, $column = 'id')
+    public function getGroup(string $value, string $column = 'id') : array
     {
         return $this->db->createQueryBuilder()
             ->select('*')
