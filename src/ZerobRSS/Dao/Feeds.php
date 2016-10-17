@@ -17,7 +17,7 @@ class Feeds
     /**
      * Get one or all feeds for a user
      */
-    public function getFeeds($userId, $feedId = null)
+    public function getFeeds(int $userId, int $feedId = null) : array
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
@@ -47,7 +47,7 @@ class Feeds
 
 
     // Used by cronjob to get feeds that needs to be updated
-    public function getFeedsToUpdate()
+    public function getFeedsToUpdate() : array
     {
         return $this->db->createQueryBuilder()
             ->select('*')
@@ -58,7 +58,7 @@ class Feeds
 
 
     // Update settings for feed
-    public function update($id, $values)
+    public function update(int $id, array $values) : bool
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
@@ -76,7 +76,7 @@ class Feeds
 
 
     // Add feed
-    public function create($userId, $values)
+    public function create(int $userId, array $values) : bool
     {
         // Prepare insert query
         $query = $this->db->createQueryBuilder()
@@ -97,7 +97,7 @@ class Feeds
 
 
     // Delete feed
-    public function delete($feedId)
+    public function delete(int $feedId) : bool
     {
         return $this->db->createQueryBuilder()
             ->delete('feeds')
