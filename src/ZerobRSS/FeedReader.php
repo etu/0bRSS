@@ -21,7 +21,7 @@ class FeedReader
     /**
      * Open feed URI for reading
      */
-    public function open($feedUri)
+    public function open(string $feedUri)
     {
         $this->simplePie->set_feed_url($feedUri);
         $this->simplePie->init();

@@ -28,7 +28,7 @@ class Middlewares
     /**
      * Closure to load controllers
      */
-    public function controllerLoader($controller, $method)
+    public function controllerLoader(string $controller, string $method)
     {
         $injector = $this->injector;
 
@@ -74,7 +74,7 @@ class Middlewares
     /**
      * Middleware to init session and authenticate the user
      */
-    public function auth($group)
+    public function auth(string $group) : bool
     {
         $slim = $this->slim;
 
