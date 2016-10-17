@@ -13,7 +13,7 @@ class Users
         $this->db = $db;
     }
 
-    public function getUser($value, $column = 'id')
+    public function getUser(string $value, string $column = 'id') : \stdClass
     {
         return $this->db->createQueryBuilder()
             ->select('*')
@@ -23,7 +23,7 @@ class Users
             ->execute();
     }
 
-    public function update($id, $values)
+    public function update(int $id, array $values) : bool
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
@@ -39,7 +39,7 @@ class Users
         return $query->execute();
     }
 
-    public function create($values)
+    public function create(array $values) : int
     {
         // Prepare insert query
         $query = $this->db->createQueryBuilder()
