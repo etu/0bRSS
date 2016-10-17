@@ -15,7 +15,7 @@ class Articles
 
 
 
-    public function create($values)
+    public function create(array $values) : int
     {
         $query = $this->db->createQueryBuilder()
                ->insert('articles');
@@ -34,7 +34,7 @@ class Articles
 
 
     // Update article by unique identifier
-    public function update($identifier, $values)
+    public function update(int $identifier, int $values) : bool
     {
         $query = $this->db->createQueryBuilder()
                ->update('articles')
@@ -51,7 +51,7 @@ class Articles
     }
 
 
-    public function getArticles($feedId, $userId)
+    public function getArticles(int $feedId, int $userId) : bool
     {
         return $this->db->createQueryBuilder()
             ->select('a.*')
@@ -70,8 +70,11 @@ class Articles
      * @param $previousId integer (optional) default: 0
      * @param $read boolean Choose if you want read articles or not, default null -> returns both
      */
-    public function getPagedArticles($feedId, $previousId = null, $read = null)
-    {
+    public function getPagedArticles(
+        int $feedId,
+        int $previousId = null,
+        bool $read = null
+    ) : array {
         $pageSize = 20;
 
         $queryBuilder = $this->db->createQueryBuilder();
@@ -113,8 +116,10 @@ class Articles
     /**
      * Get single article by UserId and Article Identifier (not article.id)
      */
-    public function getArticleByIdentifier($userId, $identifier)
-    {
+    public function getArticleByIdentifier(
+        int $userId,
+        string $identifier
+    ) : \stdClass {
         return $this->db->createQueryBuilder()
             ->select('a.*')
             ->from('articles', 'a')
