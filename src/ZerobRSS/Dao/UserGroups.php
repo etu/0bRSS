@@ -13,7 +13,7 @@ class UserGroups
         $this->db = $db;
     }
 
-    public function getUserGroups($value, $column = 'user_id')
+    public function getUserGroups(string $value, string $column = 'user_id') : array
     {
         return $this->db->createQueryBuilder()
             ->select('*')
@@ -24,7 +24,7 @@ class UserGroups
             ->execute();
     }
 
-    public function addUserToGroup($userId, $groupId)
+    public function addUserToGroup(int $userId, int $groupId) : bool
     {
         return $this->db->createQueryBuilder()
             ->insert('user_groups')
