@@ -34,7 +34,7 @@ class Login
         $this->passwordValidator = $passwordValidator;
     }
 
-    public function get($msg = null)
+    public function get(string $msg = null)
     {
         $data = [];
 

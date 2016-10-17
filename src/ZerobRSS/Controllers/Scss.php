@@ -22,7 +22,7 @@ class Scss
         $this->slim  = $slim;
     }
 
-    public function get($cssFile)
+    public function get(string $cssFile)
     {
         $scssPath = PROJECT_ROOT.'/src/scss';
         $scssFile = $scssPath.'/'.str_replace('css', 'scss', $cssFile);

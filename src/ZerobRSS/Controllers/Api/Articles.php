@@ -29,7 +29,7 @@ class Articles
      * Get all articles from feed by feedId, use ?previousId to get articles older
      * than the choosen article ID.
      */
-    public function get($feedId)
+    public function get(int $feedId)
     {
         $previousId = $this->slim->request->get('previousId', null);
         $read = $this->slim->request->get('read', null);
@@ -49,7 +49,7 @@ class Articles
     /**
      * Get a single specific article
      */
-    public function getArticle($articleIdentifier)
+    public function getArticle(string $articleIdentifier)
     {
         $article = $this->articlesDao->getArticleByIdentifier($_SESSION['user']['id'], $articleIdentifier)->fetch();
 
@@ -64,7 +64,7 @@ class Articles
     /**
      * Update read/starred of specific article
      */
-    public function put($articleIdentifier)
+    public function put(string $articleIdentifier)
     {
         // Read JSON from Body-input
         $requestData = json_decode($this->slim->request->getBody());

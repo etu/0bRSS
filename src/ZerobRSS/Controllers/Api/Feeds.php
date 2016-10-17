@@ -20,7 +20,7 @@ class Feeds
         $this->slim->response->headers->set('Content-Type', 'application/json');
     }
 
-    public function get($feedId = null)
+    public function get(int $feedId = null)
     {
         $result = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetchAll();
 
@@ -48,7 +48,7 @@ class Feeds
         $this->slim->redirect($this->slim->request->getRootUri().'/api/feeds/'.$feedId);
     }
 
-    public function put($feedId)
+    public function put(int $feedId)
     {
         // Read JSON from Body-input
         $requestData = json_decode($this->slim->request->getBody());
@@ -74,7 +74,7 @@ class Feeds
         $this->slim->response->setStatus(403);
     }
 
-    public function delete($feedId)
+    public function delete(int $feedId)
     {
         $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
 
