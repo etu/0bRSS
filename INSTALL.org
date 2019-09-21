@@ -1,18 +1,15 @@
 * Installation guide
-
 ** Requirements
  - PHP 5.4 or greater.
  - PostgreSQL or MySQL (InnoDB required).
  - Webserver that rewrites the URI's [[https://github.com/slimphp/Slim#setup-your-web-server][like this]].
 
-
 ** Installation step by step
  - Clone the git-repo (=git clone https://github.com/etu/0bRSS.git=).
- - Install the composer dependencies (=php composer.phar install --no-dev=).
+ - Install the composer dependencies (=composer install --no-dev=) inside of app dir.
  - Write the config-file (Described below).
  - Run the migrations (=php vendor/bin/phinx migrate -c config.php=).
  - Create user (=php bin/create-user=).
-
 
 ** Writing the config
 Start by copying the =config.sample.php= to =config.php= and then change your
@@ -30,7 +27,6 @@ As of writing, PHP defaults to 10.
 The login also supports rehashing, so if you change your =bcrypt-password-cost=,
 it will update the hash in the database on next login for the user logging in to
 match the new cost set in the config.
-
 
 ** Updating feeds
 Run the updater (=php bin/update-feeds=) every 5 minutes or something. Should
@@ -52,7 +48,7 @@ User=nginx
 Group=nginx
 Type=simple
 ExecStart=/usr/bin/php bin/update-feeds
-WorkingDirectory=/srv/http/0bRSS
+WorkingDirectory=/srv/http/0bRSS/app
 PrivateTmp=true
 InaccessibleDirectories=/home /root /boot /opt /mnt /media
 
