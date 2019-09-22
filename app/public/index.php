@@ -1,83 +1,105 @@
 <?php
-define('PROJECT_ROOT', realpath(__DIR__.'/..'));
-require(PROJECT_ROOT.'/vendor/autoload.php');
+declare(strict_types=1);
 
+use DI\ContainerBuilder;
+use Psr\Log\LoggerInterface;
+use Slim\Factory\AppFactory;
+use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\ResponseEmitter;
+use ZerobRSS\Slim\ErrorHandler;
+use ZerobRSS\Slim\ShutdownHandler;
 
+require_once(__DIR__.'/../vendor/autoload.php');
 
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-
-/**
- * Prepare dependency injector
- */
-$injector = new \Auryn\Injector();
-$injector->share($injector);
-
+ini_set('display_errors', '1');
 
 
 /**
- * Prepare Slim
+ * Buffer output for error handling reasons
  */
-$slim = new \Slim\Slim([
-    'view' => new \Slim\Views\Twig(),
-    'templates.path' => PROJECT_ROOT.'/src/views'
-]);
-$injector->share($slim);
-
+ob_start();
 
 
 /**
- * Prepare View
+ * Instantiate PHP-DI ContainerBuilder
  */
-$slim->view->parserOptions['debug'] = true;
-#$slim->view->parserOptions['cache'] = $slim->config('templates.path').'/cache';
-$slim->view->parserExtensions[] = new \Slim\Views\TwigExtension();
-$slim->view->parserExtensions[] = new \Twig_Extension_Debug();
-
+$containerBuilder = new ContainerBuilder();
 
 
 /**
- * Load the Middleware class with clasures for loading controllers and middlewares
+ * Set up config
  */
-$mws = $injector->make(\ZerobRSS\Middlewares::class);
-
+(require(__DIR__.'/../src/bootstrap/config.php'))($containerBuilder);
 
 
 /**
- * Prepare Routes
+ * Set up logger
  */
-$slim->get('/',                     $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
-$slim->get('/feed/:id',             $mws->auth('users'), $mws->db(), $mws->controllerLoader('Index',  'get'));
-$slim->get('/assets/css/:file',                                      $mws->controllerLoader('Scss',   'get'));
-$slim->get('/assets/js/:file',                                       $mws->controllerLoader('Js',     'get'));
-$slim->get('/login',                                     $mws->db(), $mws->controllerLoader('Login',  'get'));
-$slim->post('/login',               $mws->auth(true),    $mws->db(), $mws->controllerLoader('Login',  'post'));
-$slim->get('/logout',                                                $mws->controllerLoader('Logout', 'get'));
-
-/** Route: /api/v1 */
-$slim->group('/api/v1', function () use ($slim, $mws) {
-    /** Route: /api/v1/feeds */
-    $slim->group('/feeds', function () use ($slim, $mws) {
-        $slim->get('/',             $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
-        $slim->get('/:id',          $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'get'));
-        $slim->post('/',            $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'post'));
-        $slim->put('/:id',          $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'put'));
-        $slim->delete('/:id',       $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Feeds', 'delete'));
-        $slim->get('/:id/articles', $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'get'));
-    });
-
-    /** Route: /api/v1/articles */
-    $slim->group('/articles', function () use ($slim, $mws) {
-        $slim->get('/:aid',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'getArticle'));
-        $slim->put('/:aid',      $mws->auth('users'), $mws->db(), $mws->controllerLoader('Api\Articles', 'put'));
-    });
-});
-
+(require(__DIR__.'/../src/bootstrap/logger.php'))($containerBuilder);
 
 
 /**
- * Run application
+ * Build PHP-DI Container instance
  */
-$slim->run();
+$container = $containerBuilder->build();
+
+
+/**
+ * Instantiate the app
+ */
+AppFactory::setContainer($container);
+$app = AppFactory::create();
+$callableResolver = $app->getCallableResolver();
+
+
+/**
+ * Register routes
+ */
+(require(__DIR__.'/../src/bootstrap/routes.php'))($app);
+
+
+/** @var bool $displayErrorDetails */
+$displayErrorDetails = $container->get('settings')['displayErrorDetails'];
+
+
+/**
+ * Create Request object from globals
+ */
+$serverRequestCreator = ServerRequestCreatorFactory::create();
+$request = $serverRequestCreator->createServerRequestFromGlobals();
+
+
+/**
+ * Create Error Handler
+ */
+$responseFactory = $app->getResponseFactory();
+$errorHandler = new ErrorHandler($callableResolver, $responseFactory, $container->get(LoggerInterface::class));
+
+
+/**
+ * Create Shutdown Handler
+ */
+$shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
+register_shutdown_function($shutdownHandler);
+
+
+/**
+ * Add Routing Middleware
+ */
+$app->addRoutingMiddleware();
+
+
+/**
+ * Add Error Middleware
+ */
+$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, true, true);
+$errorMiddleware->setDefaultErrorHandler($errorHandler);
+
+
+/**
+ * Run App & Emit Response
+ */
+$response = $app->handle($request);
+$responseEmitter = new ResponseEmitter();
+$responseEmitter->emit($response);

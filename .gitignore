@@ -1,3 +1,4 @@
 app/cache/
 app/config.php
+app/logs/
 app/vendor/

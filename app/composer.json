@@ -1,19 +1,19 @@
 {
     "require": {
-        "rdlowrey/auryn": "^1.1",
+        "php": "^7.3",
 
-        "robmorgan/phinx": "^0.4.4",
-        "doctrine/dbal": "^2.5",
+        "php-di/php-di": "^6.0",
+        "slim/slim": "^4.2",
+        "slim/psr7": "^0.5.0",
 
-        "slim/slim": "^2.6",
-        "twig/twig": "^1.23",
-        "slim/views": "^0.1.3",
+        "leafo/scssphp": "^0.8.4",
 
-        "jeremykendall/password-validator": "^3.0",
+        "simplepie/simplepie": "^1.5",
 
-        "leafo/scssphp": "^0.6",
+        "robmorgan/phinx": "^0.11.1",
+        "doctrine/dbal": "^2.9",
 
-        "simplepie/simplepie": "^1.3"
+        "monolog/monolog": "^2.0"
     },
 
     "autoload": {
