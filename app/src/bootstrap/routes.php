@@ -22,7 +22,7 @@ return function (App $app) {
     $app->get('/assets/js/{file}', Js::class);                     # Needs: Nothing
 
     $app->group('/login', function (Group $group) {
-        $group->get('', Login::class.':get');                      # Needs: DB
+        $group->get('', Login::class.':get');                      # Needs: Nothing
         $group->post('', Login::class.':post');                    # Needs: DB
     });
 
