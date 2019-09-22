@@ -9,16 +9,17 @@ use Psr\Log\LoggerInterface;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use Twig\Extension\DebugExtension;
+use ZerobRSS\Config;
 
 return function (ContainerBuilder $containerBuilder) {
     // Global Settings Object
     $containerBuilder->addDefinitions([
         Twig::class => function (ContainerInterface $c) {
             $twig = new Twig(
-                __DIR__.'/../views/',
+                $c->get(Config::class)->projectRoot.'/src/views',
                 [
-                    'cache' => __DIR__.'/../../cache/',
-                    'debug' => $c->get('settings')['displayErrorDetails'],
+                    'cache' => $c->get(Config::class)->projectRoot.'/cache',
+                    'debug' => $c->get(Config::class)->debug,
                 ]
             );
 
@@ -29,13 +30,11 @@ return function (ContainerBuilder $containerBuilder) {
         },
 
         LoggerInterface::class => function (ContainerInterface $c) {
-            $settings = $c->get('settings');
+            $config = $c->get(Config::class);
 
-            $loggerSettings = $settings['logger'];
+            $logger = new Logger($config->logger->name);
 
-            $logger = new Logger($loggerSettings['name']);
-
-            $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
+            $handler = new StreamHandler($config->logger->path, $config->logger->level);
             $logger->pushHandler($handler);
 
             return $logger;

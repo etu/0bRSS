@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\ResponseEmitter;
+use ZerobRSS\Config;
 use ZerobRSS\Slim\ErrorHandler;
 use ZerobRSS\Slim\ShutdownHandler;
 
@@ -59,8 +60,8 @@ $callableResolver = $app->getCallableResolver();
 (require(__DIR__.'/../src/bootstrap/routes.php'))($app);
 
 
-/** @var bool $displayErrorDetails */
-$displayErrorDetails = $container->get('settings')['displayErrorDetails'];
+/** @var bool $debug */
+$debug = $container->get(Config::class)->debug;
 
 
 /**
@@ -80,7 +81,7 @@ $errorHandler = new ErrorHandler($callableResolver, $responseFactory, $container
 /**
  * Create Shutdown Handler
  */
-$shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
+$shutdownHandler = new ShutdownHandler($request, $errorHandler, $debug);
 register_shutdown_function($shutdownHandler);
 
 
@@ -93,7 +94,7 @@ $app->addRoutingMiddleware();
 /**
  * Add Error Middleware
  */
-$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, true, true);
+$errorMiddleware = $app->addErrorMiddleware($debug, true, true);
 $errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 
