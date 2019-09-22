@@ -14,6 +14,8 @@
         "robmorgan/phinx": "^0.11.1",
         "doctrine/dbal": "^2.9",
 
+        "jeremykendall/password-validator": "^3.0",
+
         "monolog/monolog": "^2.0"
     },
 
