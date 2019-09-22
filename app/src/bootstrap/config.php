@@ -10,7 +10,7 @@ return function (ContainerBuilder $containerBuilder) {
         'settings' => [
             'displayErrorDetails' => true, // Should be set to false in production
             'logger' => [
-                'name' => 'slim-app',
+                'name' => '0bRSS',
                 'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../../logs/app.log',
                 'level' => Logger::DEBUG,
             ],

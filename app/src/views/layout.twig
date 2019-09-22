@@ -8,7 +8,7 @@
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
-        <link rel="stylesheet" href="{{ baseUrl() }}/assets/css/style.css" />
+        <link rel="stylesheet" href="/assets/css/style.css" />
     </head>
     <body>
         <header id="pageheader">
@@ -24,7 +24,7 @@
 
                 {# Right hand side menu itself #}
                 <nav id="header-menu">
-                    <a href="{{ baseUrl() }}/logout"><i class="fa fa-sign-out"></i> Logout</a>
+                    <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
                 </nav>
             {% endif %}
         </header>
@@ -73,23 +73,23 @@
 
 
     {# Set API-URI so JS can use it #}
-    <script>window.ZerobRSS = { apiUri: '{{ baseUrl() }}/api' };</script>
+    <script>window.ZerobRSS = { apiUri: '/api' };</script>
 
     {# Include Scripts #}
     <script src="//ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
     <script src="//cdn.jsdelivr.net/handlebarsjs/3.0.3/handlebars.min.js"></script>
 
     {# JS Classes #}
-    <script src="{{ baseUrl() }}/assets/js/Router.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/Feeds.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/ArticleLoader.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/Scroll.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/Keyboard.js"></script>
+    <script src="/assets/js/Router.js"></script>
+    <script src="/assets/js/Feeds.js"></script>
+    <script src="/assets/js/ArticleLoader.js"></script>
+    <script src="/assets/js/Scroll.js"></script>
+    <script src="/assets/js/Keyboard.js"></script>
 
     {# Misc layout functions #}
-    <script src="{{ baseUrl() }}/assets/js/header-menu.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/aside-menu.js"></script>
+    <script src="/assets/js/header-menu.js"></script>
+    <script src="/assets/js/aside-menu.js"></script>
 
     {# Init the classes, set up listeners and so on for the client to work #}
-    <script src="{{ baseUrl() }}/assets/js/init.js"></script>
+    <script src="/assets/js/init.js"></script>
 </html>

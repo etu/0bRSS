@@ -34,9 +34,9 @@ $containerBuilder = new ContainerBuilder();
 
 
 /**
- * Set up logger
+ * Set up dependencies
  */
-(require(__DIR__.'/../src/bootstrap/logger.php'))($containerBuilder);
+(require(__DIR__.'/../src/bootstrap/dependencies.php'))($containerBuilder);
 
 
 /**
