@@ -31,6 +31,5 @@ class AddUserGroups extends AbstractMigration
      */
     public function down()
     {
-
     }
 }

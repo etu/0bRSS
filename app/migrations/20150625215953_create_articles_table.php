@@ -14,7 +14,7 @@ class CreateArticlesTable extends AbstractMigration
      */
     public function change()
     {
-        $articles = $this->table('articles');
+        $articles = $this->table('articles', ['signed' => false]);
         $articles->addColumn('feed_id',    'integer', ['signed' => false])
                  ->addColumn('identifier', 'string',  ['limit'  => 32])
                  ->addColumn('title',      'string',  ['limit'  => 255])

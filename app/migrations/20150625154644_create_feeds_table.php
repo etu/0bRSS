@@ -14,7 +14,7 @@ class CreateFeedsTable extends AbstractMigration
      */
     public function change()
     {
-        $feeds = $this->table('feeds');
+        $feeds = $this->table('feeds', ['signed' => false]);
         $feeds->addColumn('name',            'string',   ['limit'   => 64])
               ->addColumn('website_uri',     'string',   ['limit'   => 255])
               ->addColumn('feed_uri',        'string',   ['limit'   => 255])

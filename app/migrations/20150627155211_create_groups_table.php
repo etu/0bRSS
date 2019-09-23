@@ -14,7 +14,7 @@ class CreateGroupsTable extends AbstractMigration
      */
     public function change()
     {
-        $groups = $this->table('groups');
+        $groups = $this->table('groups', ['signed' => false]);
         $groups->addColumn('name',  'string', ['limit' => 64])
                ->addColumn('system', 'boolean')
 
