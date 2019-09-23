@@ -59,7 +59,10 @@ return function (ContainerBuilder $containerBuilder) {
             ];
 
             // Set up the connection
-            return DbDriverManager::getConnection($connectionParams, $dbConfig);
+            $conn = DbDriverManager::getConnection($connectionParams, $dbConfig);
+            $conn->setFetchMode(PDO::FETCH_OBJ);
+
+            return $conn;
         },
     ]);
 };
