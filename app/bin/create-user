@@ -1,36 +1,59 @@
 #!/usr/bin/env php
 <?php
-define('PROJECT_ROOT', realpath(__DIR__.'/..'));
-require(PROJECT_ROOT.'/vendor/autoload.php');
+declare(strict_types=1);
+
+use DI\ContainerBuilder;
+use JeremyKendall\Password\PasswordValidator;
+use ZerobRSS\Config;
+use ZerobRSS\Dao\Groups as GroupsDao;
+use ZerobRSS\Dao\UserGroups as UserGroupsDao;
+use ZerobRSS\Dao\Users as UsersDao;
+
+require_once(__DIR__.'/../vendor/autoload.php');
+
+/**
+ * Instantiate PHP-DI ContainerBuilder
+ */
+$containerBuilder = new ContainerBuilder();
 
 
-
-// Prepare dependency injector
-$injector = new \Auryn\Injector();
-$injector->share($injector);
-
-
-
-// Set up Middlewares
-$mws = $injector->make('\ZerobRSS\Middlewares');
-
-// Init the database connection
-$dbClosure = $mws->db();
-$dbClosure();
+/**
+ * Set up config
+ */
+(require(__DIR__.'/../src/bootstrap/config.php'))($containerBuilder);
 
 
-
-// Load the password validator
-$validator = $injector->make('\JeremyKendall\Password\PasswordValidator');
-$config = require(PROJECT_ROOT.'/config.php');
-$validator->setOptions(['cost' => $config['bcrypt-password-cost']]);
-
+/**
+ * Set up dependencies
+ */
+(require(__DIR__.'/../src/bootstrap/dependencies.php'))($containerBuilder);
 
 
-// Get \ZerobRSS\Dao\Users
-$usersDao = $injector->make('\ZerobRSS\Dao\Users');
-$groupsDao = $injector->make('\ZerobRSS\Dao\Groups');
-$userGroupsDao = $injector->make('\ZerobRSS\Dao\UserGroups');
+/**
+ * Build PHP-DI Container instance
+ */
+$container = $containerBuilder->build();
+
+
+/** @var bool $debug */
+$debug = $container->get(Config::class)->debug;
+
+
+/** @var PasswordValidator $validator */
+$validator = $container->get(PasswordValidator::class);
+$validator->setOptions(['cost' => $container->get(Config::class)->bcryptPasswordCost]);
+
+
+/** @var UsersDao $usersDao */
+$usersDao = $container->get(UsersDao::class);
+
+
+/** @var GroupsDao $groupsDao */
+$groupsDao = $container->get(GroupsDao::class);
+
+
+/** @var UserGroupsDao $userGroupsDao */
+$userGroupsDao = $container->get(UserGroupsDao::class);
 
 
 // Ask for users name

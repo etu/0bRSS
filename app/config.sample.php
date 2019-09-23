@@ -2,7 +2,7 @@
 
 return [
     'debug' => false,                   // Display debug data
-    'bcrypt-password-cost' => 10,       // bcrypt password cost
+    'bcryptPasswordCost' => 10,         // bcrypt password cost
 
     'paths' => [
         'migrations' => __DIR__.'/migrations',
