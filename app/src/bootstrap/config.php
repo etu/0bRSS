@@ -14,7 +14,7 @@ return function (ContainerBuilder $containerBuilder) {
                 'projectRoot' => realpath(__DIR__.'/../../'),
                 'logger' => [
                     'name' => '0bRSS',
-                    'path' => realpath(__DIR__ . '/../../logs/app.log'),
+                    'path' => realpath(__DIR__.'/../../logs').'/app.log',
                     'level' => Logger::DEBUG,
                 ]
             ];
