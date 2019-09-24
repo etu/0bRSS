@@ -99,6 +99,12 @@ $errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 
 /**
+ * Parse incomming JSON and make it available.
+ */
+$app->add(\ZerobRSS\Slim\JsonBodyParserMiddleware::class);
+
+
+/**
  * Run App & Emit Response
  */
 $response = $app->handle($request);
