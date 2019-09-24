@@ -1,32 +1,51 @@
 #!/usr/bin/env php
 <?php
-define('PROJECT_ROOT', realpath(__DIR__.'/..'));
-require(PROJECT_ROOT.'/vendor/autoload.php');
+declare(strict_types=1);
+
+use DI\ContainerBuilder;
+use ZerobRSS\FeedReader;
+use ZerobRSS\Dao\Feeds as FeedsDao;
+use ZerobRSS\Dao\Articles as ArticlesDao;
+
+require_once(__DIR__.'/../vendor/autoload.php');
+
+/**
+ * Instantiate PHP-DI ContainerBuilder
+ */
+$containerBuilder = new ContainerBuilder();
 
 
-
-// Prepare dependency injector
-$injector = new \Auryn\Injector();
-$injector->share($injector);
-
-
-
-// Set up Middlewares
-$mws = $injector->make('\ZerobRSS\Middlewares');
-
-// Init the database connection
-$dbClosure = $mws->db();
-$dbClosure();
+/**
+ * Set up config
+ */
+(require(__DIR__.'/../src/bootstrap/config.php'))($containerBuilder);
 
 
-// Set up Feed Reader class and Dao for feeds
-$feedReader  = $injector->make('\ZerobRSS\FeedReader');
-$feedsDao    = $injector->make('\ZerobRSS\Dao\Feeds');
-$articlesDao = $injector->make('\ZerobRSS\Dao\Articles');
+/**
+ * Set up dependencies
+ */
+(require(__DIR__.'/../src/bootstrap/dependencies.php'))($containerBuilder);
+
+
+/**
+ * Build PHP-DI Container instance
+ */
+$container = $containerBuilder->build();
+
+
+/** @var FeedReader $feedReader */
+$feedReader = $container->get(FeedReader::class);
+
+/** @var FeedsDao $feedsDao */
+$feedsDao = $container->get(FeedsDao::class);
+
+/** @var ArticlesDao $articlesDao */
+$articlesDao = $container->get(ArticlesDao::class);
 
 
 // Fetch all feeds to update
 $feedsToUpdate = $feedsDao->getFeedsToUpdate()->fetchAll();
+
 if (!empty($feedsToUpdate)) {
     foreach ($feedsToUpdate as $feed) {
         $feedReader->open($feed->feed_uri);

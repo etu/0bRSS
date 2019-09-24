@@ -1,18 +1,20 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS;
 
-use \SimplePie;
+use SimplePie;
 
 class FeedReader
 {
     /** @var SimplePie */
     private $simplePie;
 
-    public function __construct(SimplePie $simplePie)
+    public function __construct(Config $config, SimplePie $simplePie)
     {
         $this->simplePie = $simplePie;
 
-        $this->simplePie->set_cache_location(PROJECT_ROOT.'/cache');
+        $this->simplePie->set_cache_location($config->projectRoot.'/cache');
         $this->simplePie->enable_cache(true);
     }
 
