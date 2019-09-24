@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Dao;
 
 use \Doctrine\DBAL\Connection as Db;
+use PDOStatement;
 
 class Feeds
 {
@@ -13,11 +16,10 @@ class Feeds
         $this->db = $db;
     }
 
-
     /**
      * Get one or all feeds for a user
      */
-    public function getFeeds($userId, $feedId = null)
+    public function getFeeds(int $userId, ?int $feedId) : PDOStatement
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
@@ -45,9 +47,8 @@ class Feeds
         return $query->execute();
     }
 
-
     // Used by cronjob to get feeds that needs to be updated
-    public function getFeedsToUpdate()
+    public function getFeedsToUpdate() : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->select('*')
@@ -56,9 +57,8 @@ class Feeds
             ->execute();
     }
 
-
     // Update settings for feed
-    public function update($id, $values)
+    public function update(int $id, array $values) : PDOStatement
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
@@ -74,9 +74,8 @@ class Feeds
         return $query->execute();
     }
 
-
     // Add feed
-    public function create($userId, $values)
+    public function create(int $userId, array $values) : int
     {
         // Prepare insert query
         $query = $this->db->createQueryBuilder()
@@ -91,13 +90,11 @@ class Feeds
 
         $query->execute();
 
-        // @TODO: Check if this works in MariaDB
         return $this->db->lastInsertId('feeds_id_seq');
     }
 
-
     // Delete feed
-    public function delete($feedId)
+    public function delete(int $feedId) : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->delete('feeds')

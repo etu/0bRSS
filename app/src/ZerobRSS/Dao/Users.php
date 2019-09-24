@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Dao;
 
-use \Doctrine\DBAL\Connection as Db;
+use Doctrine\DBAL\Connection as Db;
+use PDOStatement;
 
 class Users
 {
@@ -13,7 +16,7 @@ class Users
         $this->db = $db;
     }
 
-    public function getUser($value, $column = 'id')
+    public function getUser(string $value, string $column = 'id') : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->select('*')
@@ -23,13 +26,13 @@ class Users
             ->execute();
     }
 
-    public function update($id, $values)
+    public function update(int $id, string $values) : PDOStatement
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
-               ->update('users')
-               ->where('id = :id')
-               ->setParameter(':id', $id);
+            ->update('users')
+            ->where('id = :id')
+            ->setParameter(':id', $id);
 
         // Append parameters to update to the query
         foreach ($values as $key => $value) {
@@ -39,11 +42,11 @@ class Users
         return $query->execute();
     }
 
-    public function create($values)
+    public function create(array $values) : int
     {
         // Prepare insert query
         $query = $this->db->createQueryBuilder()
-               ->insert('users');
+            ->insert('users');
 
         // Append parameters to insert to the query
         foreach ($values as $key => $value) {
@@ -52,7 +55,6 @@ class Users
 
         $query->execute();
 
-        // @TODO: Check if this works in MariaDB
         return $this->db->lastInsertId('users_id_seq');
     }
 }

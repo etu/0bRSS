@@ -69,7 +69,7 @@ if (!empty($feedsToUpdate)) {
             try {
                 $articlesDao->create($article);
             } catch (Exception $e) {
-                $articlesDao->update($article['identifier'], $article);
+                $articlesDao->update($article);
             }
         }
 

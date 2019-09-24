@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Dao;
 
-use \Doctrine\DBAL\Connection as Db;
+use Doctrine\DBAL\Connection as Db;
+use PDOStatement;
 
 class Groups
 {
@@ -13,7 +16,7 @@ class Groups
         $this->db = $db;
     }
 
-    public function getGroup($value, $column = 'id')
+    public function getGroup(string $value, string $column = 'id') : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->select('*')

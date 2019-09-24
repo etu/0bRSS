@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Dao;
 
-use \Doctrine\DBAL\Connection as Db;
+use Doctrine\DBAL\Connection as Db;
+use PDOStatement;
 
 class Articles
 {
@@ -13,12 +16,10 @@ class Articles
         $this->db = $db;
     }
 
-
-
-    public function create($values)
+    public function create(array $values) : int
     {
         $query = $this->db->createQueryBuilder()
-               ->insert('articles');
+            ->insert('articles');
 
         // Append parameters to insert to the query
         foreach ($values as $key => $value) {
@@ -27,20 +28,18 @@ class Articles
 
         $query->execute();
 
-        // @TODO: Check if this works in MariaDB
+        // Return last insert id
         return $this->db->lastInsertId('articles_id_seq');
     }
 
-
-
     // Update article by unique identifier
-    public function update($identifier, $values)
+    public function update(array $values) : PDOStatement
     {
         $query = $this->db->createQueryBuilder()
-               ->update('articles')
-               ->where('identifier = :id AND feed_id = :feedid')
-               ->setParameter(':id', $values['identifier'])
-               ->setParameter(':feedid', $values['feed_id']);
+            ->update('articles')
+            ->where('identifier = :id AND feed_id = :feedid')
+            ->setParameter(':id', $values['identifier'])
+            ->setParameter(':feedid', $values['feed_id']);
 
         // Append parameters to insert to the query
         foreach ($values as $key => $value) {
@@ -50,8 +49,7 @@ class Articles
         return $query->execute();
     }
 
-
-    public function getArticles($feedId, $userId)
+    public function getArticles(int $feedId, int $userId) : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->select('a.*')
@@ -70,7 +68,7 @@ class Articles
      * @param $previousId integer (optional) default: 0
      * @param $read boolean Choose if you want read articles or not, default null -> returns both
      */
-    public function getPagedArticles($feedId, $previousId = null, $read = null)
+    public function getPagedArticles(int $feedId, ?int $previousId, ?bool $read) : PDOStatement
     {
         $pageSize = 20;
 
@@ -113,7 +111,7 @@ class Articles
     /**
      * Get single article by UserId and Article Identifier (not article.id)
      */
-    public function getArticleByIdentifier($userId, $identifier)
+    public function getArticleByIdentifier(int $userId, string $identifier) : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->select('a.*')

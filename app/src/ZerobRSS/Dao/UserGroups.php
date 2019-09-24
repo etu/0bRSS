@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Dao;
 
-use \Doctrine\DBAL\Connection as Db;
+use Doctrine\DBAL\Connection as Db;
+use PDOStatement;
 
 class UserGroups
 {
@@ -13,7 +16,7 @@ class UserGroups
         $this->db = $db;
     }
 
-    public function getUserGroups($value, $column = 'user_id')
+    public function getUserGroups(string $value, string $column = 'user_id') : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->select('*')
@@ -24,7 +27,7 @@ class UserGroups
             ->execute();
     }
 
-    public function addUserToGroup($userId, $groupId)
+    public function addUserToGroup(int $userId, int $groupId) : PDOStatement
     {
         return $this->db->createQueryBuilder()
             ->insert('user_groups')
