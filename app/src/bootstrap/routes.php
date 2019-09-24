@@ -9,22 +9,25 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use ZerobRSS\Controllers\Api\Articles;
 use ZerobRSS\Controllers\Api\Feeds;
+use ZerobRSS\Controllers\Api\Login as ApiLogin;
+use ZerobRSS\Controllers\Api\Logout as ApiLogout;
 use ZerobRSS\Controllers\Index;
 use ZerobRSS\Controllers\Js;
 use ZerobRSS\Controllers\Login;
-use ZerobRSS\Controllers\Logout;
 use ZerobRSS\Controllers\Scss;
 
 return function (App $app) {
     $app->get('/', Index::class);                                  # Needs: Auth
-    $app->get('/feed/{id}', Index::class);                         # Needs: Auth
     $app->get('/assets/css/{file}', Scss::class);                  # Status: Done
     $app->get('/assets/js/{file}', Js::class);                     # Status: Done
+    $app->get('/feed/{id}', Index::class);                         # Needs: Auth
     $app->get('/login', Login::class);                             # Status: Done
-    $app->get('/logout', Logout::class);                           # Needs: Auth
 
     /** Route: /api/v1 */
     $app->group('/api/v1', function (Group $group) {
+        $group->post('/login', ApiLogin::class);
+        $group->get('/logout', ApiLogout::class);
+
         /** Route: /api/v1/feeds */
         $group->group('/feeds', function (Group $group) {
             $group->get('', Feeds::class.':get');                  # Needs: Auth
