@@ -29,7 +29,7 @@ class Articles
         $query->execute();
 
         // Return last insert id
-        return $this->db->lastInsertId('articles_id_seq');
+        return (int) $this->db->lastInsertId('articles_id_seq');
     }
 
     // Update article by unique identifier
