@@ -95,7 +95,7 @@ try {
     $userGroup = $groupsDao->getGroup('users', 'name')->fetch();
 
     // Add user to users group
-    $userGroupsDao->addUserToGroup($userId, $userGroup->id);
+    $userGroupsDao->addUserToGroup((int) $userId, (int) $userGroup->id);
 
     echo 'User created'.PHP_EOL;
 } catch (\Exception $e) {
