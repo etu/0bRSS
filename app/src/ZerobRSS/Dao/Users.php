@@ -55,6 +55,6 @@ class Users
 
         $query->execute();
 
-        return $this->db->lastInsertId('users_id_seq');
+        return (int) $this->db->lastInsertId('users_id_seq');
     }
 }

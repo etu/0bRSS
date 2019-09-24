@@ -27,9 +27,9 @@ class UserGroups
             ->execute();
     }
 
-    public function addUserToGroup(int $userId, int $groupId) : PDOStatement
+    public function addUserToGroup(int $userId, int $groupId) : bool
     {
-        return $this->db->createQueryBuilder()
+        return (bool) $this->db->createQueryBuilder()
             ->insert('user_groups')
             ->setValue('user_id', ':user_id')
             ->setValue('group_id', ':group_id')
