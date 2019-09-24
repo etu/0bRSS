@@ -16,34 +16,34 @@ use ZerobRSS\Controllers\Logout;
 use ZerobRSS\Controllers\Scss;
 
 return function (App $app) {
-    $app->get('/', Index::class);                                  # Needs: DB, Auth
-    $app->get('/feed/{id}', Index::class);                         # Needs: DB, Auth
-    $app->get('/assets/css/{file}', Scss::class);                  # Needs: Nothing
-    $app->get('/assets/js/{file}', Js::class);                     # Needs: Nothing
+    $app->get('/', Index::class);                                  # Needs: Auth
+    $app->get('/feed/{id}', Index::class);                         # Needs: Auth
+    $app->get('/assets/css/{file}', Scss::class);                  # Status: Done
+    $app->get('/assets/js/{file}', Js::class);                     # Status: Done
 
     $app->group('/login', function (Group $group) {
-        $group->get('', Login::class.':get');                      # Needs: Nothing
-        $group->post('', Login::class.':post');                    # Needs: DB
+        $group->get('', Login::class.':get');                      # Status: Done
+        $group->post('', Login::class.':post');                    # Needs: Auth
     });
 
-    $app->get('/logout', Logout::class);                           # Needs: DB, Auth
+    $app->get('/logout', Logout::class);                           # Needs: Auth
 
     /** Route: /api/v1 */
     $app->group('/api/v1', function (Group $group) {
         /** Route: /api/v1/feeds */
         $group->group('/feeds', function (Group $group) {
-            $group->get('', Feeds::class.':get');                  # Needs: DB, Auth
-            $group->get('/{id}', Feeds::class.':get');             # Needs: DB, Auth
-            $group->post('', Feeds::class.':post');                # Needs: DB, Auth
-            $group->put('/{id}', Feeds::class.':put');             # Needs: DB, Auth
-            $group->delete('/{id}', Feeds::class.':delete');       # Needs: DB, Auth
-            $group->get('/{id}/articles', Articles::class.':get'); # Needs: DB, Auth
+            $group->get('', Feeds::class.':get');                  # Needs: Auth
+            $group->get('/{id}', Feeds::class.':get');             # Needs: Auth
+            $group->post('', Feeds::class.':post');                # Needs: Auth
+            $group->put('/{id}', Feeds::class.':put');             # Needs: Auth
+            $group->delete('/{id}', Feeds::class.':delete');       # Needs: Auth
+            $group->get('/{id}/articles', Articles::class.':get'); # Needs: Auth
         });
 
         /** Route: /api/v1/articles */
         $group->group('/articles', function (Group $group) {
-            $group->get('/{aid}', Articles::class.':getArticle');  # Needs: DB, Auth
-            $group->put('/{aid}', Articles::class.':put');         # Needs: DB, Auth
+            $group->get('/{aid}', Articles::class.':getArticle');  # Needs: Auth
+            $group->put('/{aid}', Articles::class.':put');         # Needs: Auth
         });
     });
 };
