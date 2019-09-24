@@ -74,6 +74,6 @@ if (!empty($feedsToUpdate)) {
         }
 
         // Mark feed as updated and update updated time and time to next update
-        $feedsDao->update($feed->id, $feedUpdates);
+        $feedsDao->update((int) $feed->id, $feedUpdates);
     }
 }
