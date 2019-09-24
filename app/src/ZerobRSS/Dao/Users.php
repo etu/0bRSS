@@ -26,7 +26,7 @@ class Users
             ->execute();
     }
 
-    public function update(int $id, string $values) : bool
+    public function update(int $id, array $values) : bool
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
