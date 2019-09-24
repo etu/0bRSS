@@ -44,8 +44,6 @@ return function (ContainerBuilder $containerBuilder) {
         },
 
         DbConnection::class => function (ContainerInterface $c) {
-            $dbConfig = new DbConfiguration();
-
             // Extract db settings from config
             $config = $c->get(Config::class)->environments->{$c->get(Config::class)->environments->default_database};
 
@@ -56,10 +54,11 @@ return function (ContainerBuilder $containerBuilder) {
                 'password' => $config->pass,
                 'host' => $config->host,
                 'driver' => 'pdo_'.$config->adapter,
+                'charset' => $config->charset,
             ];
 
             // Set up the connection
-            $conn = DbDriverManager::getConnection($connectionParams, $dbConfig);
+            $conn = DbDriverManager::getConnection($connectionParams, new DbConfiguration());
             $conn->setFetchMode(PDO::FETCH_OBJ);
 
             return $conn;
