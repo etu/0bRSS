@@ -58,7 +58,7 @@ class Feeds
     }
 
     // Update settings for feed
-    public function update(int $id, array $values) : PDOStatement
+    public function update(int $id, array $values) : bool
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
@@ -71,7 +71,7 @@ class Feeds
             $query = $query->set($key, ':'.$key)->setParameter(':'.$key, $value);
         }
 
-        return $query->execute();
+        return (bool) $query->execute();
     }
 
     // Add feed
@@ -94,9 +94,9 @@ class Feeds
     }
 
     // Delete feed
-    public function delete(int $feedId) : PDOStatement
+    public function delete(int $feedId) : bool
     {
-        return $this->db->createQueryBuilder()
+        return (bool) $this->db->createQueryBuilder()
             ->delete('feeds')
             ->where('id = :feed_id')
             ->setParameter(':feed_id', $feedId)

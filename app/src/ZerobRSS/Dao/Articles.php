@@ -33,7 +33,7 @@ class Articles
     }
 
     // Update article by unique identifier
-    public function update(array $values) : PDOStatement
+    public function update(array $values) : bool
     {
         $query = $this->db->createQueryBuilder()
             ->update('articles')
@@ -46,7 +46,7 @@ class Articles
             $query = $query->set($key, ':'.$key)->setParameter(':'.$key, $value);
         }
 
-        return $query->execute();
+        return (bool) $query->execute();
     }
 
     public function getArticles(int $feedId, int $userId) : PDOStatement

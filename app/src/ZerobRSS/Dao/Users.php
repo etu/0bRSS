@@ -26,7 +26,7 @@ class Users
             ->execute();
     }
 
-    public function update(int $id, string $values) : PDOStatement
+    public function update(int $id, string $values) : bool
     {
         // Prepare update query
         $query = $this->db->createQueryBuilder()
@@ -39,7 +39,7 @@ class Users
             $query = $query->set($key, ':'.$key)->setParameter(':'.$key, $value);
         }
 
-        return $query->execute();
+        return (bool) $query->execute();
     }
 
     public function create(array $values) : int
