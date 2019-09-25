@@ -67,30 +67,32 @@ class Feeds extends AbstractAuth
             ->withStatus(302);
     }
 
-    public function put($feedId)
+    public function put(Request $request, Response $response, array $args = []) : Response
     {
-        // Read JSON from Body-input
-        $requestData = json_decode($this->slim->request->getBody());
+        // Prepare variables
+        $userId = $this->authRequest($request);
+        $requestData = (object) $request->getParsedBody();
+        $feedId = isset($args['id']) ? ((int) $args['id']) : null;
 
-        $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
+        // Fetch feed
+        $feed = $this->feedsDao->getFeeds($userId, $feedId)->fetch();
 
         if (false !== $feed) {
             try {
-                $this->feedsDao->update($feed->id, [
+                $this->feedsDao->update((int) $feed->id, [
                     'name' => $requestData->name,
                     'website_uri' => $requestData->website_uri,
                     'feed_uri' => $requestData->feed_uri,
                     'update_interval' => $requestData->update_interval
                 ]);
-
             } catch (\Exception $e) {
-                $this->slim->response->setStatus(400);
+                return $response->withStatus(400);
             }
 
-            return;
+            return $response->withStatus(200);
         }
 
-        $this->slim->response->setStatus(403);
+        return $response->withStatus(403);
     }
 
     public function delete($feedId)

@@ -45,3 +45,17 @@ Accept: application/json
   "feed_uri": "http://example.org/rss.xml",
   "update_interval": "5"
 }
+
+#
+# Update an existing feed
+#
+PUT :host/api/v1/feeds/1?token=:token
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "example2",
+  "website_uri": "http://example.org",
+  "feed_uri": "http://example.org/rss.xml",
+  "update_interval": "5"
+}

@@ -33,7 +33,7 @@ return function (App $app) {
             $group->get('', Feeds::class.':get');                  # Status: Done
             $group->get('/{id}', Feeds::class.':get');             # Status: Done
             $group->post('', Feeds::class.':post');                # Status: Done
-            $group->put('/{id}', Feeds::class.':put');             # Needs: Auth
+            $group->put('/{id}', Feeds::class.':put');             # Status: Done
             $group->delete('/{id}', Feeds::class.':delete');       # Needs: Auth
             $group->get('/{id}/articles', Articles::class.':get'); # Needs: Auth
         });
