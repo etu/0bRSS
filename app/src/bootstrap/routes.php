@@ -30,8 +30,8 @@ return function (App $app) {
 
         /** Route: /api/v1/feeds */
         $group->group('/feeds', function (Group $group) {
-            $group->get('', Feeds::class.':get');                  # Needs: Auth
-            $group->get('/{id}', Feeds::class.':get');             # Needs: Auth
+            $group->get('', Feeds::class.':get');                  # Status: Done
+            $group->get('/{id}', Feeds::class.':get');             # Status: Done
             $group->post('', Feeds::class.':post');                # Needs: Auth
             $group->put('/{id}', Feeds::class.':put');             # Needs: Auth
             $group->delete('/{id}', Feeds::class.':delete');       # Needs: Auth
