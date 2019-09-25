@@ -22,14 +22,12 @@ Accept: application/json
 # Feeds related endpoints
 #
 GET :host/api/v1/feeds?token=:token
-Content-Type: application/json
 Accept: application/json
 
 #
 # Specific Feed related endpoints
 #
 GET :host/api/v1/feeds/1?token=:token
-Content-Type: application/json
 Accept: application/json
 
 #
