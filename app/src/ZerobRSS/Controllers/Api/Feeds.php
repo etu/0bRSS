@@ -1,34 +1,51 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Controllers\Api;
 
-use \Slim\Slim;
-use \ZerobRSS\Dao\Feeds as FeedsDao;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Psr7\Factory\StreamFactory;
+use ZerobRSS\Controllers\AbstractAuth;
+use ZerobRSS\Dao\Feeds as FeedsDao;
+use ZerobRSS\Dao\UserApiTokens as UserApiTokensDao;
 
-class Feeds
+class Feeds extends AbstractAuth
 {
-    /** @var Slim */
-    private $slim;
-
     /** @var FeedsDao */
     private $feedsDao;
 
-    public function __construct(Slim $slim, FeedsDao $feedsDao)
-    {
-        $this->slim = $slim;
-        $this->feedsDao = $feedsDao;
+    /** @var UserApiTokensDao */
+    protected $userApiTokensDao;
 
-        $this->slim->response->headers->set('Content-Type', 'application/json');
+    /** @var StreamFactory */
+    private $streamFactory;
+
+    public function __construct(FeedsDao $feedsDao, UserApiTokensDao $userApiTokensDao, StreamFactory $streamFactory)
+    {
+        $this->feedsDao = $feedsDao;
+        $this->streamFactory = $streamFactory;
+        $this->userApiTokensDao = $userApiTokensDao;
     }
 
-    public function get($feedId = null)
+    public function get(Request $request, Response $response, array $args = []) : Response
     {
-        $result = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetchAll();
+        // Prepare variables
+        $userId = $this->authRequest($request);
+        $feedId = isset($args['id']) ? ((int) $args['id']) : null;
+
+        // Fetch feeds
+        $result = $this->feedsDao->getFeeds($userId, $feedId)->fetchAll();
 
         if (null !== $feedId) {
             $result = $result[0];
         }
 
-        echo json_encode($result);
+        // Set response header
+        $response = $response->withHeader('Content-Type', 'application/javascript');
+
+        // Return data
+        return $response->withBody($this->streamFactory->createStream(json_encode($result)));
     }
 
     public function post()

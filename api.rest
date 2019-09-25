@@ -4,6 +4,7 @@
 
 :email = "sample@example.org"
 :password = "Correct horse battery staple"
+:token = placeholder_api_token
 
 #
 # Login API endpoint
@@ -16,3 +17,17 @@ Accept: application/json
     "email": :email,
     "password": :password
 }
+
+#
+# Feeds related endpoints
+#
+GET :host/api/v1/feeds?token=:token
+Content-Type: application/json
+Accept: application/json
+
+#
+# Specific Feed related endpoints
+#
+GET :host/api/v1/feeds/1?token=:token
+Content-Type: application/json
+Accept: application/json

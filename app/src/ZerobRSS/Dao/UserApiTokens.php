@@ -47,7 +47,7 @@ class UserApiTokens
         }
     }
 
-    public function validateUserToken(string $token) : bool
+    public function validateUserToken(string $token) : ?int
     {
         $token = $this->db->createQueryBuilder()
             ->select('uat.*')
@@ -57,6 +57,10 @@ class UserApiTokens
             ->execute()
             ->fetch();
 
-        return strtotime($token->expires) > time();
+        if (strtotime($token->expires ?? '0') > time()) {
+            return (int) $token->user_id;
+        }
+
+        return null;
     }
 }
