@@ -63,3 +63,9 @@ Accept: application/json
 #
 DELETE :host/api/v1/feeds/1?token=:token
 Accept: application/json
+
+#
+# Get articles for a specific feed
+#
+GET :host/api/v1/feeds/1/articles?token=:token
+Accept: application/json

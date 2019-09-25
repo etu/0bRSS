@@ -1,49 +1,69 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Controllers\Api;
 
-use \Slim\Slim;
-use \ZerobRSS\Dao\Articles as ArticlesDao;
-use \ZerobRSS\Dao\Feeds as FeedsDao;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Psr7\Factory\StreamFactory;
+use ZerobRSS\Controllers\AbstractAuth;
+use ZerobRSS\Dao\Articles as ArticlesDao;
+use ZerobRSS\Dao\Feeds as FeedsDao;
+use ZerobRSS\Dao\UserApiTokens as UserApiTokensDao;
 
-class Articles
+class Articles extends AbstractAuth
 {
-    /** @var Slim */
-    private $slim;
-
     /** @var ArticlesDao */
     private $articlesDao;
 
     /** @var FeedsDao */
     private $feedsDao;
 
-    public function __construct(Slim $slim, ArticlesDao $articlesDao, FeedsDao $feedsDao)
-    {
-        $this->slim = $slim;
+    /** @var UserApiTokensDao */
+    protected $userApiTokensDao;
+
+    /** @var StreamFactory */
+    private $streamFactory;
+
+    public function __construct(
+        ArticlesDao $articlesDao,
+        FeedsDao $feedsDao,
+        UserApiTokensDao $userApiTokensDao,
+        StreamFactory $streamFactory
+    ) {
         $this->articlesDao = $articlesDao;
         $this->feedsDao = $feedsDao;
-
-        $this->slim->response->headers->set('Content-Type', 'application/json');
+        $this->streamFactory = $streamFactory;
+        $this->userApiTokensDao = $userApiTokensDao;
     }
 
     /**
      * Get all articles from feed by feedId, use ?previousId to get articles older
      * than the choosen article ID.
      */
-    public function get($feedId)
+    public function get(Request $request, Response $response, array $args = []) : Response
     {
-        $previousId = $this->slim->request->get('previousId', null);
-        $read = $this->slim->request->get('read', null);
+        // Prepare variables
+        $userId = $this->authRequest($request);
 
-        $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
+        $previousId = isset($request->getQueryParams()['previousId']) ?
+            ((int) $request->getQueryParams()['previousId']) : null;
+        $read = isset($request->getQueryParams()['read']) ? ((bool) $request->getQueryParams()['read']) : null;
+        $feedId = isset($args['id']) ? ((int) $args['id']) : null;
+
+        // Fetch feed
+        $feed = $this->feedsDao->getFeeds($userId, $feedId)->fetch();
 
         if (false !== $feed) {
+            // Fetch articles
             $articles = $this->articlesDao->getPagedArticles($feedId, $previousId, $read)->fetchAll();
 
-            echo json_encode($articles);
-            exit;
+            // Return data
+            return $response->withHeader('Content-Type', 'application/javascript')
+                ->withBody($this->streamFactory->createStream(json_encode($articles)));
         }
 
-        $this->slim->response->setStatus(403);
+        return $response->withStatus(403);
     }
 
     /**
