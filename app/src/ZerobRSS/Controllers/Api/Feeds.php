@@ -95,19 +95,25 @@ class Feeds extends AbstractAuth
         return $response->withStatus(403);
     }
 
-    public function delete($feedId)
+    public function delete(Request $request, Response $response, array $args = []) : Response
     {
-        $feed = $this->feedsDao->getFeeds($_SESSION['user']['id'], $feedId)->fetch();
+        // Prepare variables
+        $userId = $this->authRequest($request);
+        $feedId = isset($args['id']) ? ((int) $args['id']) : null;
+
+        // Fetch feed
+        $feed = $this->feedsDao->getFeeds($userId, $feedId)->fetch();
 
         if (false !== $feed) {
             try {
-                $this->feedsDao->delete($feed->id);
+                $this->feedsDao->delete((int) $feed->id);
             } catch (\Exception $e) {
+                return $response->withStatus(400);
             }
 
-            return;
+            return $response->withStatus(200);
         }
 
-        $this->slim->response->setStatus(403);
+        return $response->withStatus(403);
     }
 }
