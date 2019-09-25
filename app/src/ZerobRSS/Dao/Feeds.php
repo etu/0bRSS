@@ -90,7 +90,7 @@ class Feeds
 
         $query->execute();
 
-        return $this->db->lastInsertId('feeds_id_seq');
+        return (int) $this->db->lastInsertId('feeds_id_seq');
     }
 
     // Delete feed

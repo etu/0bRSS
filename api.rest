@@ -1,6 +1,6 @@
 # -*- restclient -*-
 
-:host = http://localhost/
+:host = http://localhost
 
 :email = "sample@example.org"
 :password = "Correct horse battery staple"
@@ -31,3 +31,17 @@ Accept: application/json
 GET :host/api/v1/feeds/1?token=:token
 Content-Type: application/json
 Accept: application/json
+
+#
+# Subscribe to new feed
+#
+POST :host/api/v1/feeds?token=:token
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "example",
+  "website_uri": "http://example.org",
+  "feed_uri": "http://example.org/rss.xml",
+  "update_interval": "5"
+}

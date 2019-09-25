@@ -48,21 +48,23 @@ class Feeds extends AbstractAuth
         return $response->withBody($this->streamFactory->createStream(json_encode($result)));
     }
 
-    public function post()
+    public function post(Request $request, Response $response, array $args = []) : Response
     {
-        // Read JSON from Body-input
-        $requestData = json_decode($this->slim->request->getBody());
+        // Prepare variables
+        $userId = $this->authRequest($request);
+        $requestData = (object) $request->getParsedBody();
 
         // Create feed
-        $feedId = $this->feedsDao->create($_SESSION['user']['id'], [
+        $feedId = $this->feedsDao->create($userId, [
             'name' => $requestData->name,
             'website_uri' => $requestData->website_uri,
             'feed_uri' => $requestData->feed_uri,
             'update_interval' => $requestData->update_interval
         ]);
 
-        // Redirect to the new API-Resource to tell the client where it is
-        $this->slim->redirect($this->slim->request->getRootUri().'/api/feeds/'.$feedId);
+        // Redirect to newly created resource
+        return $response->withHeader('Location', '/api/v1/feeds/'.$feedId.'?token='.$request->getQueryParams()['token'])
+            ->withStatus(302);
     }
 
     public function put($feedId)
