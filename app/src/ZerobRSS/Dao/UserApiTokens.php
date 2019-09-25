@@ -18,9 +18,7 @@ class UserApiTokens
     public function createTokenForUser(int $userId) : string
     {
         // Set up valid characters
-        $chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9), [
-            '=', '!', '@', '#', '/', '(', ')', '{', '[', ']', '}', '_',
-        ]);
+        $chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9), [ '_', '-' ]);
 
         while (true) {
             $token = '';
