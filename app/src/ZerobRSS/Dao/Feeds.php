@@ -38,7 +38,7 @@ class Feeds
 
         $query = $queryBuilder
             ->select('id, name, website_uri, feed_uri, description, added, updated, next_update, update_interval')
-            ->addSelect('(SELECT COUNT(*) FROM articles WHERE read = false and feed_id = feeds.id) as unread')
+            ->addSelect('(SELECT COUNT(*) FROM articles WHERE `read` = 0 and feed_id = feeds.id) as unread')
             ->from('feeds')
             ->where($whereClause)
             ->setParameter(':user_id', $userId);
