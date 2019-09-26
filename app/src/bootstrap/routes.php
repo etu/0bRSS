@@ -40,7 +40,7 @@ return function (App $app) {
 
         /** Route: /api/v1/articles */
         $group->group('/articles', function (Group $group) {
-            $group->get('/{aid}', Articles::class.':getArticle');  # Needs: Auth
+            $group->get('/{aid}', Articles::class.':getArticle');  # Status: Done
             $group->put('/{aid}', Articles::class.':put');         # Needs: Auth
         });
     });

@@ -69,16 +69,21 @@ class Articles extends AbstractAuth
     /**
      * Get a single specific article
      */
-    public function getArticle($articleIdentifier)
+    public function getArticle(Request $request, Response $response, array $args = []) : Response
     {
-        $article = $this->articlesDao->getArticleByIdentifier($_SESSION['user']['id'], $articleIdentifier)->fetch();
+        // Prepare variables
+        $userId = $this->authRequest($request);
+        $articleIdentifier = $args['aid'] ?? '';
+
+        $article = $this->articlesDao->getArticleByIdentifier($userId, $articleIdentifier)->fetch();
 
         if (false !== $article) {
-            echo json_encode($article);
-            exit;
+            // Return data
+            return $response->withHeader('Content-Type', 'application/javascript')
+                ->withBody($this->streamFactory->createStream(json_encode($article)));
         }
 
-        $this->slim->response->setStatus(403);
+        return $response->withStatus(404);
     }
 
     /**
