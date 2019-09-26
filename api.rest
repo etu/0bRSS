@@ -69,3 +69,9 @@ Accept: application/json
 #
 GET :host/api/v1/feeds/1/articles?token=:token
 Accept: application/json
+
+#
+# Get articles for a specific feed
+#
+GET :host/api/v1/articles/05899f5a23e3e7a87605db370d0eb9dc?token=:token
+Accept: application/json
