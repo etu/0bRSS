@@ -35,7 +35,7 @@ return function (App $app) {
             $group->post('', Feeds::class.':post');                # Status: Done
             $group->put('/{id}', Feeds::class.':put');             # Status: Done
             $group->delete('/{id}', Feeds::class.':delete');       # Status: Done
-            $group->get('/{id}/articles', Articles::class.':get'); # Needs: Auth
+            $group->get('/{id}/articles', Articles::class.':get'); # Status: Done
         });
 
         /** Route: /api/v1/articles */
