@@ -81,7 +81,7 @@ class Articles
         if (null !== $read) {
             $whereClause = $queryBuilder->expr()->andX(
                 $whereClause,
-                $queryBuilder->expr()->eq('read', ':read')
+                $queryBuilder->expr()->eq('is_read', ':read')
             );
 
             $queryBuilder->setParameter(':read', $read);
