@@ -296,7 +296,7 @@ div#content {
         padding: 2rem 1rem;
     }
 
-    input {
+    input, button {
         width: 100%;
 
         padding: 0.5rem;
@@ -305,7 +305,7 @@ div#content {
         border: 0.1rem solid $inputBorderColor;
         box-shadow: 0 0rem 0.1rem $boxShadowColor;
 
-        &[type='submit'] {
+        &#login-button {
             cursor: pointer;
 
             box-shadow: 0 0rem 0.4rem $boxShadowColor;
