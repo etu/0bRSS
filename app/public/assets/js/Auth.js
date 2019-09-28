@@ -30,6 +30,9 @@ class Auth {
 
         // Hide the sidebar show/hide button
         document.getElementById('show-aside-button').style.display = 'none';
+
+        // Hide the right hand side menu button
+        document.getElementById('header-menu-button').style.display = 'none';
     }
 }
 

@@ -16,15 +16,13 @@
 
             0bRSS
 
-            {% if not hide_header_menu %}
-                {# Button to open and close the right hand side menu #}
-                <button id="header-menu-button" class="fa fa-ellipsis-v"></button>
+            {# Button to open and close the right hand side menu #}
+            <button id="header-menu-button">&#8942;</button>
 
-                {# Right hand side menu itself #}
-                <nav id="header-menu">
-                    <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
-                </nav>
-            {% endif %}
+            {# Right hand side menu itself #}
+            <nav id="header-menu">
+                <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+            </nav>
         </header>
 
         <aside id="aside-menu"><nav></nav></aside>
