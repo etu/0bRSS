@@ -89,12 +89,14 @@ class Articles extends AbstractAuth
     /**
      * Update read/starred of specific article
      */
-    public function put($articleIdentifier)
+    public function put(Request $request, Response $response, array $args = []) : Response
     {
-        // Read JSON from Body-input
-        $requestData = json_decode($this->slim->request->getBody());
+        // Prepare variables
+        $userId = $this->authRequest($request);
+        $articleIdentifier = $args['aid'] ?? '';
+        $requestData = (object) $request->getParsedBody();
 
-        $article = $this->articlesDao->getArticleByIdentifier($_SESSION['user']['id'], $articleIdentifier)->fetch();
+        $article = $this->articlesDao->getArticleByIdentifier($userId, $articleIdentifier)->fetch();
 
         if (false !== $article) {
             $values = [
@@ -102,18 +104,19 @@ class Articles extends AbstractAuth
                 'feed_id' => $article->feed_id
             ];
 
-            if (isset($requestData->read)) {
-                $values['read'] = ($requestData->read) ? 'true' : 'false';
+            if (isset($requestData->is_read)) {
+                $values['is_read'] = ($requestData->is_read) ? 1 : 0;
             }
 
-            if (isset($requestData->starred)) {
-                $values['starred'] = ($requestData->starred) ? 'true' : 'false';
+            if (isset($requestData->is_starred)) {
+                $values['is_starred'] = ($requestData->is_starred) ? 1 : 0;
             }
 
-            $this->articlesDao->update($article->identifier, $values);
-            exit;
+            $this->articlesDao->update($values);
+
+            return $response->withStatus(200);
         }
 
-        $this->slim->response->setStatus(403);
+        return $response->withStatus(404);
     }
 }

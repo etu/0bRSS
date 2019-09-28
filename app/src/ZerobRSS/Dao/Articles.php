@@ -35,11 +35,15 @@ class Articles
     // Update article by unique identifier
     public function update(array $values) : bool
     {
+        // Build query
         $query = $this->db->createQueryBuilder()
             ->update('articles')
             ->where('identifier = :id AND feed_id = :feedid')
             ->setParameter(':id', $values['identifier'])
             ->setParameter(':feedid', $values['feed_id']);
+
+        // Unset fields we don't want to set
+        unset($values['identifier'], $values['feed_id']);
 
         // Append parameters to insert to the query
         foreach ($values as $key => $value) {

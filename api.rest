@@ -75,3 +75,15 @@ Accept: application/json
 #
 GET :host/api/v1/articles/05899f5a23e3e7a87605db370d0eb9dc?token=:token
 Accept: application/json
+
+#
+# Set starred / read for specific article
+#
+PUT :host/api/v1/articles/05899f5a23e3e7a87605db370d0eb9dc?token=:token
+Content-Type: application/json
+Accept: application/json
+
+{
+  "is_read": true,
+  "is_starred": false
+}
