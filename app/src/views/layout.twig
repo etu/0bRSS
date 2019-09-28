@@ -1,4 +1,3 @@
-{% set hide_aside = false %}
 {% set hide_header_menu = false %}
 <!DOCTYPE html>
 <html>
@@ -8,15 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8" />
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link rel="stylesheet" href="/assets/css/style.css" />
     </head>
     <body>
         <header id="pageheader">
-            {% if not hide_aside %}
-                <button id="show-aside-button" class="fa fa-bars"></button>
-            {% endif %}
+            <button id="show-aside-button">&#9776;</button>
 
             0bRSS
 
@@ -31,15 +27,9 @@
             {% endif %}
         </header>
 
-        {% if not hide_aside %}
-            <aside id="aside-menu">
-                <nav>
-                </nav>
-            </aside>
-        {% endif %}
+        <aside id="aside-menu"><nav></nav></aside>
 
-        <div id="content"{{ hide_aside ? ' class="fullwidth"' }}>
-        </div>
+        <div id="content"></div>
     </body>
 
 

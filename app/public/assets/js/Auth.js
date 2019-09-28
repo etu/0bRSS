@@ -10,7 +10,9 @@ class Auth {
     }
 
     drawLoginArea() {
-        document.getElementById('content').innerHTML = `
+        var content = document.getElementById('content');
+
+        content.innerHTML = `
           <form id="loginform">
             <fieldset>
               <input type="email" name="email" placeholder="Email" required />
@@ -19,6 +21,15 @@ class Auth {
             </fieldset>
           </form>
         `;
+
+        // Draw the login box
+        content.classList.add('fullwidth');
+
+        // Hide the sidebar menu
+        document.getElementById('aside-menu').style.display = 'none';
+
+        // Hide the sidebar show/hide button
+        document.getElementById('show-aside-button').style.display = 'none';
     }
 }
 
