@@ -1,3 +1,5 @@
+{% set hide_aside = false %}
+{% set hide_header_menu = false %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,7 +39,6 @@
         {% endif %}
 
         <div id="content"{{ hide_aside ? ' class="fullwidth"' }}>
-            {{ block('content') }}
         </div>
     </body>
 
@@ -70,6 +71,19 @@
     </script>
     {# End news-card-handlebars-template #}
 
+    {# Start loginform-handlebars-template  #}
+    <script id="loginform-template" type="text/x-handlebars-template">
+        {% verbatim %}
+            <form id="loginform">
+                <fieldset>
+                    <input type="email" name="email" placeholder="Email" required />
+                    <input type="password" name="password" placeholder="Password" required />
+                    <button id="login-button">Login</button>
+                </fieldset>
+            </form>
+        {% endverbatim %}
+    </script>
+    {# End loginform-handlebars-template  #}
 
 
     {# Set API-URI so JS can use it #}

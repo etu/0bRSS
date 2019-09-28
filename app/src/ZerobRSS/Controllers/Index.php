@@ -1,31 +1,28 @@
 <?php
+declare(strict_types=1);
+
 namespace ZerobRSS\Controllers;
 
-use \Slim\Slim;
-
-use \ZerobRSS\Dao\Feeds as FeedsDao;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Views\Twig;
 
 class Index
 {
-    /** @var Slim */
-    private $slim;
+    /** @var Twig */
+    private $twig;
 
-    /** @var FeedsDao */
-    private $feedsDao;
-
-    public function __construct(Slim $slim, FeedsDao $feedsDao)
+    public function __construct(Twig $twig)
     {
-        $this->slim = $slim;
-        $this->feedsDao = $feedsDao;
+        $this->twig = $twig;
     }
 
-    public function get()
+    public function __invoke(Request $request, Response $response, array $args = []) : Response
     {
-        $this->slim->render(
+        return $this->twig->render(
+            $response,
             'layout.twig',
-            [
-                'feeds' => $this->feedsDao->getFeeds($_SESSION['user']['id'])->fetchAll()
-            ]
+            []
         );
     }
 }

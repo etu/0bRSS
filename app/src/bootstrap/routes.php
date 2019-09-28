@@ -20,8 +20,6 @@ return function (App $app) {
     $app->get('/', Index::class);                                  # Needs: Auth
     $app->get('/assets/css/{file}', Scss::class);                  # Status: Done
     $app->get('/assets/js/{file}', Js::class);                     # Status: Done
-    $app->get('/feed/{id}', Index::class);                         # Needs: Auth
-    $app->get('/login', Login::class);                             # Status: Done
 
     /** Route: /api/v1 */
     $app->group('/api/v1', function (Group $group) {
