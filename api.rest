@@ -19,6 +19,12 @@ Accept: application/json
 }
 
 #
+# Logout API endpoint
+#
+GET :host/api/v1/logout?token=:token
+Accept: application/json
+
+#
 # Feeds related endpoints
 #
 GET :host/api/v1/feeds?token=:token
