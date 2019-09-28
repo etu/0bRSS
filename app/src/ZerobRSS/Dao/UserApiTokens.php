@@ -61,4 +61,13 @@ class UserApiTokens
 
         return null;
     }
+
+    public function deleteToken(string $token) : int
+    {
+        return $this->db->createQueryBuilder()
+            ->delete('user_api_tokens')
+            ->where('token = :token')
+            ->setParameter(':token', $token)
+            ->execute();
+    }
 }

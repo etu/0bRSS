@@ -26,7 +26,7 @@ return function (App $app) {
     /** Route: /api/v1 */
     $app->group('/api/v1', function (Group $group) {
         $group->post('/login', ApiLogin::class);                   # Status: Done
-        $group->get('/logout', ApiLogout::class);
+        $group->get('/logout', ApiLogout::class);                  # Status: Done
 
         /** Route: /api/v1/feeds */
         $group->group('/feeds', function (Group $group) {
