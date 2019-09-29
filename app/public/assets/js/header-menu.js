@@ -1,32 +1,27 @@
 'use strict';
 
-if ($('header-menu-button')) {
-    /**
-     * Open and close button for menu
-     */
-    $('header-menu-button').addEvent('click', function (event) {
-        $('header-menu').setStyle(
-            'display',
-            $('header-menu').getStyle('display') === 'none' ? 'block' : 'none'
-        );
-    });
+var menuButton = document.getElementById('header-menu-button');
+var menu = document.getElementById('header-menu');
 
+if (menuButton) {
+    // Make sure menu is hidden
+    menu.style.display = 'none';
 
+    // Toggle showing of menu
+    menuButton.onclick = function() {
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    };
 
-    /**
-     * Catch all clicks on the html element (everything basicly), then filter out
-     * which is not interesting (menu button and menu itself) and then close the
-     * menu if it's not catched in the not interesting filter
-     */
-    $$('html')[0].addEvent('click', function (event) {
-        if (event.target                           === $('header-menu-button') ||
-            event.target.getParent('#header-menu') === $('header-menu') ||
-            event.target                           === $('header-menu')) {
+    // Hide menu when clicking outside of the menu
+    document.getElementsByTagName('html')[0].onclick = function (event) {
+        if (event.target === document.getElementById('header-menu-button') ||
+            event.target === document.getElementById('header-menu') ||
+            event.target.parentNode === document.getElementById('header-menu')) {
             return true;
         }
 
-        if ('block' === $('header-menu').getStyle('display')) {
-            $('header-menu').setStyle('display', 'none');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
         }
-    });
+    };
 }
