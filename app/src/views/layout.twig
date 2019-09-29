@@ -30,32 +30,13 @@
     </body>
 
 
-    {# Start news-card-handlebars-template #}
-    <script id="news-card-template" type="text/x-handlebars-template">
-        {% verbatim %}
-            <header>
-                {{{title}}}
-                <span class="extras">
-                    <!-- <i class="fa fa-star"></i> Icons for future usage <i class="fa fa-star-o"></i> -->
-                    <a href="{{{uri}}}" target="_blank" class="fa fa-external-link"></a>
-                </span>
-            </header>
-            <div class="article-body">
-                {{{body}}}
-            </div>
-            <footer>
-                {{date}} {{starred}}
-            </footer>
-        {% endverbatim %}
-    </script>
-    {# End news-card-handlebars-template #}
-
     {# Set API-URI so JS can use it #}
     <script>window.ZerobRSS = { apiUri: '/api' };</script>
 
     {# Include JavaScript files #}
     <script src="/assets/js/Auth.js"></script>
     <script src="/assets/js/Feeds.js"></script>
+    <script src="/assets/js/ArticleLoader.js"></script>
 
     {# Misc layout functions #}
     <script src="/assets/js/aside-menu.js"></script>
