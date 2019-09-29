@@ -24,4 +24,8 @@ if (menuButton) {
             menu.style.display = 'none';
         }
     };
+
+    document.getElementById('header-menu-logout').onclick = function (event) {
+        window.ZerobRSS.Auth.logout();
+    };
 }

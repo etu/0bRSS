@@ -72,6 +72,24 @@ class Auth {
         document.getElementById('errormessage').style.display = 'block';
         document.getElementById('errormessage').innerHTML = json.message;
     }
+
+    async logout() {
+        // Build API URI
+        var uri = window.ZerobRSS.apiUri + '/v1/logout?token=' + window.ZerobRSS.Auth.token;
+
+        // Do request
+        var response = await fetch(uri, {
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+
+        // Remove access token
+        localStorage.removeItem('token');
+
+        // Reload page
+        location.reload();
+    }
 }
 
 window.ZerobRSS.Auth = new Auth();
