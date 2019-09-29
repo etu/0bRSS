@@ -24,19 +24,11 @@
             </nav>
         </header>
 
-        <aside id="aside-menu"><nav></nav></aside>
+        <aside id="aside-menu"></aside>
 
         <div id="content"></div>
     </body>
 
-
-    {# Start feed-menu-handlebars-template #}
-    <script id="feed-menu-template" type="text/x-handlebars-template">
-        {% verbatim %}
-            <i class="fa fa-rss-square"></i> {{name}} <span class="unread">{{unread}}</span>
-        {% endverbatim %}
-    </script>
-    {# End feed-menu-handlebars-template #}
 
     {# Start news-card-handlebars-template #}
     <script id="news-card-template" type="text/x-handlebars-template">
@@ -63,6 +55,7 @@
 
     {# Include JavaScript files #}
     <script src="/assets/js/Auth.js"></script>
+    <script src="/assets/js/Feeds.js"></script>
 
     {# Misc layout functions #}
     <script src="/assets/js/aside-menu.js"></script>

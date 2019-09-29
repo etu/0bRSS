@@ -1,48 +1,42 @@
 'use strict';
 
-
-/**
- * Class to fetch the feed list and draw the aside
- */
-var Feeds = new Class({
-    feeds: [],
-
-    initialize: function () {
+class Feeds {
+    constructor() {
         this.loadFeeds();
-    },
+    }
 
     /**
      * Load feeds from API and trigger the drawing function
      */
-    loadFeeds: function () {
-        new Request.JSON({
-            method: 'get',
-            url: window.ZerobRSS.apiUri + '/v1/feeds',
-            onComplete: function (response) {
-                window.ZerobRSS.Feeds.feeds = response;
+    async loadFeeds() {
+        // Build API URI
+        var uri = window.ZerobRSS.apiUri + '/v1/feeds?token=' + window.ZerobRSS.Auth.token;
 
-                window.ZerobRSS.Feeds.drawAside();
-            }
-        }).send();
-    },
+        // Do request
+        var response = await fetch(uri, {
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+
+        // Parse response
+        this.feeds = await response.json();
+
+        this.drawAside();
+    }
 
     /**
      * Draw feeds in the aside-bar
      */
-    drawAside: function () {
-        var template = Handlebars.compile($('feed-menu-template').get('html'));
+    drawAside() {
+        var template = `
+          <nav>
+            ${this.feeds.map(feed => `<a data-feed-id="${feed.id}">&#x1f4f0; ${feed.name} <span class="unread">${feed.unread}</span></a>`)}
+          </nav>
+        `;
 
-        this.feeds.each(function(feed) {
-            var a = new Element('a');
-
-            a.set('data-feed-id', feed.id);
-            a.set('html', template(feed));
-
-            a.addEvent('click', (function () {
-                window.ZerobRSS.Router.nav('/feed/' + feed.id)
-            }));
-
-            a.inject($$('#aside-menu nav')[0]);
-        });
+        document.getElementById('aside-menu').innerHTML = template;
     }
-});
+}
+
+window.ZerobRSS.Feeds = new Feeds();
