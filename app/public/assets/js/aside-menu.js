@@ -1,15 +1,16 @@
 'use strict';
 
-if ($('show-aside-button')) {
+var menuButton = document.getElementById('show-aside-button');
+
+if (menuButton) {
     /**
      * Change aside margin to show it
      * Change content width do adjust to fit on the side of aside
      */
     var showAside = (function () {
-        $('aside-menu').setStyle('margin-left', '0rem');
-        $('content').setStyle('margin-right', '-17rem');
+        document.getElementById('aside-menu').style.marginLeft = '0rem';
+        document.getElementById('content').style.marginRight = '-17rem';
     });
-
 
 
     /**
@@ -17,8 +18,8 @@ if ($('show-aside-button')) {
      * Change content width do adjust to fit on the side of aside
      */
     var hideAside = (function () {
-        $('aside-menu').setStyle('margin-left', '-18rem');
-        $('content').setStyle('margin-right', '0rem');
+        document.getElementById('aside-menu').style.marginLeft = '-17rem';
+        document.getElementById('content').style.marginRight = '0rem';
     });
 
 
@@ -26,35 +27,22 @@ if ($('show-aside-button')) {
     /**
      * Open and close button for aside-menu
      */
-    $('show-aside-button').addEvent('click', function (event) {
-        // Get the aside current margin-left as integer
-        var asideMargin = parseInt($('aside-menu').getStyle('margin-left'));
+    menuButton.onclick = (function (event) {
+        var asideMargin = document.getElementById('aside-menu').style.marginLeft;
 
-        if (0 === asideMargin) {
+        // set a fallback value
+        if (asideMargin === '') {
+            asideMargin = 1;
+        }
+
+        // Hide aside if it's showing
+        if (parseInt(asideMargin) === 0) {
             hideAside();
 
             return true;
         }
 
+        // Otherwise show the aside
         showAside();
-    });
-
-
-
-    /**
-     * Catch all clicks on the content element, then check if we should close the
-     * aside or not.
-     */
-    $('content').addEvent('click', function (event) {
-        var asideButtonVisible = $('show-aside-button').getStyle('display') !== 'none';
-        var asideVisible = parseInt($('aside-menu').getStyle('margin-left')) === 0;
-
-        if (false === asideButtonVisible && false === asideVisible) {
-            showAside();
-        }
-
-        if (true === asideButtonVisible && true === asideVisible) {
-            hideAside();
-        }
     });
 }
